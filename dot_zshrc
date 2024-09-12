@@ -22,5 +22,3 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Starship prompt
 eval "$(starship init zsh)"
 
-# Chezmoi environment vars
-export EDITOR=nvim # neovim

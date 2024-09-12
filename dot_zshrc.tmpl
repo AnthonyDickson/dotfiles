@@ -31,6 +31,13 @@ SAVEHIST=10000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Custom key bindings
+bindkey "^[[1;5C" forward-word # ctrl + right arrow
+bindkey "^[[1;5D" backward-word # ctrl + left arrow
+bindkey "^[[H" beginning-of-line # home
+bindkey "^[[F" end-of-line # end
+bindkey "^[[3~" delete-char # del
+
 # CUDA
 export PATH=${PATH}:/usr/local/cuda/bin
 

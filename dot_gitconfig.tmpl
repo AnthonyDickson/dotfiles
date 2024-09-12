@@ -1,0 +1,11 @@
+[user]
+	name = Anthony Dickson
+	email = anthony.dickson9656@gmail.com
+[init]
+	defaultBranch = main
+
+{{ if eq .chezmoi.hostname "fedora" -}}
+[credential]
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = cache
+{{ end }}

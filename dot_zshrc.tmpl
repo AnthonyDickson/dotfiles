@@ -1,3 +1,5 @@
+{{- if eq .chezmoi.hostname "anthonys-macbook-pro"}}
+
 export NVM_DIR=~/.nvm
 source ~/.nvm/nvm.sh
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -18,6 +20,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+{{- end }}
 
 # Starship prompt
 eval "$(starship init zsh)"

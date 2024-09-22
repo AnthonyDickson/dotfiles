@@ -7,7 +7,7 @@ I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required f
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinateI
     ```
-2.  Run `nix run nixpkgs#chezmoi -- init --apply $GITHUB_REPO` to run chezmoi and get the dotfiles from this repo.
+2.  Run `nix run nixpkgs#chezmoi -- init --apply AnthonyDickson/dotfiles` to run chezmoi and get the dotfiles from this repo.
 3.  Run nix to build the system and user environment:
     1. MacOS (first time):
         ```shell

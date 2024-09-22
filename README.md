@@ -28,6 +28,8 @@ If you edit or add nix flakes, you should rerun step 3.
 ## TODO
 - Get kitty to show up in spotlight
   - Once this is done, try bring as many apps into home.nix such as obsidian, firefox
+- Have Zsh configs appear under `.config/zsh` instead of home.
+- Have chezmoi place the `chezmoi.toml` and `flake.lock` somewhere else instead of home directory.
 - Alias vim and vi to neovim
 - Feature parity for LunarVim with old LazyVim config.
   - Markdown Rendering 

@@ -9,7 +9,7 @@ I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required f
     ```
 2.  Run `nix run nixpkgs#chezmoi -- init --apply AnthonyDickson/dotfiles` to run chezmoi and get the dotfiles from this repo.
 3.  Run nix to build the system and user environment:
-    1. MacOS (first time):
+    1. macOS (first time):
         ```shell
         nix run nix-darwin -- switch --flake ~/.config/nix
         ```
@@ -24,3 +24,11 @@ To update/edit config files, you should use `chezmoi edit ./config/path/to/confi
 To add new config files, you should use `chezmoi add ./config/path/file.conf`.
 
 If you edit or add nix flakes, you should rerun step 3.
+
+## TODO
+- Get kitty to show up in spotlight
+  - Once this is done, try bring as many apps into home.nix such as obsidian, firefox
+- Alias vim and vi to neovim
+- Feature parity for LunarVim with old LazyVim config. 
+- Get nix working with aarch64-darwin architecture instead of x86_64-darwin.
+- Split config into macOS and Linux configs and get config working on Fedora, then NixOS.

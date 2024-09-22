@@ -20,7 +20,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -37,7 +37,21 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.chezmoi
+    kitty # terminal emulator
+    nerdfonts # fancy fonts with ligatures and monospacing
+    chezmoi # For managing dotfiles
+    neovim # vim but better
+    lunarvim # IDE layer for neovim
+    git # version control
+    lazygit # awesome terminal wrapper for git, used in lunarvim config
+    bat # cat with syntax highlighting
+    cloc # counts lines of code excluding comments and empty lines
+    ripgrep # better grep, works recursively on folders and is fast
+    ffmpeg # multimedia tool for handling audio, video and other multimedia
+    
+    gnumake # GNU Make
+    nodejs_22 # node and npm for running and building applications in JavaScript
+    python3 # Python interpreter
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -71,4 +85,15 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+  # fancy prompts for terminal apps
+  programs.starship = {
+      enable = true;
+      enableZshIntegration = true;
+  };
 }

@@ -31,5 +31,6 @@ If you edit or add nix flakes, you should rerun step 3.
 - Alias vim and vi to neovim
 - Feature parity for LunarVim with old LazyVim config.
   - Markdown Rendering 
+- Custom keymappings for menu items in `Settings -> Keyboard -> Keyboard Shortcuts... -> App Shortcuts`.
 - Get nix working with aarch64-darwin architecture instead of x86_64-darwin.
 - Split config into macOS and Linux configs and get config working on Fedora, then NixOS.

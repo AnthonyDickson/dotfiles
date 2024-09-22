@@ -19,6 +19,12 @@ I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required f
         darwin-rebuild switch --flake ~/.config/nix
         ```
 
+## Hacks
+Normally, chezmoi will symlink files. This causes issues for nix which will not work on a symlinked flake.lock.
+As a workaround, I instead use a script (`./run_onchange_after_hardlink_flake_lock.sh`) to create a hardlink for flake.lock.
+This will run everytime you run `chezmoi apply` so there should not be any issues.
+
+
 ## Editing and Adding Files
 To update/edit config files, you should use `chezmoi edit ./config/path/to/config.file`.
 To add new config files, you should use `chezmoi add ./config/path/file.conf`.
@@ -29,10 +35,8 @@ If you edit or add nix flakes, you should rerun step 3.
 - Get kitty to show up in spotlight
   - Once this is done, try bring as many apps into home.nix such as obsidian, firefox
 - Have Zsh configs appear under `.config/zsh` instead of home.
-- Have chezmoi place the `chezmoi.toml` and `flake.lock` somewhere else instead of home directory.
 - Alias vim and vi to neovim
 - Feature parity for LunarVim with old LazyVim config.
   - Markdown Rendering 
 - Custom keymappings for menu items in `Settings -> Keyboard -> Keyboard Shortcuts... -> App Shortcuts`.
-- Get nix working with aarch64-darwin architecture instead of x86_64-darwin.
 - Split config into macOS and Linux configs and get config working on Fedora, then NixOS.

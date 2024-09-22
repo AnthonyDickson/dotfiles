@@ -26,7 +26,7 @@
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
-      # nix.settings.extra-platforms = "x86_64-darwin aarch64-darwin";
+      #nix.settings.extra-platforms = "x86_64-darwin aarch64-darwin";
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;  # default shell on catalina
@@ -40,8 +40,8 @@
       system.stateVersion = 5;
 
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "x86_64-darwin";
-      # nixpkgs.hostPlatform = "aarch64-darwin";
+      #nixpkgs.hostPlatform = "x86_64-darwin";
+      nixpkgs.hostPlatform = "aarch64-darwin";
       
       security.pam.enableSudoTouchIdAuth = true;
 
@@ -60,7 +60,7 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Anthonys-MacBook-Pro
     darwinConfigurations."Anthonys-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      # system = "aarch64-darwin";
+      system = "aarch64-darwin";
       modules = [ 
         configuration
         home-manager.darwinModules.home-manager {

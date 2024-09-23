@@ -31,12 +31,3 @@ To add new config files, you should use `chezmoi add ./config/path/file.conf`.
 
 If you edit or add nix flakes, you should rerun step 3.
 
-## TODO
-- Get kitty to show up in spotlight
-  - Once this is done, try bring as many apps into home.nix such as obsidian, firefox
-- Have Zsh configs appear under `.config/zsh` instead of home.
-- Alias vim and vi to neovim
-- Feature parity for LunarVim with old LazyVim config.
-  - Markdown Rendering 
-- Custom keymappings for menu items in `Settings -> Keyboard -> Keyboard Shortcuts... -> App Shortcuts`.
-- Split config into macOS and Linux configs and get config working on Fedora, then NixOS.

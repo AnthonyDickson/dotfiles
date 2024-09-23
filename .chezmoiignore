@@ -1,2 +1,3 @@
 README.md
 .config/nix/flake.lock
+unmanaged_config/

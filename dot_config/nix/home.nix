@@ -5,7 +5,7 @@
 {
   home.username = "anthony";
   home.homeDirectory = "/Users/anthony";
-  
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
 
@@ -41,7 +41,6 @@
     nerdfonts # fancy fonts with ligatures and monospacing
     chezmoi # For managing dotfiles
     neovim # vim but better
-    lunarvim # IDE layer for neovim
     git # version control
     lazygit # awesome terminal wrapper for git, used in lunarvim config
     bat # cat with syntax highlighting

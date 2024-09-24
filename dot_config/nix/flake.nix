@@ -55,7 +55,7 @@
       nix.useDaemon = true;
 
       system.defaults = {
-        dock.autohide = true;
+        dock.autohide = false;
         finder.AppleShowAllExtensions = true;
       };
     };

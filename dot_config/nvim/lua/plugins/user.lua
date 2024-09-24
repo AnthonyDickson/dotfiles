@@ -25,6 +25,10 @@ return {
 					suffix_next = "n", -- Suffix to search with "next" method
 				},
 			})
+
+			require("which-key").add({
+				{ "gs", desc = "surround" },
+			})
 		end,
 	},
 }

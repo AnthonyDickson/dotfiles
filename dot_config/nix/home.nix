@@ -51,6 +51,7 @@
     gnumake # GNU Make
     nodejs_22 # node and npm for running and building applications in JavaScript
     python3 # Python interpreter
+    go # GoLang compiler
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

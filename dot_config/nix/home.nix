@@ -53,6 +53,7 @@
     python3 # Python interpreter
     go # golang
     gotools # extra tools for golang such as gopls, godoc
+    golangci-lint # linter for golang
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

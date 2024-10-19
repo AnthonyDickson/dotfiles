@@ -48,6 +48,8 @@
     ripgrep # better grep, works recursively on folders and is fast
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     
+    cmake
+    ninja
     gnumake # GNU Make
     nodejs_22 # node and npm for running and building applications in JavaScript
     python3 # Python interpreter

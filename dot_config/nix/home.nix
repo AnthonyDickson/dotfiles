@@ -42,14 +42,15 @@
     chezmoi # For managing dotfiles
     neovim # vim but better
     git # version control
+    gh # GitHub CLI for auth
     lazygit # awesome terminal wrapper for git, used in lunarvim config
     bat # cat with syntax highlighting
     cloc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     
-    cmake
-    ninja
+    cmake # Build tools for CXX
+    ninja # Faster builds for CXX
     gnumake # GNU Make
     nodejs_22 # node and npm for running and building applications in JavaScript
     python3 # Python interpreter

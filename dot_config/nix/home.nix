@@ -49,6 +49,7 @@
     cloc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
     ffmpeg # multimedia tool for handling audio, video and other multimedia
+    tealdeer # tldr in Rust, provides simple examples for commands
     
     cmake # Build tools for CXX
     ninja # Faster builds for CXX

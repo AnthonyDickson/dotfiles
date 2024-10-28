@@ -45,6 +45,7 @@
     gh # GitHub CLI for auth
     lazygit # awesome terminal wrapper for git, used in lunarvim config
     bat # cat with syntax highlighting
+    lsd # ls with colours and dev icons
     cloc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
     ffmpeg # multimedia tool for handling audio, video and other multimedia
@@ -97,6 +98,11 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    shellAliases = {
+      l = "lsd";
+      cm = "chezmoi";
+      lg = "lazygit";
+    };
   };
   
   # fancy prompts for terminal apps

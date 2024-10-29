@@ -52,6 +52,7 @@
     tealdeer # tldr in Rust, provides simple examples for commands
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation
+    btop # better htop with nice UI
     
     cmake # Build tools for CXX
     ninja # Faster builds for CXX

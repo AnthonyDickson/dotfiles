@@ -46,10 +46,12 @@
     lazygit # awesome terminal wrapper for git, used in lunarvim config
     bat # cat with syntax highlighting
     lsd # ls with colours and dev icons
-    cloc # counts lines of code excluding comments and empty lines
+    scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     tealdeer # tldr in Rust, provides simple examples for commands
+    duf # better df with colours and nice formatting
+    dust # better du with graph visualisation
     
     cmake # Build tools for CXX
     ninja # Faster builds for CXX
@@ -110,5 +112,11 @@
   programs.starship = {
       enable = true;
       enableZshIntegration = true;
+  };
+
+  # smarter cd
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

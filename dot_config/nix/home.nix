@@ -48,6 +48,7 @@
     lsd # ls with colours and dev icons
     scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
+    fd # better find
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     tealdeer # tldr in Rust, provides simple examples for commands
     duf # better df with colours and nice formatting

@@ -1,12 +1,12 @@
 # Dotfiles
 
-This repo contains config files for various programs I use such as zsh, kitty, LunarVim, and git.
+This repo contains config files for various programs I use such as zsh, kitty, Neovim, and git.
 I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required for you to use these files without modification.
 
 Files in ./unmanaged_config are not directly managed by chezmoi. This allows progams to freely modify these files.
 Use this folder for files such as lock files.
 
-## Installation
+## Installation (macOS)
 
 1.  Install Nix if not installed already:
     ```shell
@@ -17,7 +17,7 @@ Use this folder for files such as lock files.
 
 3.  Run nix to build the system and user environment:
 
-    1. macOS (first time):
+    1. First time:
 
        ```shell
        nix run nix-darwin -- switch --flake ~/.config/nix
@@ -27,6 +27,21 @@ Use this folder for files such as lock files.
        ```shell
        darwin-rebuild switch --flake ~/.config/nix
        ```
+
+## Installation (NixOS)
+
+1. Run `nix-shell -p chezmoi git --run "chezmoi init --apply AnthonyDickson/dotfiles"` to run chezmoi and get the dotfiles from this repo.
+
+2. Create a symbolic link between the default `configuration.nix` and the file managed by chezmoi:
+    ```shell
+    ln -s -f ~/.config/nix/configuration.nix /etc/nixos/configuration.nix
+    ```
+
+3. Build the system:
+
+    ```shell
+    sudo nix-rebuild switch 
+    ```
 
 ## Hacks
 

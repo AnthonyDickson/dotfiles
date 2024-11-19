@@ -8,39 +8,37 @@ Use this folder for files such as lock files.
 
 ## Installation (macOS)
 
-1.  Install Nix if not installed already:
+1. Install Nix if not installed already:
+
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinateI
     ```
-2.  Run `nix run nixpkgs#chezmoi -- init --apply AnthonyDickson/dotfiles` to run chezmoi and get the dotfiles from this repo.
+
+2. Run `nix run nixpkgs#chezmoi -- init --apply AnthonyDickson/dotfiles` to run chezmoi and get the dotfiles from this repo.
     This will run chezmoi without installing it; the next step will ensure it is installed permanently.
 
-3.  Run nix to build the system and user environment:
+3. Run nix to build the system and user environment:
 
     1. First time:
 
        ```shell
-       nix run nix-darwin -- switch --flake ~/.config/nix
+       nix run nix-darwin -- switch --flake ~/.config/nix#darwin
        ```
 
     2. After initial install:
+
        ```shell
-       darwin-rebuild switch --flake ~/.config/nix
+       darwin-rebuild switch --flake ~/.config/nix#darwin
        ```
 
 ## Installation (NixOS)
 
 1. Run `nix-shell -p chezmoi git --run "chezmoi init --apply AnthonyDickson/dotfiles"` to run chezmoi and get the dotfiles from this repo.
 
-2. Create a symbolic link between the default `configuration.nix` and the file managed by chezmoi:
-    ```shell
-    ln -s -f ~/.config/nix/configuration.nix /etc/nixos/configuration.nix
-    ```
-
-3. Build the system:
+2. Build the system:
 
     ```shell
-    sudo nix-rebuild switch 
+    sudo nix-rebuild switch --flake ~/.config/nix#nix
     ```
 
 ## Hacks
@@ -54,4 +52,4 @@ This will run everytime you run `chezmoi apply` so there should not be any issue
 To update/edit config files, you should use `chezmoi edit ./config/path/to/config.file`.
 To add new config files, you should use `chezmoi add ./config/path/file.conf`.
 
-If you edit or add nix flakes, you should rerun step 3.
+If you edit or add nix flakes, you should rerun the rebuild step (step 3 for macOS and 2 for NixOS).

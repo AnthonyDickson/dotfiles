@@ -56,12 +56,8 @@
 
   # Graphics
   # See: https://nixos.wiki/wiki/Nvidia for more details
-  hardware.opengl = {
-    enable = true;
-  };
-
   services.xserver.videoDrivers = ["nvidia"];
-
+  hardware.graphics.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -93,29 +89,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.anthony = {
     isNormalUser = true;
     description = "Anthony";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    kitty # terminal emulator
-    nerdfonts # fancy fonts with ligatures and monospacing
-    starship # fancy prompts for terminal applications
-    zoxide # smarter cd
-    chezmoi # For managing dotfiles
-    gh # GitHub CLI for auth
-    lazygit # awesome terminal wrapper for git, used in lunarvim config
-    bat # cat with syntax highlighting
-    lsd # ls with colours and dev icons
-    scc # counts lines of code excluding comments and empty lines
-    ripgrep # better grep, works recursively on folders and is fast
-    fd # better find
-    ffmpeg # multimedia tool for handling audio, video and other multimedia
-    tealdeer # tldr in Rust, provides simple examples for commands
-    duf # better df with colours and nice formatting
-    dust # better du with graph visualisation
-    btop # better htop with nice UI
     ];
   };
 
@@ -156,6 +137,24 @@
     gotools # extra tools for golang such as gopls, godoc
     golangci-lint # linter for golang
     rustup # Rust toolchain
+
+    kitty # terminal emulator
+    nerdfonts # fancy fonts with ligatures and monospacing
+    starship # fancy prompts for terminal applications
+    zoxide # smarter cd
+    chezmoi # For managing dotfiles
+    gh # GitHub CLI for auth
+    lazygit # awesome terminal wrapper for git, used in lunarvim config
+    bat # cat with syntax highlighting
+    lsd # ls with colours and dev icons
+    scc # counts lines of code excluding comments and empty lines
+    ripgrep # better grep, works recursively on folders and is fast
+    fd # better find
+    ffmpeg # multimedia tool for handling audio, video and other multimedia
+    tealdeer # tldr in Rust, provides simple examples for commands
+    duf # better df with colours and nice formatting
+    dust # better du with graph visualisation
+    btop # better htop with nice UI
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

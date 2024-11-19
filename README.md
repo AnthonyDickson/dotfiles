@@ -41,6 +41,12 @@ Use this folder for files such as lock files.
     sudo nix-rebuild switch --flake ~/.config/nix#nix
     ```
 
+3. Set up rust (first time only):
+
+    ```shell
+    rustup default stable
+    ```
+
 ## Hacks
 
 Normally, chezmoi will symlink files. This causes issues for nix which will not work on a symlinked flake.lock.

@@ -29,10 +29,17 @@
       };
     };
 
+    # Build NixOS flake using:
+    # $ darwin-rebuild build --flake .#nixos
     nixosConfigurations = {
-      nix = nixpkgs.lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem {
         modules = [
           ./hosts/nix/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.anthony = import ./hosts/nix/home.nix;
+          }
         ];
       };
     };

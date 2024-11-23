@@ -104,57 +104,15 @@
   programs.firefox.enable = true;
 
   # The better Bash
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      l = "lsd";
-      cm = "chezmoi";
-      lg = "lazygit";
-    };
-  };
-  
+  programs.zsh.enable = true; 
+  users.defaultUserShell = pkgs.zsh;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # vim but better
-    wl-clipboard # clipboard provider for neovim
-    git # version control
-    unzip # unarchive zip files
-    wget # download things from the command line
-
-    gcc #_CXX compiler
-    cmake # Build tools for CXX
-    ninja # Faster builds for CXX
-    gnumake # GNU Make
-    nodejs_22 # node and npm for running and building applications in JavaScript
-    python3 # Python interpreter
-    go # golang
-    gotools # extra tools for golang such as gopls, godoc
-    golangci-lint # linter for golang
-    rustup # Rust toolchain
-
-    kitty # terminal emulator
-    nerdfonts # fancy fonts with ligatures and monospacing
-    starship # fancy prompts for terminal applications
-    zoxide # smarter cd
-    chezmoi # For managing dotfiles
-    gh # GitHub CLI for auth
-    lazygit # awesome terminal wrapper for git, used in lunarvim config
-    bat # cat with syntax highlighting
-    lsd # ls with colours and dev icons
-    scc # counts lines of code excluding comments and empty lines
-    ripgrep # better grep, works recursively on folders and is fast
-    fd # better find
-    ffmpeg # multimedia tool for handling audio, video and other multimedia
-    tealdeer # tldr in Rust, provides simple examples for commands
-    duf # better df with colours and nice formatting
-    dust # better du with graph visualisation
-    btop # better htop with nice UI
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

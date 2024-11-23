@@ -4,8 +4,9 @@
 [init]
 	defaultBranch = main
 
-{{ if eq .chezmoi.hostname "fedora" -}}
-[credential]
-	helper = /usr/local/bin/git-credential-manager
-	credentialStore = secretservice
+{{ if eq .chezmoi.hostname "nixos" -}}
+[credential "https://github.com"]
+  helper = !/etc/profiles/per-user/anthony/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+  helper = !/etc/profiles/per-user/anthony/bin/gh auth git-credential
 {{ end }}

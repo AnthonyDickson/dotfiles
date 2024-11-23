@@ -3,17 +3,24 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # System-wide styling/theming
+    stylix = {
+      url = "github:danth/stylix";
+    };
   };
 
-  outputs = { self, nix-darwin, nixpkgs, home-manager }: {
+  outputs = { self, nix-darwin, nixpkgs, home-manager, stylix }: {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#darwin
     darwinConfigurations = {
@@ -40,6 +47,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.anthony = import ./hosts/nixos/home.nix;
           }
+          stylix.nixosModules.stylix
         ];
       };
     };

@@ -38,5 +38,7 @@
   system.defaults = {
     dock.autohide = false;
     finder.AppleShowAllExtensions = true;
+    ## Enable cmd + ctrl to drag a window by clicking anywhere on it.
+    NSGlobalDomain.NSWindowShouldDragOnGesture = true;
   };
 }

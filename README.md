@@ -1,7 +1,9 @@
 # Dotfiles
 
-This repo contains config files for various programs I use such as zsh, kitty, Neovim, and git.
-I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required for you to use these files without modification.
+This repo contains config files for various programs I use such as zsh, kitty,
+Neovim, and git for my MacBook, NixOS desktop and NixOS server.
+I manage my dotfiles with [chezmoi](https://www.chezmoi.io/) which is required
+for you to use these files without modification.
 
 Files in ./unmanaged_config are not directly managed by chezmoi. This allows progams to freely modify these files.
 Use this folder for files such as lock files.
@@ -45,6 +47,16 @@ Use this folder for files such as lock files.
 
     ```shell
     rustup default stable
+    ```
+
+## Installation (Lenovo M93p Tiny Server)
+
+1. Run `nix-shell -p chezmoi git --run "chezmoi init --apply AnthonyDickson/dotfiles"` to run chezmoi and get the dotfiles from this repo.
+
+2. Build the system:
+
+    ```shell
+    sudo nix-rebuild switch --flake ~/.config/nix#m93p
     ```
 
 ## Hacks

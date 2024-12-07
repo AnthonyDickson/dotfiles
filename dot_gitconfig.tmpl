@@ -10,3 +10,12 @@
 [credential "https://gist.github.com"]
   helper = !/etc/profiles/per-user/anthony/bin/gh auth git-credential
 {{ end }}
+
+{{ if eq .chezmoi.hostname "m93p" -}}
+[credential "https://github.com"]
+	helper =
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+{{ end }}

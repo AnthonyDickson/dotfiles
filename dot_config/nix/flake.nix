@@ -51,5 +51,15 @@
         ];
       };
     };
+
+    # Build M93p (NixOS) flake using:
+    # $ darwin-rebuild build --flake .#m93p
+    nixosConfigurations = {
+      m93p = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/m93p/configuration.nix
+        ];
+      };
+    };
   };
 }

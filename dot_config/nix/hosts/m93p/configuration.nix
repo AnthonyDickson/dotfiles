@@ -70,6 +70,8 @@
     tealdeer
     bat
     btop
+
+    tailscale
   ];
 
   # Some programs need SUID wrappers, can be configured further or are started in user sessions. programs.mtr.enable = true; programs.gnupg.agent = {
@@ -77,7 +79,36 @@
   # };
 
   # List services that you want to enable:
+  services.tailscale.enable = true;
 
+  # create a oneshot job to authenticate to Tailscale
+  systemd.services.tailscale-autoconnect = {
+    description = "Automatic connection to Tailscale";
+
+    # make sure tailscale is running before trying to connect to tailscale
+    after = [ "network-pre.target" "tailscale.service" ];
+    wants = [ "network-pre.target" "tailscale.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    # set this service as a oneshot job
+    serviceConfig.Type = "oneshot";
+
+    # have the job run this shell script
+    script = with pkgs; ''
+      # wait for tailscaled to settle
+      sleep 2
+
+      # check if we are already authenticated to tailscale
+      status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+      if [ $status = "Running" ]; then # if so, then do nothing
+        exit 0
+      fi
+
+      # otherwise authenticate with tailscale
+      # The key below is a one-off key, if it does not work generate a new one at https://login.tailscale.com/admin/settings/keys
+      ${tailscale}/bin/tailscale up -authkey tskey-auth-kjLcGYyE7211CNTRL-DXsLGV42Uj5DFuuFVAcJj5RYCFwAFy1bW
+    '';
+  };
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -89,6 +120,9 @@
 
   networking.firewall = {
     enable = true;
+    # Always allow traffic from tailscale network
+    trustedInterfaces = [ "tailscale0" ];
+    # Allow HTTP and HTTPS traffic over public internet. 
     allowedTCPPorts = [ 80 443 ];
   };
 

@@ -18,20 +18,47 @@
     stylix = {
       url = "github:danth/stylix";
     };
+
+    # Declarative Homebrew management
+    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-aerospace-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
   };
 
-  outputs = { self, nix-darwin, nixpkgs, home-manager, stylix }: {
+  outputs = inputs@{ nix-darwin, nixpkgs, home-manager, stylix, nix-homebrew, ... }: 
+    let
+      username = "anthony";
+    in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#darwin
     darwinConfigurations = {
       darwin = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          inherit inputs;
+          username = username;
+        };
         modules = [ 
           ./hosts/darwin/configuration.nix
           home-manager.darwinModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.anthony = import ./hosts/darwin/home.nix;
+            home-manager.users.${username} = import ./hosts/darwin/home.nix;
           }
+          nix-homebrew.darwinModules.nix-homebrew
         ];
       };
     };
@@ -45,7 +72,7 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.anthony = import ./hosts/nixos/home.nix;
+            home-manager.users.${username} = import ./hosts/nixos/home.nix;
           }
           stylix.nixosModules.stylix
         ];

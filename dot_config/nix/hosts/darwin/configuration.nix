@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, username, inputs, ... }:
 
 {
   # Necessary for using flakes on this system.
@@ -30,15 +30,46 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  users.users.anthony.home = "/Users/anthony";
+  users.users.${username}.home = "/Users/${username}";
   home-manager.backupFileExtension = "backup";
   nix.configureBuildUsers = true;
   nix.useDaemon = true;
 
   system.defaults = {
-    dock.autohide = false;
+    dock = {
+      autohide = false;
+      # Groups apps by app in mission control
+      expose-group-by-app = true;
+    };
     finder.AppleShowAllExtensions = true;
     ## Enable cmd + ctrl to drag a window by clicking anywhere on it.
     NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+  };
+  
+  nix-homebrew = {
+    enable = true;
+    enableRosetta = true;
+    user = username;
+
+    # Declarative tap management
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
+      "homebrew/homebrew-tap" = inputs.homebrew-aerospace-tap;
+    };
+
+    # Enable fully-declarative tap management
+    #
+    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+    mutableTaps = false;
+  };
+
+  homebrew = {
+    enable = true;
+    casks = [
+      "aerospace"
+      "kitty"
+    ];
   };
 }

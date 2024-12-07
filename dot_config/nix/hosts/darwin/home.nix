@@ -33,7 +33,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    kitty # terminal emulator
     nerdfonts # fancy fonts with ligatures and monospacing
     chezmoi # For managing dotfiles
     neovim # vim but better

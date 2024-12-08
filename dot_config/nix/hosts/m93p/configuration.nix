@@ -2,7 +2,7 @@
 #
 # Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, username, ... }:
 
 { imports =
     [ # Include the results of the hardware scan.
@@ -35,18 +35,18 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.anthony = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Anthony";
+    description = username;
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    # packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwdgNUV5+JjsTN90SG/UxMSjbP3i/aO+kzsUW0CW4F41Nb7PYCvjXNkrx/OGNrKkaOpzlFONL3B6k0Dcf81cIXtkjFFG1ebiTHP2VCt9EmZKA/9dCR68t26HRMFVLy8ynDj+MnR7h0MNJTMeHuL1mve9rZau+qGIDQwzWlamqaHZt74aBCqjMRJudLDzRQYrkewU7k7LvdNyG/GtEV7Hk4lxv1j83k9RrAeIuGBHSpNa3+lhThTSv5OOiFk1J5TFZKdS+FJngxYyGczWNijw/5tmLCaNP4uMVR01L7JHRTzWwuLzUROH5PbOd4NDD94iEJsEh8R8XKPKSrhYbiPxJvT/xQwNzQimlgUSOII9mBL3tnJFWBVnjtAphVl83k8rQT7VhELp+e/EStuAslX6g3oKSeQtuPM0WaJpeFkXVwoqzfv0XvnqNzlA75P6vQEL12+/GhorsE/HTjBVtPg5db7axAzWYV8B3+Cwa58ogKTlt4A7BFgLS7M1ZRkZc1fz3xMQJublNHqtxlj8vOGcLbb5/NaKlJ7xsSxzrU/U9oEU0aAp9OR76LnK2Uu51MuF+UU4f+cOsrHoZFfTTU6c3OcYM3C9R9hhx4ocpI+iPOAMK21LmVVAIcDiOZz78rFFL45dpvBMa/H7V7kidFYFpmRA2eKqx8peIMj5ou/ZI/tw== anthony@anthonys-macbook-pro.persian-hake.ts.net"
     ];
   };
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "anthony";
+  services.getty.autologinUser = username;
 
   # List packages installed in system profile. To search, run: $ nix search wget
   environment.systemPackages = with pkgs; [

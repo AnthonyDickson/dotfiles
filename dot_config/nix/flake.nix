@@ -21,22 +21,6 @@
 
     # Declarative Homebrew management
     nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-aerospace-tap = {
-      url = "github:nikitabobko/homebrew-tap";
-      flake = false;
-    };
   };
 
   outputs = inputs@{ nix-darwin, nixpkgs, home-manager, stylix, nix-homebrew, ... }: 

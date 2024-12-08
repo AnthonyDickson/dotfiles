@@ -50,26 +50,24 @@
     enable = true;
     enableRosetta = true;
     user = username;
-
-    # Declarative tap management
-    taps = {
-      "homebrew/homebrew-core" = inputs.homebrew-core;
-      "homebrew/homebrew-cask" = inputs.homebrew-cask;
-      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
-      "homebrew/homebrew-tap" = inputs.homebrew-aerospace-tap;
-    };
-
-    # Enable fully-declarative tap management
-    #
-    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
-    mutableTaps = false;
+    autoMigrate = true;
   };
 
   homebrew = {
     enable = true;
     casks = [
+      # Tiling window manager
       "aerospace"
       "kitty"
     ];
+    brews = [
+      # Window borders
+      "borders"
+    ];
+    taps = [
+      "nikitabobko/tap"
+      "FelixKratz/formulae"
+    ];
+    onActivation.cleanup = "zap";
   };
 }

@@ -21,9 +21,11 @@
 
     # Declarative Homebrew management
     nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = inputs@{ nix-darwin, nixpkgs, home-manager, stylix, nix-homebrew, ... }: 
+  outputs = inputs@{ nix-darwin, nixpkgs, home-manager, stylix, nix-homebrew, catppuccin, ... }: 
     let
       username = "anthony";
     in {
@@ -40,7 +42,13 @@
           home-manager.darwinModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./hosts/darwin/home.nix;
+            home-manager.extraSpecialArgs = { username = username; };
+            home-manager.users.${username} = {
+              imports = [
+                ./hosts/darwin/home.nix
+                catppuccin.homeManagerModules.catppuccin
+              ];
+            };
           }
           nix-homebrew.darwinModules.nix-homebrew
         ];

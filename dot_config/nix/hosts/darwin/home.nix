@@ -1,10 +1,10 @@
 # home.nix
 
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 {
-  home.username = "anthony";
-  home.homeDirectory = "/Users/anthony";
+  home.username = username;
+  home.homeDirectory = "/Users/${username}";
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -38,8 +38,6 @@
     neovim # vim but better
     git # version control
     gh # GitHub CLI for auth
-    lazygit # awesome terminal wrapper for git, used in lunarvim config
-    bat # cat with syntax highlighting
     lsd # ls with colours and dev icons
     scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
@@ -48,7 +46,6 @@
     tealdeer # tldr in Rust, provides simple examples for commands
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation
-    btop # better htop with nice UI
     
     cmake # Build tools for CXX
     ninja # Faster builds for CXX
@@ -117,4 +114,24 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  # cat with syntax highlighting
+  programs.bat = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  # better htop with nice UI
+  programs.btop = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  # awesome terminal UI for git
+  programs.lazygit = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
+  catppuccin.flavor = "mocha";
 }

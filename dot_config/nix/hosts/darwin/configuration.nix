@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, username, inputs, ... }:
+{ pkgs, username, ... }:
 
 {
   # Necessary for using flakes on this system.
@@ -60,14 +60,17 @@
       "aerospace"
       "kitty"
     ];
-    brews = [
-      # Window borders
-      "borders"
-    ];
     taps = [
       "nikitabobko/tap"
-      "FelixKratz/formulae"
     ];
     onActivation.cleanup = "zap";
+  };
+
+  services.jankyborders = {
+    enable = true;
+    width = 4.0;
+    active_color = "0xffe1e3e4";
+    inactive_color = "0xff494d64";
+    hidpi = true;
   };
 }

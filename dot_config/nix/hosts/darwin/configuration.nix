@@ -41,9 +41,21 @@
       # Groups apps by app in mission control
       expose-group-by-app = true;
     };
-    finder.AppleShowAllExtensions = true;
+    finder = {
+      AppleShowAllExtensions = true;
+      # Search current folder by default.
+      FXDefaultSearchScope = "SCcf";
+    };
     ## Enable cmd + ctrl to drag a window by clicking anywhere on it.
     NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+
+    CustomUserPreferences = {
+      "com.apple.desktopservices" = {
+        # Do not create .DS_Store files on network drives and USB drives.
+        DSDontWriteNetworkStores = true;
+        DSDontWriteUSBStores = true;
+      };
+    };
   };
   
   nix-homebrew = {

@@ -101,6 +101,16 @@
       cm = "chezmoi";
       lg = "lazygit";
     };
+    initExtra = ''
+      # alt + left arrow
+      bindkey "^[[1;3D" backward-word
+      # alt + right arrow
+      bindkey "^[[1;3C" forward-word
+      # delete key
+      bindkey "^[[3~" delete-char
+      # alt + del
+      bindkey "^[[3;3~" delete-word
+    '';
   };
   
   # fancy prompts for terminal apps

@@ -51,7 +51,11 @@
     ninja # Faster builds for CXX
     gnumake # GNU Make
     nodejs_22 # node and npm for running and building applications in JavaScript
-    python3 # Python interpreter
+    # Python interpreter
+    (python3.withPackages (ps: with ps; [
+      pip
+      setuptools
+    ]))
     go # golang
     gotools # extra tools for golang such as gopls, godoc
     golangci-lint # linter for golang

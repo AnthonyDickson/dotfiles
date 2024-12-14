@@ -1,0 +1,7 @@
+tunnel: 511ce7b5-14fc-4b0f-97cc-6ff527c3b403
+credentials-file: /home/anthony/.cloudflared/511ce7b5-14fc-4b0f-97cc-6ff527c3b403.json
+
+ingress:
+  - hostname: anthonydickson.com
+    service: http://localhost:5000
+  - service: http_status:404

@@ -38,6 +38,7 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
     # packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
@@ -52,7 +53,10 @@
   environment.systemPackages = with pkgs; [
     gcc
     cargo
-    python3
+    (python3.withPackages (ps: with ps; [
+      pip
+      setuptools
+    ]))
     nodejs
 
     git
@@ -65,18 +69,35 @@
     wget
     neovim
 
+    lsd
     dust
     duf
     tealdeer
     bat
     btop
 
-    tailscale
+    cloudflared
   ];
 
   # Some programs need SUID wrappers, can be configured further or are started in user sessions. programs.mtr.enable = true; programs.gnupg.agent = {
   #   enable = true; enableSSHSupport = true;
   # };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      cm = "chezmoi";
+      lg = "lazygit";
+      l = "lsd";
+      update = "sudo nixos-rebuild switch";
+    };
+
+    histSize = 10000;
+  };
 
   # List services that you want to enable:
   services.tailscale.enable = true;
@@ -109,6 +130,7 @@
       ${tailscale}/bin/tailscale up -authkey tskey-auth-kjLcGYyE7211CNTRL-DXsLGV42Uj5DFuuFVAcJj5RYCFwAFy1bW
     '';
   };
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;

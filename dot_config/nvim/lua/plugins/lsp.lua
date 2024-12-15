@@ -7,5 +7,10 @@ return {
 				border = "rounded",
 			},
 		},
+		servers = {
+			clangd = {
+				mason = false,
+			},
+		},
 	},
 }

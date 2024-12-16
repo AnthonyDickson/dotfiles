@@ -43,6 +43,7 @@
     bat # cat with syntax highlighting
     lsd # ls with colours and dev icons
     scc # counts lines of code excluding comments and empty lines
+    fzf # fuzzy finder for terminal, used in neovim
     ripgrep # better grep, works recursively on folders and is fast
     fd # better find
     ffmpeg # multimedia tool for handling audio, video and other multimedia

@@ -65,6 +65,7 @@
     chezmoi
     unzip
     fd
+    fzf
     ripgrep
     wget
     neovim

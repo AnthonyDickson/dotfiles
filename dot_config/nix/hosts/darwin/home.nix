@@ -38,6 +38,7 @@
     neovim # vim but better
     git # version control
     gh # GitHub CLI for auth
+    fzf # Fuzzy finder for terminal, used in neovim
     lsd # ls with colours and dev icons
     scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast

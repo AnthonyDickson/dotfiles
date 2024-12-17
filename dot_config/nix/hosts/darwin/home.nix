@@ -115,6 +115,10 @@
       bindkey "^[[3~" delete-char
       # alt + del
       bindkey "^[[3;3~" delete-word
+
+      # Fix for OCS 52 key codes (remote copy and paste) in kitty terminal
+      # when using ssh.
+      [[ "$TERM"  == "xterm-kitty" ]] && alias ssh="TERM=xterm-256color ssh"
     '';
   };
   

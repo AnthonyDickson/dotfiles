@@ -75,9 +75,12 @@
     # $ darwin-rebuild build --flake .#m93p
     nixosConfigurations = {
       m93p = nixpkgs.lib.nixosSystem {
-        specialArgs = { username = username; };
+        specialArgs = {
+            username = username;
+          };
         modules = [
           ./hosts/m93p/configuration.nix
+          catppuccin.nixosModules.catppuccin
         ];
       };
     };

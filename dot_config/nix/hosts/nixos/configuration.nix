@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   imports =
@@ -92,9 +92,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.anthony = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Anthony";
+    description = username;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     ];

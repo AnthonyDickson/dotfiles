@@ -59,11 +59,13 @@
     # $ darwin-rebuild build --flake .#nixos
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { username = username; };
         modules = [
           ./hosts/nixos/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { username = username; };
             home-manager.users.${username} = import ./hosts/nixos/home.nix;
           }
           stylix.nixosModules.stylix

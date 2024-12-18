@@ -1,10 +1,10 @@
 # home.nix
 
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 {
-  home.username = "anthony";
-  home.homeDirectory = "/home/anthony";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

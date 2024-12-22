@@ -33,13 +33,19 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    nerdfonts # fancy fonts with ligatures and monospacing
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.caskaydia-mono
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.jetbrains-mono
     chezmoi # For managing dotfiles
     neovim # vim but better
     git # version control
     gh # GitHub CLI for auth
+    lazygit # awesome terminal UI for git
     fzf # Fuzzy finder for terminal, used in neovim
     lsd # ls with colours and dev icons
+    bat # cat with syntax highlighting
     scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
     fd # better find
@@ -47,6 +53,7 @@
     tealdeer # tldr in Rust, provides simple examples for commands
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation
+    btop # better htop with nice UI
     httpie # better curl for testing http requests
     
     cmake # Build tools for CXX
@@ -135,23 +142,11 @@
     enableZshIntegration = true;
   };
 
-  # cat with syntax highlighting
-  programs.bat = {
-    enable = true;
-    catppuccin.enable = true;
-  };
 
-  # better htop with nice UI
-  programs.btop = {
-    enable = true;
-    catppuccin.enable = true;
+  catppuccin = {
+    flavor = "mocha";
+    bat.enable = true;
+    btop.enable = true;
+    lazygit.enable = true;
   };
-
-  # awesome terminal UI for git
-  programs.lazygit = {
-    enable = true;
-    catppuccin.enable = true;
-  };
-
-  catppuccin.flavor = "mocha";
 }

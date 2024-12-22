@@ -39,7 +39,7 @@
     dock = {
       autohide = false;
       # Groups apps by app in mission control
-      expose-group-by-app = true;
+      expose-group-apps = true;
     };
     finder = {
       AppleShowAllExtensions = true;

@@ -58,6 +58,8 @@
   # See: https://nixos.wiki/wiki/Nvidia for more details
   services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
+  # needed for steam to work.
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -97,6 +99,7 @@
     description = username;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      steam
     ];
   };
 

@@ -108,8 +108,8 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://r4.wallpaperflare.com/wallpaper/253/955/781/drops-macro-flowers-rosa-the-dark-background-hd-wallpaper-48061d58e020ec08601cc19e48a2b4ea.jpg";
-      hash = "sha256-eeJpXMDJRpIVGMWbwsZhOuDHscXMedd/EvQ0hxNU4OA=";
+      url = "https://images5.alphacoders.com/117/1175189.jpg";
+      hash = "sha256-N33mgBfqFbAN9VQfSFmsnKZbAn9iJcM6c4SyDSlMLRk=";
     };
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";

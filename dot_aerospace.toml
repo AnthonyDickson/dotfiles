@@ -158,15 +158,7 @@ shift-down = ['volume set 0', 'mode main']
 
 # Some windows are best left floating.
 [[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.iCal'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -175,8 +167,4 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
 run = 'layout floating'

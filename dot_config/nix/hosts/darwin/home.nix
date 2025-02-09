@@ -43,6 +43,7 @@
     git # version control
     gh # GitHub CLI for auth
     lazygit # awesome terminal UI for git
+    difftastic # diffs based on syntax
     fzf # Fuzzy finder for terminal, used in neovim
     lsd # ls with colours and dev icons
     bat # cat with syntax highlighting
@@ -127,6 +128,9 @@
       # Fix for OCS 52 key codes (remote copy and paste) in kitty terminal
       # when using ssh.
       [[ "$TERM"  == "xterm-kitty" ]] && alias ssh="TERM=xterm-256color ssh"
+
+      # Set config home used by lazygit
+      export XDG_CONFIG_HOME="$HOME/.config"
     '';
   };
   

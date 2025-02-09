@@ -131,6 +131,8 @@
 
       # Set config home used by lazygit
       export XDG_CONFIG_HOME="$HOME/.config"
+
+      export EDITOR="nvim"
     '';
   };
   

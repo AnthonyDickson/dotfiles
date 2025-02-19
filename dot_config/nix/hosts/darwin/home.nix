@@ -49,6 +49,7 @@
     bat # cat with syntax highlighting
     scc # counts lines of code excluding comments and empty lines
     ripgrep # better grep, works recursively on folders and is fast
+    ast-grep # grep that parses code
     fd # better find
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     tealdeer # tldr in Rust, provides simple examples for commands

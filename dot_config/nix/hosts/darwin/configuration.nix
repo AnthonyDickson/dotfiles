@@ -5,8 +5,8 @@
 { pkgs, username, ... }:
 
 {
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  # Needed for Nix installed via Determinate installer.
+  nix.enable = false;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -16,10 +16,6 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -32,8 +28,6 @@
 
   users.users.${username}.home = "/Users/${username}";
   home-manager.backupFileExtension = "backup";
-  nix.configureBuildUsers = true;
-  nix.useDaemon = true;
 
   system.defaults = {
     dock = {

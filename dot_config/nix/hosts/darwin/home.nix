@@ -57,6 +57,7 @@
     dust # better du with graph visualisation
     btop # better htop with nice UI
     httpie # better curl for testing http requests
+    wget # download files from the internet
     
     cmake # Build tools for CXX
     ninja # Faster builds for CXX

@@ -72,6 +72,10 @@
     gotools # extra tools for golang such as gopls, godoc
     golangci-lint # linter for golang
     rustup # Rust toolchain (rustc, cargo, rust-analyzer)
+
+    tectonic # For rendering LaTeX math equations
+    imagemagick # For image manipulation
+    mermaid-cli # For neovim image preview
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

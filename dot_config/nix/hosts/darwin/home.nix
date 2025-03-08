@@ -116,6 +116,7 @@
       l = "lsd";
       cm = "chezmoi";
       lg = "lazygit";
+      sg = "ast-grep";
     };
     initExtra = ''
       # alt + left arrow

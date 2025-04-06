@@ -16,6 +16,7 @@
     ./../modules/lazygit
     ./../modules/nvim
     ./../modules/ast-grep.nix
+    ./../modules/micromamba.nix
   ];
 
   home.username = username;

@@ -6,7 +6,7 @@
     ./../modules/programs
     ./../modules/zsh#darwin
     ./../modules/starship
-    ./../modules/kitty#darwin
+    ./../modules/kitty
     ./../modules/nerd-fonts.nix
     ./../modules/zoxide.nix
     ./../modules/lsd.nix

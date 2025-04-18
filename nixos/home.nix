@@ -13,6 +13,7 @@
     ./../modules/bat.nix
     ./../modules/btop.nix
     ./../modules/git.nix
+    ./../modules/git_credentials.nix
     ./../modules/lazygit
     ./../modules/nvim
     ./../modules/ast-grep.nix

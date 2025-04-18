@@ -30,6 +30,7 @@
     httpie # better curl for testing http requests
     imagemagick # For image manipulation
     mermaid-cli # For neovim image preview
+    nixfmt-rfc-style # Formatter for .nix files
     nodejs_22 # node and npm for running and building applications in JavaScript
     ninja # Faster builds for CXX
     python3 # Python interpreter

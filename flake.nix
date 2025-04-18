@@ -14,77 +14,96 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # System-wide styling/theming
-    stylix = {
-      url = "github:danth/stylix";
-    };
-
     # Declarative Homebrew management
-    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
 
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = inputs@{ nix-darwin, nixpkgs, home-manager, stylix, nix-homebrew, catppuccin, ... }: 
+  outputs =
+    inputs@{
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      nix-homebrew,
+      catppuccin,
+      ...
+    }:
     let
       username = "anthony";
-    in {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#darwin
-    darwinConfigurations = {
-      darwin = nix-darwin.lib.darwinSystem {
-        specialArgs = {
-          inherit inputs;
-          username = username;
-        };
-        modules = [ 
-          ./darwin/configuration.nix
-          home-manager.darwinModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { username = username; };
-            home-manager.users.${username} = {
-              imports = [
-                ./darwin/home.nix
-                catppuccin.homeModules.catppuccin
-              ];
-            };
-          }
-          nix-homebrew.darwinModules.nix-homebrew
-        ];
-      };
-    };
-
-    # Build NixOS flake using:
-    # $ sudo nixos-rebuild build --flake .#nixos
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { username = username; };
-        modules = [
-          ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { username = username; };
-            home-manager.users.${username} = import ./nixos/home.nix;
-          }
-          stylix.nixosModules.stylix
-        ];
-      };
-    };
-
-    # Build M93p (NixOS) flake using:
-    # $ sudo nixos-rebuild build --flake .#m93p
-    nixosConfigurations = {
-      m93p = nixpkgs.lib.nixosSystem {
-        specialArgs = {
+    in
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#darwin
+      darwinConfigurations = {
+        darwin = nix-darwin.lib.darwinSystem {
+          specialArgs = {
+            inherit inputs;
             username = username;
           };
-        modules = [
-          ./m93p/configuration.nix
-          catppuccin.nixosModules.catppuccin
-        ];
+          modules = [
+            ./darwin/configuration.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                username = username;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./darwin/home.nix
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+          ];
+        };
+      };
+
+      # Build NixOS flake using:
+      # $ sudo nixos-rebuild build --flake .#nixos
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = username;
+          };
+          modules = [
+            ./nixos/configuration.nix
+            catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                username = username;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./nixos/home.nix
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
+            }
+          ];
+        };
+      };
+
+      # Build M93p (NixOS) flake using:
+      # $ sudo nixos-rebuild build --flake .#m93p
+      nixosConfigurations = {
+        m93p = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = username;
+          };
+          modules = [
+            ./m93p/configuration.nix
+            catppuccin.nixosModules.catppuccin
+          ];
+        };
       };
     };
-  };
 }

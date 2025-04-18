@@ -2,14 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./bluetooth.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./bluetooth.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -57,7 +62,7 @@
 
   # Graphics
   # See: https://nixos.wiki/wiki/Nvidia for more details
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
   # needed for steam to work.
   hardware.graphics.enable32Bit = true;
@@ -74,7 +79,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -92,40 +97,32 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       steam
     ];
   };
 
-  # System wide scheme.
-  stylix = {
-    enable = true;
-    image = pkgs.fetchurl {
-      url = "https://images5.alphacoders.com/117/1175189.jpg";
-      hash = "sha256-N33mgBfqFbAN9VQfSFmsnKZbAn9iJcM6c4SyDSlMLRk=";
-    };
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    polarity = "dark";
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override {fonts= ["FiraCode"];};
-        name = "FiraCode Nerd Font Mono";
-      };
-    };
-  };
+  # Enable dynamically linked programs, in particular for Neovim plugins
+  programs.nix-ld.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
 
   # The better Bash
-  programs.zsh.enable = true; 
+  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
   # Allow unfree packages
@@ -161,6 +158,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
 }

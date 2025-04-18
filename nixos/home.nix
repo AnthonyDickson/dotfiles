@@ -6,7 +6,7 @@
     ./../modules/programs#nixos
     ./../modules/zsh
     ./../modules/starship
-    ./../modules/kitty#nixos
+    ./../modules/kitty
     ./../modules/nerd-fonts.nix
     ./../modules/zoxide.nix
     ./../modules/lsd.nix

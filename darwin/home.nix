@@ -4,7 +4,7 @@
 {
   imports = [
     ./../modules/programs
-    ./../modules/zsh#darwin
+    ./../modules/zsh/darwin.nix
     ./../modules/starship
     ./../modules/kitty
     ./../modules/nerd-fonts.nix
@@ -17,7 +17,7 @@
     ./../modules/nvim
     ./../modules/ast-grep.nix
     ./../modules/micromamba.nix
-    ./../modules/aerospace#darwin
+    ./../modules/aerospace/darwin.nix
   ];
 
   home.username = username;

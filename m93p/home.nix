@@ -6,7 +6,7 @@
     ./../modules/programs/nixos.nix
     ./../modules/zsh
     ./../modules/starship
-    ./../modules/kitty
+    ./../modules/kitty/nixos.nix
     ./../modules/nerd-fonts.nix
     ./../modules/zoxide.nix
     ./../modules/lsd.nix
@@ -15,7 +15,7 @@
     ./../modules/git.nix
     ./../modules/git_credentials.nix
     ./../modules/lazygit
-    ./../modules/nvim
+    ./../modules/helix.nix
     ./../modules/ast-grep.nix
     ./../modules/micromamba.nix
   ];

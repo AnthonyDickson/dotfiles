@@ -4,7 +4,7 @@
 {
   imports = [
     ./../modules/programs/nixos.nix
-    ./../modules/zsh
+    ./../modules/zsh/nixos.nix
     ./../modules/starship
     ./../modules/kitty/nixos.nix
     ./../modules/nerd-fonts.nix

@@ -18,6 +18,7 @@
     ./../modules/helix.nix
     ./../modules/ast-grep.nix
     ./../modules/micromamba.nix
+    ./../modules/hyprland
   ];
 
   home.username = username;

@@ -20,17 +20,22 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    walker.url = "github:abenz1267/walker";
   };
 
   outputs =
-    inputs@{
+    {
       nix-darwin,
       nixpkgs,
       home-manager,
       nix-homebrew,
       catppuccin,
+      walker,
       ...
-    }:
+    }@inputs:
     let
       username = "anthony";
     in
@@ -97,6 +102,7 @@
       nixosConfigurations = {
         m93p = nixpkgs.lib.nixosSystem {
           specialArgs = {
+            inherit inputs;
             username = username;
           };
           modules = [
@@ -106,6 +112,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = {
                 username = username;
               };
@@ -113,6 +120,7 @@
                 imports = [
                   ./m93p/home.nix
                   catppuccin.homeModules.catppuccin
+                  walker.homeManagerModules.default
                 ];
               };
             }

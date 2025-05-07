@@ -42,7 +42,7 @@ NixOS/Nix Darwin, Nix and Home Manager are used to manage the system and user en
 1. Build the system:
 
     ```shell
-    sudo nix-rebuild switch --flake ~/.config/nix#nix
+    sudo nixos-rebuild switch --flake ~/.config/nix#nix
     ```
 
 ## Installation (Lenovo M93p Tiny Server)
@@ -56,7 +56,7 @@ NixOS/Nix Darwin, Nix and Home Manager are used to manage the system and user en
 2. Build the system:
 
     ```shell
-    sudo nix-rebuild switch --flake ~/.config/nix#m93p
+    sudo nixos-rebuild switch --flake ~/.config/nix#m93p
     ```
 
 ## TODO

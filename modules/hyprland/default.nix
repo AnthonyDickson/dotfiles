@@ -1,4 +1,5 @@
 {
+  # TODO: Split into modules
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -65,10 +66,10 @@
               text = "$TIME";
               text_align = "center";
               color = "rgba(255, 255, 255, 1.0)";
-              font_size = 72;
+              font_size = 118;
               font_family = "Sans";
               rotate = 0;
-              position = "0, 80";
+              position = "0, 120";
               halign = "center";
               valign = "center";
             }
@@ -77,7 +78,7 @@
               text = ''cmd[update:60000] echo $(date +"%A, %-d %b")'';
               text_align = "center";
               color = "rgba(255, 255, 255, 1.0)";
-              font_size = 36;
+              font_size = 34;
               font_family = "Sans";
               rotate = 0;
               position = "0, 0";

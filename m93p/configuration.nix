@@ -62,6 +62,9 @@
     xwayland.enable = true;
   };
 
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";

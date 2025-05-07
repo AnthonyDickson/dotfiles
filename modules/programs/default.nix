@@ -40,5 +40,6 @@
     tectonic # For rendering LaTeX math equations
     unzip # unarchive zip files
     wget # download files from the internet
+    yazi # awesome terminal file manager
   ];
 }

@@ -19,6 +19,7 @@
     ./modules/desktop-manager.nix
     ./modules/display-manager.nix
     ./modules/firefox.nix
+    ./modules/fish.nix
     ./modules/hyprland.nix
     ./modules/hyprlock.nix
     ./modules/keymap.nix
@@ -29,7 +30,6 @@
     ./modules/unfree.nix
     ./modules/user-accounts.nix
     ./modules/xserver.nix
-    ./modules/zsh.nix
   ];
   
   nix.settings.experimental-features = [

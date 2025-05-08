@@ -8,4 +8,8 @@
       recursive = true;
     };
   };
+
+  programs.zsh.sessionVariables = {
+    EDITOR = "nvim";
+  };
 }

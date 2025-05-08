@@ -9,6 +9,7 @@
         "$mod, K, exec, kitty"
         "$mod, space, exec, walker"
         "$mod, L, exec, hyprlock"
+        "$mod SHIFT, L, exec, loginctl lock-session && systemctl suspend"
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"
         "$mod, N, movefocus, l"

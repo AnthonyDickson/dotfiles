@@ -49,7 +49,7 @@
             username = username;
           };
           modules = [
-            ./darwin/configuration.nix
+            ./hosts/darwin/configuration.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -59,7 +59,7 @@
               };
               home-manager.users.${username} = {
                 imports = [
-                  ./darwin/home.nix
+                  ./hosts/darwin/home.nix
                   catppuccin.homeModules.catppuccin
                 ];
               };
@@ -77,7 +77,7 @@
             username = username;
           };
           modules = [
-            ./nixos/configuration.nix
+            ./hosts/nixos/configuration.nix
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
@@ -88,7 +88,7 @@
               };
               home-manager.users.${username} = {
                 imports = [
-                  ./nixos/home.nix
+                  ./hosts/nixos/home.nix
                   catppuccin.homeModules.catppuccin
                 ];
               };
@@ -106,7 +106,7 @@
             username = username;
           };
           modules = [
-            ./m93p/configuration.nix
+            ./hosts/m93p/configuration.nix
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
@@ -118,7 +118,7 @@
               };
               home-manager.users.${username} = {
                 imports = [
-                  ./m93p/home.nix
+                  ./hosts/m93p/home.nix
                   catppuccin.homeModules.catppuccin
                   walker.homeManagerModules.default
                 ];

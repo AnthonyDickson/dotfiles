@@ -3,22 +3,22 @@
 { username, ... }:
 {
   imports = [
-    ./../modules/programs/nixos.nix
-    ./../modules/starship
-    ./../modules/kitty/nixos.nix
-    ./../modules/nerd-fonts.nix
-    ./../modules/zoxide.nix
-    ./../modules/lsd.nix
-    ./../modules/bat.nix
-    ./../modules/btop.nix
-    ./../modules/git.nix
-    ./../modules/git_credentials.nix
-    ./../modules/lazygit
-    ./../modules/helix.nix
-    ./../modules/ast-grep.nix
-    ./../modules/micromamba.nix
-    ./../modules/hyprland
-    ./../modules/fish.nix
+    ./../../modules/home/programs/nixos.nix
+    ./../../modules/home/starship
+    ./../../modules/home/kitty/nixos.nix
+    ./../../modules/home/nerd-fonts.nix
+    ./../../modules/home/zoxide.nix
+    ./../../modules/home/lsd.nix
+    ./../../modules/home/bat.nix
+    ./../../modules/home/btop.nix
+    ./../../modules/home/git.nix
+    ./../../modules/home/git_credentials.nix
+    ./../../modules/home/lazygit
+    ./../../modules/home/helix.nix
+    ./../../modules/home/ast-grep.nix
+    ./../../modules/home/micromamba.nix
+    ./../../modules/home/hyprland
+    ./../../modules/home/fish.nix
   ];
 
   home.username = username;

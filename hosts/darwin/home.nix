@@ -3,25 +3,25 @@
 { username, ... }:
 {
   imports = [
-    ./../modules/programs/nixos.nix
-    ./../modules/zsh
-    ./../modules/starship
-    ./../modules/kitty
-    ./../modules/nerd-fonts.nix
-    ./../modules/zoxide.nix
-    ./../modules/lsd.nix
-    ./../modules/bat.nix
-    ./../modules/btop.nix
-    ./../modules/git.nix
-    ./../modules/git_credentials.nix
-    ./../modules/lazygit
-    ./../modules/nvim
-    ./../modules/ast-grep.nix
-    ./../modules/micromamba.nix
+    ./../../modules/home/programs
+    ./../../modules/home/zsh/darwin.nix
+    ./../../modules/home/starship
+    ./../../modules/home/kitty
+    ./../../modules/home/nerd-fonts.nix
+    ./../../modules/home/zoxide.nix
+    ./../../modules/home/lsd.nix
+    ./../../modules/home/bat.nix
+    ./../../modules/home/btop.nix
+    ./../../modules/home/git.nix
+    ./../../modules/home/lazygit
+    ./../../modules/home/nvim
+    ./../../modules/home/ast-grep.nix
+    ./../../modules/home/micromamba.nix
+    ./../../modules/home/aerospace/darwin.nix
   ];
 
   home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.homeDirectory = "/Users/${username}";
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -34,6 +34,7 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -66,4 +67,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  catppuccin = {
+    flavor = "mocha";
+  };
 }

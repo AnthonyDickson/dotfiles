@@ -13,23 +13,23 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/audio.nix
-    ./modules/bootloader.nix
-    ./modules/cachix.nix
-    ./modules/desktop-manager.nix
-    ./modules/display-manager.nix
-    ./modules/firefox.nix
-    ./modules/fish.nix
-    ./modules/hyprland.nix
-    ./modules/hyprlock.nix
-    ./modules/keymap.nix
-    ./modules/keyring.nix
-    ./modules/locale.nix
-    ./modules/networking.nix
-    ./modules/printing.nix
-    ./modules/unfree.nix
-    ./modules/user-accounts.nix
-    ./modules/xserver.nix
+    ./../../modules/system/audio.nix
+    ./../../modules/system/bootloader.nix
+    ./../../modules/system/cachix.nix
+    ./../../modules/system/desktop-manager.nix
+    ./../../modules/system/display-manager.nix
+    ./../../modules/system/firefox.nix
+    ./../../modules/system/fish.nix
+    ./../../modules/system/hyprland.nix
+    ./../../modules/system/hyprlock.nix
+    ./../../modules/system/keymap.nix
+    ./../../modules/system/keyring.nix
+    ./../../modules/system/locale.nix
+    ./../../modules/system/networking.nix
+    ./../../modules/system/printing.nix
+    ./../../modules/system/unfree.nix
+    ./../../modules/system/user-accounts.nix
+    ./../../modules/system/xserver.nix
   ];
   
   nix.settings.experimental-features = [

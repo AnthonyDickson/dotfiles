@@ -3,13 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  inputs,
-  pkgs,
-  username,
-  ...
-}:
-
-{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -28,6 +21,7 @@
     ./../../modules/system/networking.nix
     ./../../modules/system/nixd.nix
     ./../../modules/system/printing.nix
+    ./../../modules/system/stylix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix
     ./../../modules/system/xserver.nix

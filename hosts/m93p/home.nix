@@ -1,6 +1,6 @@
 # home.nix
 
-{ username, ... }:
+{ username, wallpaper_path, ... }:
 {
   imports = [
     ./../../modules/home/programs/nixos.nix
@@ -9,7 +9,7 @@
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/zoxide.nix
     ./../../modules/home/lsd.nix
-    ./../../modules/home/bat.nix
+    ./../../modules/home/bat
     ./../../modules/home/btop.nix
     ./../../modules/home/git.nix
     ./../../modules/home/git_credentials.nix
@@ -19,6 +19,7 @@
     ./../../modules/home/micromamba.nix
     ./../../modules/home/hyprland
     ./../../modules/home/fish.nix
+    ./../../modules/home/stylix.nix
     ./../../modules/home/yazi.nix
   ];
 

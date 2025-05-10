@@ -1,6 +1,3 @@
-let
-  wallpaper_path = "Pictures/red_panda.jpeg";
-in
 {
   # TODO: Split into modules
   wayland.windowManager.hyprland = {
@@ -59,16 +56,13 @@ in
             no_fade_in = false;
           };
 
-          background = [
-            {
+          background =  {
               path = "screenshot";
               blur_passes = 3;
               blur_size = 8;
               brightness = 0.7;
               contrast = 0.7;
-            }
-          ];
-
+          };
 
           label = [
             {
@@ -97,20 +91,15 @@ in
             }
           ];
 
-          input-field = [
-            {
+          input-field =  {
               size = "400, 50";
               position = "0, -80";
               monitor = "";
               dots_center = true;
               fade_on_empty = false;
-              font_color = "rgb(202, 211, 245)";
-              inner_color = "rgb(91, 96, 120)";
-              outer_color = "rgb(24, 25, 38)";
               outline_thickness = 0;
-              placeholder_text = ''<span foreground="##cad3f5">Password...</span>'';
-            }
-          ];
+              placeholder_text = "Password...";
+          };
         };
     };
   };
@@ -223,15 +212,5 @@ in
 
   services.hyprpaper = {
     enable = true;
-    settings = {
-      preload = ["${wallpaper_path}"];
-      wallpaper = [
-        ",${wallpaper_path}"
-      ];
-    };
-  };
-
-  home.file = {
-    ${wallpaper_path}.source = ./red_panda.jpg;
   };
 }

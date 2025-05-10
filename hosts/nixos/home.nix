@@ -10,7 +10,7 @@
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/zoxide.nix
     ./../../modules/home/lsd.nix
-    ./../../modules/home/bat.nix
+    ./../../modules/home/bat
     ./../../modules/home/btop.nix
     ./../../modules/home/git.nix
     ./../../modules/home/git_credentials.nix

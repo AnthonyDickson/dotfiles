@@ -13,8 +13,4 @@
       lg = "lazygit";
     };
   };
-
-  catppuccin = {
-    lazygit.enable = true;
-  };
 }

@@ -3,7 +3,6 @@
     enable = true;
     defaultEditor = true;
     settings = {
-      theme="catppuccin_mocha";
       editor = {
         line-number = "relative";
         cursor-shape = {

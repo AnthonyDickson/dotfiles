@@ -22,8 +22,8 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland.url = "github:hyprwm/Hyprland";
-
     walker.url = "github:abenz1267/walker";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs =
@@ -34,6 +34,7 @@
       nix-homebrew,
       catppuccin,
       walker,
+      stylix,
       ...
     }@inputs:
     let
@@ -107,6 +108,7 @@
           };
           modules = [
             ./hosts/m93p/configuration.nix
+            stylix.nixosModules.stylix
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {

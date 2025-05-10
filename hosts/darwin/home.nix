@@ -5,15 +5,15 @@
   imports = [
     ./../../modules/home/programs
     ./../../modules/home/zsh/darwin.nix
-    ./../../modules/home/starship
+    ./../../modules/home/starship/darwin.nix
     ./../../modules/home/kitty
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/zoxide.nix
     ./../../modules/home/lsd.nix
-    ./../../modules/home/bat.nix
+    ./../../modules/home/bat/darwin.nix
     ./../../modules/home/btop.nix
     ./../../modules/home/git.nix
-    ./../../modules/home/lazygit
+    ./../../modules/home/lazygit/darwin.nix
     ./../../modules/home/nvim
     ./../../modules/home/ast-grep.nix
     ./../../modules/home/micromamba.nix

@@ -12,5 +12,10 @@
         name = "FiraCode Nerd Font Mono";
       };
     };
+    cursor = {
+      name = "BreezX-RosePine-Linux";
+      package = pkgs.rose-pine-hyprcursor;
+      size = 32;
+    };
   };
 }

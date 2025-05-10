@@ -26,6 +26,7 @@
     ./../../modules/system/keyring.nix
     ./../../modules/system/locale.nix
     ./../../modules/system/networking.nix
+    ./../../modules/system/nixd.nix
     ./../../modules/system/printing.nix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix

@@ -70,7 +70,7 @@
               text = "$TIME";
               text_align = "center";
               color = "rgba(255, 255, 255, 1.0)";
-              font_size = 118;
+              font_size = 110;
               font_family = "Sans";
               rotate = 0;
               position = "0, 120";

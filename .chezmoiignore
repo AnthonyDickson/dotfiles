@@ -1,4 +1,0 @@
-README.md
-.config/nix/flake.lock
-unmanaged_config/
-./run_onchange_after_hardlink_flake_lock.sh

@@ -1,3 +1,6 @@
+let
+  wallpaper_path = "Pictures/red_panda.jpeg";
+in
 {
   # TODO: Split into modules
   wayland.windowManager.hyprland = {
@@ -33,6 +36,7 @@
         "walker --gapplication-service"
         "dunst"
         "waybar"
+        "hyprpaper"
       ];
     };
   };
@@ -215,5 +219,19 @@
   services = {
     dunst.enable = true;
     hyprpolkitagent.enable = true;
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = ["${wallpaper_path}"];
+      wallpaper = [
+        ",${wallpaper_path}"
+      ];
+    };
+  };
+
+  home.file = {
+    ${wallpaper_path}.source = ./red_panda.jpg;
   };
 }

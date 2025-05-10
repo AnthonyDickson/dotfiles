@@ -151,7 +151,8 @@
         };
 
         clock = {
-          format = "{:%a, %d. %b %H:%M}";
+          format = "{:%a, %d %b %H:%M}";
+          tooltip = false;
         };
 
         cpu = {

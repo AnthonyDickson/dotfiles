@@ -148,6 +148,7 @@
         };
         "hyprland/window" = {
           format = "{class} - {title}";
+          max-length = 32;
         };
 
         clock = {

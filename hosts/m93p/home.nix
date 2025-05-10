@@ -1,26 +1,26 @@
 # home.nix
 
-{ username, wallpaper_path, ... }:
+{ username, ... }:
 {
   imports = [
-    ./../../modules/home/programs/nixos.nix
-    ./../../modules/home/starship
-    ./../../modules/home/kitty/nixos.nix
-    ./../../modules/home/nerd-fonts.nix
-    ./../../modules/home/zoxide.nix
-    ./../../modules/home/lsd.nix
+    ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat
     ./../../modules/home/btop.nix
+    ./../../modules/home/fish.nix
     ./../../modules/home/git.nix
     ./../../modules/home/git_credentials.nix
-    ./../../modules/home/lazygit
     ./../../modules/home/helix.nix
-    ./../../modules/home/ast-grep.nix
-    ./../../modules/home/micromamba.nix
     ./../../modules/home/hyprland
-    ./../../modules/home/fish.nix
+    ./../../modules/home/kitty/nixos.nix
+    ./../../modules/home/lazygit
+    ./../../modules/home/lsd.nix
+    ./../../modules/home/micromamba.nix
+    ./../../modules/home/nerd-fonts.nix
+    ./../../modules/home/programs/nixos.nix
+    ./../../modules/home/starship
     ./../../modules/home/stylix.nix
     ./../../modules/home/yazi.nix
+    ./../../modules/home/zoxide.nix
   ];
 
   home.username = username;

@@ -19,6 +19,7 @@
     ./../../modules/home/micromamba.nix
     ./../../modules/home/hyprland
     ./../../modules/home/fish.nix
+    ./../../modules/home/yazi.nix
   ];
 
   home.username = username;

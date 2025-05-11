@@ -21,6 +21,7 @@
     ./../../modules/system/nixd.nix
     ./../../modules/system/playerctl.nix
     ./../../modules/system/printing.nix
+    ./../../modules/system/spotify.nix
     ./../../modules/system/stylix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix

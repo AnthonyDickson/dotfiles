@@ -6,11 +6,16 @@
     ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat
     ./../../modules/home/btop.nix
+    ./../../modules/home/dunst.nix
     ./../../modules/home/fish.nix
     ./../../modules/home/git.nix
     ./../../modules/home/git_credentials.nix
     ./../../modules/home/helix.nix
-    ./../../modules/home/hyprland
+    ./../../modules/home/hypridle.nix
+    ./../../modules/home/hyprland.nix
+    ./../../modules/home/hyprlock.nix
+    ./../../modules/home/hyprpaper.nix
+    ./../../modules/home/hyprpolkit.nix
     ./../../modules/home/kitty/nixos.nix
     ./../../modules/home/lazygit
     ./../../modules/home/lsd.nix
@@ -19,6 +24,8 @@
     ./../../modules/home/programs/nixos.nix
     ./../../modules/home/starship
     ./../../modules/home/stylix.nix
+    ./../../modules/home/walker.nix
+    ./../../modules/home/waybar
     ./../../modules/home/yazi.nix
     ./../../modules/home/zoxide.nix
   ];

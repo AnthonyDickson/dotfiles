@@ -10,8 +10,7 @@
         };
       };
       keys.normal = {
-        space.space = "file_picker";
-        C.s = ":w";
+        "C-s" = ":w";
         space.q = ":q";
       };
     };

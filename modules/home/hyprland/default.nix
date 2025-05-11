@@ -29,11 +29,23 @@
         "$mod SHIFT, S, movetoworkspace, 3"
         "$mod SHIFT, T, movetoworkspace, 4"
       ];
+      bindm = [
+        # Move/resize windows with mainMod + LMB/RMB and dragging
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
       exec-once = [
         "walker --gapplication-service"
         "dunst"
         "waybar"
         "hyprpaper"
+      ];
+      windowrulev2 = [
+        "float, title:^(Picture-in-Picture|Firefox)$"
+        "size 400 225, title:^(Picture-in-Picture|Firefox)$"
+        "pin, title:^(Picture-in-Picture|Firefox)$"
+        # 20 100%-w-20 positions the window at the bottom-left with a 20 pixel margin
+        "move onscreen 20 100%-w-20, title:^(Picture-in-Picture|Firefox)$"
       ];
     };
   };

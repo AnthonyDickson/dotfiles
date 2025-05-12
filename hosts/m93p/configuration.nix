@@ -23,6 +23,7 @@
     ./../../modules/system/printing.nix
     ./../../modules/system/spotify.nix
     ./../../modules/system/stylix
+    ./../../modules/system/tailscale.nix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix
     ./../../modules/system/xserver.nix

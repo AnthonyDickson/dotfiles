@@ -30,6 +30,22 @@
         "C-s" = ":w";
         space.q = ":q";
       };
+      languages = {
+        lanaguage = [
+          {
+            name = "python";
+            language-servers = ["pyright" "ruff"];
+          }
+        ];
+
+        language-server = {
+          pyright.config.python.analysis.typeCheckingMode = "basic";
+          ruff = {
+            command = "ruff";
+            args = ["server"];
+          };
+        };
+      };
     };
   };
 }

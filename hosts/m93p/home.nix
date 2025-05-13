@@ -22,6 +22,7 @@
     ./../../modules/home/micromamba.nix
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/programs/nixos.nix
+    ./../../modules/home/ruff.nix
     ./../../modules/home/starship
     ./../../modules/home/stylix.nix
     ./../../modules/home/walker.nix

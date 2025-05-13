@@ -3,6 +3,7 @@
     enable = true;
     defaultEditor = true;
     settings = {
+      theme = "catppuccin_mocha";
       editor = {
         bufferline = "multiple";
         line-number = "relative";
@@ -18,6 +19,11 @@
         inline-diagnostics = {
           cursor-line = "error";
           other-lines = "disable";
+        };
+        indent-guides = {
+          render = true;
+          character = "▏";
+          skip-levels = 1;
         };
       };
       keys.normal = {

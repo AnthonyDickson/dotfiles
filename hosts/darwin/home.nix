@@ -3,21 +3,23 @@
 { username, ... }:
 {
   imports = [
-    ./../../modules/home/programs
-    ./../../modules/home/zsh/darwin.nix
-    ./../../modules/home/starship/darwin.nix
-    ./../../modules/home/kitty
-    ./../../modules/home/nerd-fonts.nix
-    ./../../modules/home/zoxide.nix
-    ./../../modules/home/lsd.nix
+    ./../../modules/home/aerospace/darwin.nix
+    ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat/darwin.nix
     ./../../modules/home/btop.nix
     ./../../modules/home/git.nix
-    ./../../modules/home/lazygit/darwin.nix
-    ./../../modules/home/nvim
-    ./../../modules/home/ast-grep.nix
+    ./../../modules/home/helix.nix
+    ./../../modules/home/kitty
     ./../../modules/home/micromamba.nix
-    ./../../modules/home/aerospace/darwin.nix
+    ./../../modules/home/lazygit/darwin.nix
+    ./../../modules/home/lsd.nix
+    ./../../modules/home/nerd-fonts.nix
+    ./../../modules/home/nvim
+    ./../../modules/home/programs
+    ./../../modules/home/ruff.nix
+    ./../../modules/home/starship/darwin.nix
+    ./../../modules/home/zoxide.nix
+    ./../../modules/home/zsh/darwin.nix
   ];
 
   home.username = username;
@@ -34,7 +36,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
-
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

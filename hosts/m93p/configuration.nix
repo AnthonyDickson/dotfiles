@@ -27,6 +27,7 @@
     ./../../modules/system/tailscale.nix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix
+    ./../../modules/system/wayland-electron-fix.nix
     ./../../modules/system/xserver.nix
   ];
   

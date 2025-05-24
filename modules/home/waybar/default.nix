@@ -11,6 +11,7 @@
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "custom/ncspot"
           "cpu"
           "memory"
           "network"
@@ -79,6 +80,19 @@
           };
           scroll-step = 1;
           # TODO: Add on click to open audio management program
+        };
+
+        "custom/ncspot" = {
+          exec = ./ncspot.sh;
+          interval = 1;
+          format = "{icon} {text}";
+          format-icons = {
+            default = "";
+          };
+          hide-empty-text = true;
+          max-length = 32;
+          toolbar = true;
+          toolbar-format = "{text}";
         };
       };
     };

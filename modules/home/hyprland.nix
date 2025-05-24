@@ -11,6 +11,7 @@
         "$mod SHIFT, L, exec, loginctl lock-session && systemctl suspend"
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"
+        "$mod, period, exec, walker -m emojis"
         # Windows
         "$mod, N, movefocus, l"
         "$mod, O, movefocus, r"

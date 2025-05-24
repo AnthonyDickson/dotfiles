@@ -22,7 +22,6 @@
     ./../../modules/system/playerctl.nix
     ./../../modules/system/printing.nix
     ./../../modules/system/pyright.nix
-    ./../../modules/system/spotify.nix
     ./../../modules/system/stylix
     ./../../modules/system/tailscale.nix
     ./../../modules/system/unfree.nix

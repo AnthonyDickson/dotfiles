@@ -27,6 +27,7 @@
     ./../../modules/system/tailscale.nix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix
+    ./../../modules/system/uv.nix
     ./../../modules/system/wayland-electron-fix.nix
     ./../../modules/system/xserver.nix
   ];
@@ -35,6 +36,9 @@
     "nix-command"
     "flakes"
   ];
+
+  # Mainly for uv
+  programs.nix-ld.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

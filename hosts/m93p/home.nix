@@ -6,6 +6,7 @@
     ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat
     ./../../modules/home/btop.nix
+    ./../../modules/home/calcure
     ./../../modules/home/dunst.nix
     ./../../modules/home/fish.nix
     ./../../modules/home/git.nix

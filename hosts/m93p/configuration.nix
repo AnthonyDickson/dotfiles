@@ -9,6 +9,7 @@
     ./../../modules/system/audio.nix
     ./../../modules/system/bootloader.nix
     ./../../modules/system/cachix.nix
+    ./../../modules/system/calcure.nix
     ./../../modules/system/display-manager.nix
     ./../../modules/system/firefox.nix
     ./../../modules/system/fish.nix

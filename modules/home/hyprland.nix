@@ -12,6 +12,9 @@
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"
         "$mod, period, exec, walker -m emojis"
+        ", PRINT, exec, hyprshot --output-folder ~/Pictures --freeze --mode output"
+        "$mod, PRINT, exec, hyprshot --output-folder ~/Pictures --freeze --mode window"
+        "$mod SHIFT, PRINT, exec, hyprshot --output-folder ~/Pictures --freeze --mode region"
         # Windows
         "$mod, N, movefocus, l"
         "$mod, O, movefocus, r"

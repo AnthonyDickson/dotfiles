@@ -15,6 +15,8 @@
     ./../../modules/system/fish.nix
     ./../../modules/system/hyprland.nix
     ./../../modules/system/hyprlock.nix
+    ./../../modules/system/hyprpicker.nix
+    ./../../modules/system/hyprshot.nix
     ./../../modules/system/jaq.nix
     ./../../modules/system/keymap.nix
     ./../../modules/system/keyring.nix

@@ -4,7 +4,7 @@
     settings = {
       "$mod" = "SUPER";
       bind = [
-        "$mod, F, exec, firefox"
+        "$mod, W, exec, firefox"
         "$mod, K, exec, kitty"
         "$mod, space, exec, walker"
         "$mod, L, exec, hyprlock"
@@ -21,6 +21,7 @@
         "$mod SHIFT, O, movewindow, r"
         "$mod SHIFT, E, movewindow, d"
         "$mod SHIFT, I, movewindow, u"
+        "$mod, F, togglefloating"
         # Workspaces
         "$mod, A, workspace, 1"
         "$mod, R, workspace, 2"

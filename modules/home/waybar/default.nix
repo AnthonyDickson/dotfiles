@@ -79,7 +79,7 @@
             ];
           };
           scroll-step = 1;
-          # TODO: Add on click to open audio management program
+          on-click = "pwvucontrol";
         };
 
         "custom/ncspot" = {

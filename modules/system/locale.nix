@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   # Set your time zone.
   time.timeZone = "Pacific/Auckland";
@@ -15,5 +16,12 @@
     LC_PAPER = "en_NZ.UTF-8";
     LC_TELEPHONE = "en_NZ.UTF-8";
     LC_TIME = "en_NZ.UTF-8";
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+    # mozc for JP, pinyin for SC
+    ibus.engines = with pkgs.ibus-engines; [ mozc pinyin ];
   };
 }

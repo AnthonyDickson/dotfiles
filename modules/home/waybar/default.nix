@@ -6,16 +6,18 @@
         layer = "top";
         position = "top";
         modules-left = [
-          "hyprland/workspaces"
-          "hyprland/window"
-        ];
-        modules-center = [ "clock" ];
-        modules-right = [
-          "custom/ncspot"
           "cpu"
           "memory"
           "network"
+        ];
+        modules-center = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
+        modules-right = [
+          "custom/ncspot"
           "pulseaudio"
+          "clock"
         ];
 
         "hyprland/workspaces" = {
@@ -93,6 +95,7 @@
           max-length = 32;
           toolbar = true;
           toolbar-format = "{text}";
+          on-click = ./focus-ncspot.sh;
         };
       };
     };

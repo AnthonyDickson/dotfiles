@@ -22,6 +22,7 @@
     ./../../modules/system/keyring.nix
     ./../../modules/system/locale.nix
     ./../../modules/system/networking.nix
+    ./../../modules/system/fonts.nix
     ./../../modules/system/nixd.nix
     ./../../modules/system/obsidian.nix
     ./../../modules/system/playerctl.nix

@@ -21,7 +21,6 @@
     ./../../modules/home/lazygit
     ./../../modules/home/lsd.nix
     ./../../modules/home/micromamba.nix
-    ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/ncspot.nix
     ./../../modules/home/programs/nixos.nix
     ./../../modules/home/ruff.nix

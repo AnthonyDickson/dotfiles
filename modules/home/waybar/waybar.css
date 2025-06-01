@@ -5,7 +5,7 @@
 @define-color base0C #94e2d5; @define-color base0D #89b4fa; @define-color base0E #cba6f7; @define-color base0F #f2cdcd;
 
 * {
-    font-family: "DejaVu Sans", "FiraCode Nerd Font Mono", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Noto Sans", "Noto Sans CJK JP", "Noto Sans CJK SC", "FiraCode Nerd Font Propo", Arial, sans-serif;
     font-size: 16px;
     min-height: 0;
 }

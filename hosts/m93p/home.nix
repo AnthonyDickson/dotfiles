@@ -23,6 +23,7 @@
     ./../../modules/home/micromamba.nix
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/ncspot.nix
+    ./../../modules/home/obsidian.nix
     ./../../modules/home/programs/nixos.nix
     ./../../modules/home/ruff.nix
     ./../../modules/home/starship

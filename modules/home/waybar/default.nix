@@ -12,7 +12,6 @@
         ];
         modules-center = [
           "hyprland/workspaces"
-          "hyprland/window"
         ];
         modules-right = [
           "custom/ncspot"
@@ -24,10 +23,6 @@
           persistent-workspaces = {
             "*" = 4;
           };
-        };
-        "hyprland/window" = {
-          format = "{class} - {title}";
-          max-length = 32;
         };
 
         clock = {

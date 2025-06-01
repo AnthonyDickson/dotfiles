@@ -66,7 +66,17 @@
         "pin, title:^(Picture-in-Picture|Firefox)$"
         # positions the window at the bottom-right with a 20 pixel margin
         "move onscreen 100%-w-20 100%-w-20, title:^(Picture-in-Picture|Firefox)$"
+        "nodim, title:^(Picture-in-Picture|Firefox)$"
       ];
+      general = {
+        "gaps_in" = 5; # pixels
+        "gaps_out" = 10; # pixels
+      };
+      decoration = {
+        rounding = 5; # pixels
+        "dim_inactive" = true;
+        "dim_strength" = 0.1;
+      };
     };
   };
 }

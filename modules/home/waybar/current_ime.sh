@@ -7,11 +7,11 @@ set CURRENT_IME $(dbus-send --session --print-reply \
 
 switch $CURRENT_IME
   case "keyboard-us"
-    echo EN🇳🇿
+    echo EN 🇳🇿
   case "rime"
-    echo ZH🇨🇳
+    echo ZH 🇨🇳
   case "mozc"
-    echo JA🇯🇵
+    echo JA 🇯🇵
   case '*'
     echo $CURRENT_IME
 end

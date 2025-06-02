@@ -112,8 +112,7 @@
           interval = 2;
           format = "{text}";
           max-length = 8;
-          toolbar = true;
-          toolbar-format = "{text}";
+          toolbar = false;
         };
       };
     };

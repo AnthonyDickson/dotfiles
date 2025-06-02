@@ -20,8 +20,14 @@
 
   i18n.inputMethod = {
     enable = true;
-    type = "ibus";
-    # mozc for JP, pinyin for SC
-    ibus.engines = with pkgs.ibus-engines; [ mozc pinyin ];
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      libsForQt5.fcitx5-qt
+      fcitx5-gtk
+      fcitx5-catppuccin
+      fcitx5-mozc
+      fcitx5-rime
+    ];
+    fcitx5.waylandFrontend = true;
   };
 }

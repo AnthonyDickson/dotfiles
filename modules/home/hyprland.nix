@@ -59,6 +59,7 @@
         "dunst"
         "waybar"
         "hyprpaper"
+        "fcitx5 -d"
       ];
       windowrulev2 = [
         "float, title:^(Picture-in-Picture|Firefox)$"
@@ -75,7 +76,7 @@
       decoration = {
         rounding = 5; # pixels
         "dim_inactive" = true;
-        "dim_strength" = 0.1;
+        "dim_strength" = 0.05;
       };
     };
   };

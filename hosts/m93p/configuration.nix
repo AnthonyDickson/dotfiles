@@ -21,6 +21,7 @@
     ./../../modules/system/keymap.nix
     ./../../modules/system/keyring.nix
     ./../../modules/system/locale.nix
+    ./../../modules/system/image-viewer.nix
     ./../../modules/system/networking.nix
     ./../../modules/system/fonts.nix
     ./../../modules/system/nixd.nix

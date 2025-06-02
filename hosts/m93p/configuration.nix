@@ -11,6 +11,7 @@
     ./../../modules/system/cachix.nix
     ./../../modules/system/calcure.nix
     ./../../modules/system/display-manager.nix
+    ./../../modules/system/docker.nix
     ./../../modules/system/firefox.nix
     ./../../modules/system/fish.nix
     ./../../modules/system/hyprland.nix

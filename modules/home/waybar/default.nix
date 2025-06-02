@@ -27,8 +27,22 @@
         };
 
         clock = {
-          format = "{:%a, %d %b %H:%M}";
-          tooltip = false;
+          format = "{:%H:%M} ";
+          format-alt = "{:%a, %d %b %H:%M} ";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          calendar = {
+            mode = "month";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<span color='#f5e0dc'><b>{}</b></span>";
+              days = "<span color='#f2cdcd'><b>{}</b></span>";
+              weeks = "<span color='#a6e3a1'><b>W{}</b></span>";
+              weekdays = "<span color='#fab387'><b>{}</b></span>";
+              today = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+            };
+          };
         };
 
         cpu = {
@@ -83,7 +97,7 @@
         "custom/ncspot" = {
           exec = ./ncspot.sh;
           interval = 1;
-          format = "{icon} {text}";
+          format = "{text} {icon}";
           format-icons = {
             default = "";
           };

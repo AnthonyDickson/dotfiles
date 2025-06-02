@@ -74,7 +74,7 @@ tooltip {
 .modules-left #cpu, .modules-left #memory, .modules-left #network {
     margin-right: 1em;
 }
-.modules-right #custom-ncspot, .modules-right #pulseaudio, .modules-right #clock {
+.modules-right #custom-ncspot, .modules-right #pulseaudio,
+.modules-right #custom-ime, .modules-right #clock {
     margin-left: 1em;
 }
-

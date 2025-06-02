@@ -16,6 +16,7 @@
         modules-right = [
           "custom/ncspot"
           "pulseaudio"
+          "custom/ime"
           "clock"
         ];
 
@@ -91,6 +92,14 @@
           toolbar = true;
           toolbar-format = "{text}";
           on-click = ./focus-ncspot.sh;
+        };
+        "custom/ime" = {
+          exec = ./current_ime.sh;
+          interval = 2;
+          format = "{text}";
+          max-length = 8;
+          toolbar = true;
+          toolbar-format = "{text}";
         };
       };
     };

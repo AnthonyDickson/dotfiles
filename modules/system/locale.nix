@@ -21,13 +21,22 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      libsForQt5.fcitx5-qt
-      fcitx5-gtk
-      fcitx5-catppuccin
-      fcitx5-mozc
-      fcitx5-rime
-    ];
-    fcitx5.waylandFrontend = true;
+    fcitx5 = {
+      addons = with pkgs; [
+        libsForQt5.fcitx5-qt
+        fcitx5-gtk
+        fcitx5-catppuccin
+        fcitx5-mozc
+        fcitx5-rime
+      ];
+
+      settings.addons = {
+        classicui.globalSection = {
+          Theme = "catppuccin-mocha-blue";
+        };
+      };
+
+      waylandFrontend = true;
+    };
   };
 }

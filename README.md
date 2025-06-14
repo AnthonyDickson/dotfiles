@@ -36,30 +36,42 @@ NixOS/Nix Darwin, Nix and Home Manager are used to manage the system and user en
 1. Clone git repo:
 
     ```shell
+    nix-shell -p git neovim
     git clone https:://github.com/AnthonyDickson/dotfiles ~/.config/nix
+    cd ~/.config/nix
     ```
-
-1. Build the system:
+1. Create a new host for your PC by copying over the default config:
 
     ```shell
-    sudo nixos-rebuild switch --flake ~/.config/nix#nix
+    mkdir hosts/<host name>
+    cp /etc/nixos/configuration.nix /etc/nixos/hardware-configuration.nix hosts/<host name>/
     ```
+    and add a host in `flake.nix`.
 
-## Installation (Lenovo M93p Tiny Server)
+1. Setup Cachix by adding the following to `hosts/<host name>/configuration.nix`:
 
-1. Clone git repo:
+    ```nix
+    imports = [
+        # Include the results of the hardware scan.
+        ./hardware-configuration.nix
+        ./../../modules/system/cachix.nix
+    ];
+
+    nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+    ];
+    ```
+    and rebuild the system:
 
     ```shell
-    git clone https:://github.com/AnthonyDickson/dotfiles ~/.config/nix
+    sudo nixos-rebuild switch --flake ~/.config/nix#<host name>
     ```
 
-2. Build the system:
+1. Copy over the config you want from existing hosts, ensuring to keep
+    `system.stateVersion` in `configuration.nix` from the previous steps and
+    rebuild the system:
 
     ```shell
-    sudo nixos-rebuild switch --flake ~/.config/nix#m93p
+    sudo nixos-rebuild switch --flake ~/.config/nix#<host name>
     ```
-
-## TODO
-
-- Add home-manager to NixOS server, try to make it as similar as NixOS as possible
-- Add cloudflare config to modules/

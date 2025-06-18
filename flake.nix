@@ -140,24 +140,24 @@
           };
           modules = [
             ./hosts/m75q/configuration.nix
-            # stylix.nixosModules.stylix
-            # catppuccin.nixosModules.catppuccin
-            # home-manager.nixosModules.home-manager
-            # {
-              # home-manager.useGlobalPkgs = true;
-              # home-manager.useUserPackages = true;
-              # home-manager.backupFileExtension = "backup";
-              # home-manager.extraSpecialArgs = {
-                # username = username;
-              # };
-              # home-manager.users.${username} = {
-                # imports = [
-                  # ./hosts/m75q/home.nix
-                  # catppuccin.homeModules.catppuccin
-                  # walker.homeManagerModules.default
-                # ];
-              # };
-            # }
+            stylix.nixosModules.stylix
+            catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = {
+                username = username;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./hosts/m75q/home.nix
+                  catppuccin.homeModules.catppuccin
+                  walker.homeManagerModules.default
+                ];
+              };
+            }
           ];
         };
       };

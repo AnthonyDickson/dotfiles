@@ -13,7 +13,7 @@
     ./../../modules/home/git_credentials.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/hypridle.nix
-    ./../../modules/home/hyprland.nix
+    ./../../modules/home/hyprland/m75q.nix
     ./../../modules/home/hyprlock.nix
     ./../../modules/home/hyprpaper.nix
     ./../../modules/home/hyprpolkit.nix

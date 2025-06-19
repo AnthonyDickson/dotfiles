@@ -53,6 +53,7 @@
         ", XF86AudioStop, exec, playerctl --all-players stop"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
+        "$mod SHIFT, L, exec, systemctl suspend"
       ];
       exec-once = [
         "walker --gapplication-service"

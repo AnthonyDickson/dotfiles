@@ -31,6 +31,7 @@
     ./../../modules/system/printing.nix
     ./../../modules/system/pyright.nix
     ./../../modules/system/samba.nix
+    ./../../modules/system/steam.nix
     ./../../modules/system/stylix
     ./../../modules/system/tailscale.nix
     ./../../modules/system/unfree.nix

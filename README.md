@@ -75,3 +75,30 @@ NixOS/Nix Darwin, Nix and Home Manager are used to manage the system and user en
     ```shell
     sudo nixos-rebuild switch --flake ~/.config/nix#<host name>
     ```
+
+## Post-Installation Steps
+
+- Log in to Tailscale:
+
+    ```shell
+    sudo tailscale login
+    ```
+
+- Enter NAS credentials:
+
+    ```shell
+    sudoedit /etc/nixos/smb-secrets
+    ```
+    
+    and use the template:
+
+    ```text
+    username=username
+    password=password
+    ```
+
+- Log in with GitHub:
+
+    ```shell
+    gh auth login
+    ```

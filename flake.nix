@@ -105,6 +105,7 @@
           specialArgs = {
             inherit inputs;
             username = username;
+            hostname = "m93p";
           };
           modules = [
             ./hosts/m93p/configuration.nix
@@ -137,6 +138,7 @@
           specialArgs = {
             inherit inputs;
             username = username;
+            hostname = "m75q";
           };
           modules = [
             ./hosts/m75q/configuration.nix

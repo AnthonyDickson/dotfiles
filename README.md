@@ -102,3 +102,5 @@ NixOS/Nix Darwin, Nix and Home Manager are used to manage the system and user en
     ```shell
     gh auth login
     ```
+
+- Enable rime and mozc in Fcitx 5 Configuration for Chinese and Japanese IMEs. 

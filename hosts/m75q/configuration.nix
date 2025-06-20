@@ -22,6 +22,7 @@
     ./../../modules/system/keymap.nix
     ./../../modules/system/keyring.nix
     ./../../modules/system/locale.nix
+    ./../../modules/system/libreoffice.nix
     ./../../modules/system/image-viewer.nix
     ./../../modules/system/marksman.nix
     ./../../modules/system/networking.nix

@@ -8,7 +8,7 @@
     ./../../modules/home/btop.nix
     ./../../modules/home/calcure
     ./../../modules/home/dunst.nix
-    ./../../modules/home/fish.nix
+    ./../../modules/home/fish
     ./../../modules/home/git.nix
     ./../../modules/home/git_credentials.nix
     ./../../modules/home/helix.nix

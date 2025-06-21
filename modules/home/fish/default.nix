@@ -18,5 +18,8 @@
       sg = "ast-grep";
       mm = "micromamba";
     };
+    functions = {
+      get-current-player = ''${./get-current-player.sh}'';
+    };
   };
 }

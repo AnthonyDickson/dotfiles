@@ -15,7 +15,7 @@
           "hyprland/workspaces"
         ];
         modules-right = [
-          "custom/ncspot"
+          "custom/media"
           "pulseaudio"
           "custom/ime"
           "clock"
@@ -28,8 +28,7 @@
         };
 
         clock = {
-          format = "{:%H:%M} ";
-          format-alt = "{:%a, %d %b %H:%M} ";
+          format = " {:%a, %d %b %H:%M}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
             mode = "month";
@@ -74,8 +73,8 @@
         };
 
         pulseaudio = {
-          format = "{volume}% {icon}";
-          format-bluetooth = "{volume}% {icon}";
+          format = "{icon} {volume}%";
+          format-bluetooth = "{icon} {volume}% ";
           format-muted = "";
           format-icons = {
             "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
@@ -96,17 +95,14 @@
           on-click = "pwvucontrol";
         };
 
-        "custom/ncspot" = {
-          exec = ./ncspot.sh;
+        "custom/media" = {
+          exec = ./media.sh;
           interval = 1;
-          format = "{text} {icon}";
-          format-icons = {
-            default = "";
-          };
+          format = "{text}";
           hide-empty-text = true;
           max-length = 32;
           tooltip-format = "{text}";
-          on-click = ./focus-ncspot.sh;
+          on-click = ./focus-media-player.sh;
         };
         "custom/ime" = {
           exec = ./current_ime.sh;

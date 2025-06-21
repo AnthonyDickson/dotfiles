@@ -8,7 +8,7 @@
         "$mod, K, exec, kitty"
         "$mod, space, exec, walker"
         "$mod, L, exec, hyprlock"
-        "$mod SHIFT, L, exec, loginctl lock-session && systemctl suspend"
+        "$mod SHIFT, L, exec, loginctl lock-session && hyprctl dispatch dpms off && systemctl suspend"
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"
         "$mod, period, exec, walker -m emojis"
@@ -55,7 +55,7 @@
         ", XF86AudioPrev, exec, playerctl previous --player=$(playerctl-get-current-player)"
         ", XF86AudioNext, exec, playerctl next --player=$(playerctl-get-current-player)"
         "$mod, XF86AudioStop, exec, playerctl stop --all-players"
-        "$mod SHIFT, L, exec, systemctl suspend"
+        "$mod SHIFT, L, exec, hyprctl dispatch dpms off && systemctl suspend"
       ];
       exec-once = [
         "walker --gapplication-service"

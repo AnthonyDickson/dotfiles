@@ -110,6 +110,7 @@
           format = "{text}";
           max-length = 8;
           tooltip = false;
+          on-click = "fcitx5-configtool";
         };
       };
     };

@@ -27,7 +27,7 @@
     ./../../modules/home/starship
     ./../../modules/home/stylix.nix
     ./../../modules/home/walker.nix
-    ./../../modules/home/waybar
+    ./../../modules/home/waybar/m75q.nix
     ./../../modules/home/yazi.nix
     ./../../modules/home/zoxide.nix
   ];

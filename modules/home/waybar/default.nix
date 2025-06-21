@@ -1,3 +1,4 @@
+{lib, ...}:
 {
   programs.waybar = {
     enable = true;
@@ -47,7 +48,7 @@
 
         cpu = {
           interval = 5;
-          format = "CPU {icon0}{icon1}{icon2}{icon3}";
+          format = lib.mkDefault "CPU {icon0}{icon1}{icon2}{icon3}";
           format-icons = [
             "<span color='#69ff94'>▁</span>"
             "<span color='#2aa9ff'>▂</span>"

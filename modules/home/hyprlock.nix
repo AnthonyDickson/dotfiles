@@ -1,3 +1,6 @@
+let
+  mainMonitor = "DP-1";
+in
 {
   programs.hyprlock = {
     enable = true;
@@ -19,7 +22,7 @@
 
       label = [
         {
-          monitor = "";
+          monitor = mainMonitor;
           text = "$TIME";
           text_align = "center";
           color = "rgba(255, 255, 255, 1.0)";
@@ -31,7 +34,7 @@
           valign = "center";
         }
         {
-          monitor = "";
+          monitor = mainMonitor;
           text = ''cmd[update:60000] echo $(date +"%A, %-d %b")'';
           text_align = "center";
           color = "rgba(255, 255, 255, 1.0)";
@@ -47,7 +50,7 @@
       input-field = {
         size = "400, 50";
         position = "0, -80";
-        monitor = "";
+        monitor = mainMonitor;
         dots_center = true;
         fade_on_empty = false;
         outline_thickness = 0;

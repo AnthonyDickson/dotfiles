@@ -50,14 +50,14 @@
           interval = 5;
           format = lib.mkDefault "CPU {icon0}{icon1}{icon2}{icon3}";
           format-icons = [
-            "<span color='#69ff94'>▁</span>"
-            "<span color='#2aa9ff'>▂</span>"
-            "<span color='#f8f8f2'>▃</span>"
-            "<span color='#f8f8f2'>▄</span>"
-            "<span color='#ffffa5'>▅</span>"
-            "<span color='#ffffa5'>▆</span>"
-            "<span color='#ff9977'>▇</span>"
-            "<span color='#dd532e'>█</span>"
+            "<span color='#74c7ec'>▁</span>"
+            "<span color='#89dceb'>▂</span>"
+            "<span color='#94e2d5'>▃</span>"
+            "<span color='#a6e3a1'>▄</span>"
+            "<span color='#f9e2af'>▅</span>"
+            "<span color='#fab387'>▆</span>"
+            "<span color='#eba0ac'>▇</span>"
+            "<span color='#f38ba8'>█</span>"
           ];
         };
         memory = {
@@ -67,7 +67,6 @@
         network = {
           interval = 5;
           family = "ipv4";
-          # TODO: Print ipv4 address on local network
           format = "{ifname} ↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}";
           format-disconnected = "No Internet Connection";
         };

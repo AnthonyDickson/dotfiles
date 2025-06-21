@@ -96,16 +96,16 @@
         };
 
         "custom/media" = {
-          exec = ./media.sh;
+          exec = ./media.fish;
           interval = 1;
           format = "{text}";
           hide-empty-text = true;
           max-length = 32;
           tooltip-format = "{text}";
-          on-click = ./focus-media-player.sh;
+          on-click = ./focus-media-player.fish;
         };
         "custom/ime" = {
-          exec = ./current_ime.sh;
+          exec = ./current_ime.fish;
           interval = 2;
           format = "{text}";
           max-length = 8;

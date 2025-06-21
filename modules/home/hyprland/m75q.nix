@@ -1,5 +1,5 @@
 let
-  mainMonitor = "desc:Acer Technologies XB273K GP 0x0511FB48";
+  mainMonitor = "DP-1";
   secondaryMonitor = "desc:AOC Q27G2G4 0x0000175D";
 in
 {

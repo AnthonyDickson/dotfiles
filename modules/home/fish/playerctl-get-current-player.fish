@@ -2,8 +2,12 @@
 
 # If multiple media clients are running, the first may be paused.
 # Therefore, we should search for the player that is playing.
-set player_statuses $(playerctl status --all-players)
-set players $(playerctl --list-all)
+set player_statuses $(playerctl status --all-players 2>&1)
+set players $(playerctl --list-all 2>&1)
+
+if test $player_statuses = "No players found"
+    return 1
+end
 
 for i in (seq (count $players))
     set player_status $player_statuses[$i]
@@ -14,9 +18,9 @@ for i in (seq (count $players))
     end
 end
 
-echo $player
-
 # No playing media found
 if test -z $player
     return 1
 end
+
+echo $player

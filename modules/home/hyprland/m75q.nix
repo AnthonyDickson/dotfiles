@@ -1,7 +1,4 @@
-let
-  mainMonitor = "DP-1";
-  secondaryMonitor = "desc:AOC Q27G2G4 0x0000175D";
-in
+{mainMonitor, secondaryMonitor, ...}:
 {
   imports = [
     ./default.nix

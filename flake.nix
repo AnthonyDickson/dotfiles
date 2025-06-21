@@ -118,6 +118,7 @@
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = {
                 username = username;
+                mainMonitor = "DP-1";
               };
               home-manager.users.${username} = {
                 imports = [
@@ -151,6 +152,8 @@
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = {
                 username = username;
+                mainMonitor = "DP-1";
+                secondaryMonitor = "DP-9";
               };
               home-manager.users.${username} = {
                 imports = [

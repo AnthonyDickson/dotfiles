@@ -21,7 +21,7 @@
           "clock"
         ];
 
-        "hyprland/workspaces" = {
+        "hyprland/workspaces" = lib.mkDefault {
           persistent-workspaces = {
             "*" = 4;
           };

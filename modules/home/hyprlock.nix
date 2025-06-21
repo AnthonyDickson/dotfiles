@@ -1,6 +1,4 @@
-let
-  mainMonitor = "DP-1";
-in
+{mainMonitor, ...}:
 {
   programs.hyprlock = {
     enable = true;

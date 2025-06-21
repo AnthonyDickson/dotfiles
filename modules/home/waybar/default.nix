@@ -62,19 +62,21 @@
         };
         memory = {
           interval = 10;
-          format = "RAM {used:0.1f}G/{total:0.1f}G";
+          format = " {percentage}%";
+          tooltip-format = "RAM {used:0.1f}G/{total:0.1f}G";
         };
         network = {
           interval = 5;
           family = "ipv4";
-          format = "{ifname} ↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}";
-          format-disconnected = "No Internet Connection";
+          format-ethernet = "󰈁 ↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}";
+          format-wifi = "󰖩 {essid} ({signalStrength}) ↓ {bandwidthDownBytes} ↑ {bandwidthUpBytes}";
+          format-disconnected = "󰈂 No Internet Connection";
         };
 
         pulseaudio = {
           format = "{volume}% {icon}";
           format-bluetooth = "{volume}% {icon}";
-          format-muted = "";
+          format-muted = "";
           format-icons = {
             "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
             "alsa_output.pci-0000_00_1f.3.analog-stereo-muted" = "";
@@ -90,7 +92,7 @@
               ""
             ];
           };
-          scroll-step = 1;
+          scroll-step = 5;
           on-click = "pwvucontrol";
         };
 
@@ -103,8 +105,7 @@
           };
           hide-empty-text = true;
           max-length = 32;
-          toolbar = true;
-          toolbar-format = "{text}";
+          tooltip-format = "{text}";
           on-click = ./focus-ncspot.sh;
         };
         "custom/ime" = {
@@ -112,7 +113,7 @@
           interval = 2;
           format = "{text}";
           max-length = 8;
-          toolbar = false;
+          tooltip = false;
         };
       };
     };

@@ -3,5 +3,5 @@
     ./default.nix
   ];
 
-  programs.waybar.settings.mainBar.cpu.format = "CPU {icon} {usage}%";
+  programs.waybar.settings.mainBar.cpu.format = " {icon} {usage}%";
 }

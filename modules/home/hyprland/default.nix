@@ -49,11 +49,11 @@
       # Bind when _l_ocked
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        # TODO: create script/fish function that selects currently playing player, similar to waybar scripts
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioStop, exec, playerctl --all-players stop"
-        ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPlay, exec, playerctl play-pause --player=$(playerctl-get-current-player)"
+        ", XF86AudioStop, exec, playerctl stop --player=$(playerctl-get-current-player)"
+        ", XF86AudioPrev, exec, playerctl previous --player=$(playerctl-get-current-player)"
+        ", XF86AudioNext, exec, playerctl next --player=$(playerctl-get-current-player)"
+        "$mod, XF86AudioStop, exec, playerctl stop --all-players"
         "$mod SHIFT, L, exec, systemctl suspend"
       ];
       exec-once = [

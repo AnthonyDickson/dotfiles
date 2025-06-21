@@ -14,11 +14,11 @@ in
         "${secondaryMonitor}, 2560x1440@60, auto-left, 1.0, transform, 3"
       ];
       workspace = [
-        "1, monitor:${mainMonitor}, persistent:true"
+        "1, monitor:${mainMonitor}, persistent:true, deault:true"
         "2, monitor:${mainMonitor}, persistent:true"
         "3, monitor:${mainMonitor}, persistent:true"
         "4, monitor:${mainMonitor}, persistent:true"
-        "5, monitor:${secondaryMonitor}, persistent:true"
+        "5, monitor:${secondaryMonitor}, persistent:true, default:true"
         "6, monitor:${secondaryMonitor}, persistent:true"
         "7, monitor:${secondaryMonitor}, persistent:true"
         "8, monitor:${secondaryMonitor}, persistent:true"

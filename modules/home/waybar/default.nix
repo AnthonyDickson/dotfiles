@@ -93,7 +93,7 @@
           };
           scroll-step = 5;
           on-click = "pwvucontrol";
-          # TODO: Mute on right click
+          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
 
         "custom/media" = {

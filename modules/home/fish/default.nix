@@ -19,7 +19,7 @@
       mm = "micromamba";
     };
     functions = {
-      playerctl-get-current-player = "${./playerctl-get-current-player.fish}";
+      playerctl-current-player-get = "${./../hyprland/playerctl-current-player-get.fish}";
     };
   };
 }

@@ -153,7 +153,7 @@
               home-manager.extraSpecialArgs = {
                 username = username;
                 mainMonitor = "DP-1";
-                secondaryMonitor = "DP-9";
+                secondaryMonitor = "DP-8";
               };
               home-manager.users.${username} = {
                 imports = [

@@ -49,11 +49,11 @@
       # Bind when _l_ocked
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        # FIX: The play-pause command works as expected in the terminal, but now when I use the below keymap
-        ", XF86AudioPlay, exec, playerctl play-pause --player=$(playerctl-get-current-player)"
-        ", XF86AudioStop, exec, playerctl stop --player=$(playerctl-get-current-player)"
-        ", XF86AudioPrev, exec, playerctl previous --player=$(playerctl-get-current-player)"
-        ", XF86AudioNext, exec, playerctl next --player=$(playerctl-get-current-player)"
+        ", XF86AudioPlay, exec, fish ${./playerctl-current-player-play-pause.fish}"
+        ", XF86AudioStop, exec, fish ${./playerctl-current-player-stop.fish}"
+        ", XF86AudioPrev, exec, fish ${./playerctl-current-player-previous.fish}"
+        ", XF86AudioNext, exec, fish ${./playerctl-current-player-next.fish}"
+        "$mod, XF86AudioPlay, exec, playerctl play-pause --all-players"
         "$mod, XF86AudioStop, exec, playerctl stop --all-players"
         "$mod SHIFT, L, exec, hyprctl dispatch dpms off && systemctl suspend"
       ];

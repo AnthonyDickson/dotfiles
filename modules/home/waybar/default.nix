@@ -93,6 +93,7 @@
           };
           scroll-step = 5;
           on-click = "pwvucontrol";
+          # TODO: Mute on right click
         };
 
         "custom/media" = {
@@ -103,6 +104,7 @@
           max-length = 32;
           tooltip-format = "{text}";
           on-click = ./focus-media-player.fish;
+          # TODO: Play/pause on right click
         };
         "custom/ime" = {
           exec = ./current_ime.fish;

@@ -5,7 +5,7 @@
 set player_statuses $(playerctl status --all-players 2>&1)
 set players $(playerctl --list-all 2>&1)
 
-if test $player_statuses = "No players found"
+if test "$player_statuses" = "No players found"
     return 1
 end
 

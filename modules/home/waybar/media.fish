@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set player $(playerctl-get-current-player)
+set player $(playerctl-current-player-get)
 
 if test -z $player
     return

@@ -104,7 +104,7 @@
           max-length = 32;
           tooltip-format = "{text}";
           on-click = ./focus-media-player.fish;
-          # TODO: Play/pause on right click
+          on-click-right = "playerctl --player=$(playerctl-current-player-get) play-pause";
         };
         "custom/ime" = {
           exec = ./current_ime.fish;

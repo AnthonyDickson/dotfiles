@@ -10,6 +10,11 @@
         no_fade_in = false;
       };
 
+      auth = {
+        "pam:enabled" = true;
+        "pam:module" = "hyprlock";
+      };
+
       background = {
         path = "screenshot";
         blur_passes = 3;

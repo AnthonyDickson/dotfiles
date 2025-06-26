@@ -40,6 +40,7 @@
     ./../../modules/system/user-accounts.nix
     ./../../modules/system/uv.nix
     ./../../modules/system/wayland-electron-fix.nix
+    ./../../modules/system/wordbook.nix
     ./../../modules/system/xserver.nix
   ];
 

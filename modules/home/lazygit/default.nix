@@ -1,18 +1,6 @@
 {
   programs.lazygit = {
     enable = true;
-    settings = {
-      git = {
-        # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
-        paging = {
-          # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
-          colorArg = "always";
-
-          # e.g. 'difft --color=always'
-          externalDiffCommand = "difft";
-        };
-      };
-    };
   };
 
   programs.zsh = {

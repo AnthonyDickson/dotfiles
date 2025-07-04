@@ -4,8 +4,11 @@
     settings = {
       "$mod" = "SUPER";
       bind = [
+        # Applications
         "$mod, W, exec, firefox"
         "$mod, K, exec, kitty"
+        "$mod, M, exec, thunderbird"
+        # System
         "$mod, space, exec, walker"
         "$mod, L, exec, hyprlock"
         "$mod SHIFT, L, exec, loginctl lock-session && hyprctl dispatch dpms off && systemctl suspend"

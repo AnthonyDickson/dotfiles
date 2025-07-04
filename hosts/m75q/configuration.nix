@@ -37,6 +37,7 @@
     ./../../modules/system/steam.nix
     ./../../modules/system/stylix
     ./../../modules/system/tailscale.nix
+    ./../../modules/system/thunderbird.nix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix
     ./../../modules/system/uv.nix

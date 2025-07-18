@@ -153,7 +153,7 @@
               home-manager.extraSpecialArgs = {
                 username = username;
                 mainMonitor = "DP-1";
-                secondaryMonitor = "DP-8";
+                secondaryMonitor = "desc:AOC Q27G2G4 0x0000175D";
               };
               home-manager.users.${username} = {
                 imports = [

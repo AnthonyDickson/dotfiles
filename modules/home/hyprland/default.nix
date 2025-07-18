@@ -61,7 +61,7 @@
         "$mod SHIFT, L, exec, hyprctl dispatch dpms off && systemctl suspend"
       ];
       exec-once = [
-        "walker --gapplication-service"
+        "NIXOS_OZONE_WL=1 walker --gapplication-service"
         "dunst"
         "waybar"
         "hyprpaper"

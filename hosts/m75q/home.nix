@@ -29,6 +29,7 @@
     ./../../modules/home/walker.nix
     ./../../modules/home/waybar/m75q.nix
     ./../../modules/home/yazi.nix
+    ./../../modules/home/zellij.nix
     ./../../modules/home/zoxide.nix
   ];
 

@@ -11,6 +11,7 @@
     ./../../modules/system/cachix.nix
     ./../../modules/system/calcure.nix
     ./../../modules/system/calculator.nix
+    ./../../modules/system/claude-code.nix
     ./../../modules/system/display-manager.nix
     ./../../modules/system/docker.nix
     ./../../modules/system/firefox.nix

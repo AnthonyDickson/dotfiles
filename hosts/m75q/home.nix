@@ -1,32 +1,19 @@
-# home.nix
-
 { username, ... }:
 {
   imports = [
-    ./../../modules/home/ast-grep.nix
-    ./../../modules/home/bat
-    ./../../modules/home/btop.nix
-    ./../../modules/home/calcure
-    ./../../modules/home/dunst.nix
-    ./../../modules/home/fish
-    ./../../modules/home/git.nix
+    ./../../modules/home/fish.nix
     ./../../modules/home/git_credentials.nix
+    ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/hypridle.nix
     ./../../modules/home/hyprland/m75q.nix
     ./../../modules/home/hyprlock.nix
-    ./../../modules/home/hyprpaper.nix
-    ./../../modules/home/hyprpolkit.nix
-    ./../../modules/home/kitty/nixos.nix
-    ./../../modules/home/lazygit
-    ./../../modules/home/lsd.nix
-    ./../../modules/home/micromamba.nix
-    ./../../modules/home/ncspot.nix
-    ./../../modules/home/programs/nixos.nix
+    ./../../modules/home/kitty.nix
     ./../../modules/home/ruff.nix
-    ./../../modules/home/starship
+    ./../../modules/home/starship.nix
     ./../../modules/home/stylix.nix
-    ./../../modules/home/walker.nix
+    # TODO: Re-enable Walker once nix.flake is added back
+    # ./../../modules/home/walker.nix
     ./../../modules/home/waybar/m75q.nix
     ./../../modules/home/yazi.nix
     ./../../modules/home/zellij.nix
@@ -48,6 +35,18 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    bat.enable = true;
+    btop.enable = true;
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+    lazygit.enable = true;
+    ncspot.enable = true;
+  };
+
+  services = {
+    dunst.enable = true;
+    hyprpaper.enable = true;
+    hyprpolkitagent.enable = true;
+  };
 }

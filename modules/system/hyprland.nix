@@ -7,6 +7,9 @@
     xwayland.enable = true;
   };
 
+  # Hyprland uses wayland, so we can disable xserver
+  services.xserver.enable = false;
+
   # Wayland compat for Qt https://wiki.hyprland.org/Useful-Utilities/Must-have/#qt-wayland-support
   environment.systemPackages = with pkgs; [
     qt5.qtwayland

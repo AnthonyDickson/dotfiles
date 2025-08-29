@@ -7,13 +7,30 @@
       editor = {
         bufferline = "multiple";
         line-number = "relative";
-        rulers = [80 120];
+        rulers = [
+          80
+          120
+        ];
         cursor-shape = {
           insert = "bar";
         };
         statusline = {
-          left = ["mode" "spinner" "version-control" "file-name" "read-only-indicator" "file-modification-indicator"];
-          right = ["diagnostics" "selections" "register" "position" "total-line-numbers" "file-encoding"];
+          left = [
+            "mode"
+            "spinner"
+            "version-control"
+            "file-name"
+            "read-only-indicator"
+            "file-modification-indicator"
+          ];
+          right = [
+            "diagnostics"
+            "selections"
+            "register"
+            "position"
+            "total-line-numbers"
+            "file-encoding"
+          ];
         };
         end-of-line-diagnostics = "hint";
         inline-diagnostics = {
@@ -32,10 +49,27 @@
       };
     };
     languages = {
-      lanaguage = [
+      language = [
         {
           name = "python";
-          language-servers = ["pyright" "ruff"];
+          language-servers = [
+            "pyright"
+            "ruff"
+          ];
+        }
+        {
+          name = "markdown";
+          formatter = {
+            command = "dprint";
+            args = [
+              "fmt"
+              "--config"
+              ./dprint.json
+              "--stdin"
+              "md"
+            ];
+          };
+          rulers = [ 120 ];
         }
       ];
 
@@ -43,7 +77,7 @@
         pyright.config.python.analysis.typeCheckingMode = "basic";
         ruff = {
           command = "ruff";
-          args = ["server"];
+          args = [ "server" ];
         };
       };
     };

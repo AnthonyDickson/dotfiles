@@ -60,6 +60,7 @@
     ast-grep # Structural grep for code
     claude-code # 🤖
     cmake # Build tools for CXX
+    dprint # Code formatter, used for markdown
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation
     fd # better find

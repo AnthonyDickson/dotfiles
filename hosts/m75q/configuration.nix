@@ -67,6 +67,7 @@
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     fzf # Fuzzy finder for terminal
     httpie # better curl for testing http requests
+    hyperfine # Tool for benchmarking run time of CLI commands
     hyprcursor # Custom cursors in Hyprland
     hyprpicker # Color picker
     hyprshot # Screenshoter

@@ -12,8 +12,7 @@
     ./../../modules/home/ruff.nix
     ./../../modules/home/starship.nix
     ./../../modules/home/stylix.nix
-    # TODO: Re-enable Walker once nix.flake is added back
-    # ./../../modules/home/walker.nix
+    ./../../modules/home/walker.nix
     ./../../modules/home/waybar/m75q.nix
     ./../../modules/home/yazi.nix
     ./../../modules/home/zellij.nix

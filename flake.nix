@@ -10,8 +10,7 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-    # TODO: Re-enable Walker once nix.flake is added back
-    # walker.url = "github:abenz1267/walker";
+    walker.url = "github:abenz1267/walker";
     stylix.url = "github:danth/stylix";
   };
 
@@ -19,8 +18,7 @@
     {
       nixpkgs,
       home-manager,
-      # TODO: Re-enable Walker once nix.flake is added back
-      # walker,
+      walker,
       stylix,
       ...
     }@inputs:
@@ -53,8 +51,7 @@
               home-manager.users.${username} = {
                 imports = [
                   ./hosts/m75q/home.nix
-                  # TODO: Re-enable Walker once nix.flake is added back
-                  # walker.homeManagerModules.default
+                  walker.homeManagerModules.default
                 ];
               };
             }

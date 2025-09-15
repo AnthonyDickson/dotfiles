@@ -73,7 +73,7 @@
     hyprshot # Screenshoter
     imagemagick # For image manipulation
     jaq # CLI tool for parsing JSON
-    libsForQt5.gwenview # Image viewew
+    kdePackages.gwenview # Image viewer
     lsd # ls but nicer
     marksman # Markdown LSP + wiki style links
     nixd # nix LSP

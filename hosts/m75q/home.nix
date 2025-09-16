@@ -6,7 +6,7 @@
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/hypridle.nix
-    ./../../modules/home/hyprland/m75q.nix
+    ./../../modules/home/hyprland
     ./../../modules/home/hyprlock.nix
     ./../../modules/home/kitty.nix
     ./../../modules/home/ruff.nix

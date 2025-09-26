@@ -12,7 +12,7 @@
         "1, monitor:${mainMonitor}, persistent:true, default:true, on-created-empty:firefox"
         "2, monitor:${mainMonitor}, persistent:true"
         "3, monitor:${mainMonitor}, persistent:true"
-        "4, monitor:${mainMonitor}, persistent:true, on-created-empty:mail"
+        "4, monitor:${mainMonitor}, persistent:true"
         "5, monitor:${secondaryMonitor}, persistent:true, default:true"
         "6, monitor:${secondaryMonitor}, persistent:true"
         "7, monitor:${secondaryMonitor}, persistent:true"

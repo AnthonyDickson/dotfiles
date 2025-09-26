@@ -30,8 +30,7 @@
         "$mod SHIFT, L, exec, loginctl lock-session && hyprctl dispatch dpms off && systemctl suspend"
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"
-        # TODO: Get emoji picker working
-        # "$mod, period, exec, walker -m emojis"
+        "$mod, period, exec, walker -m symbols"
         ## Screenshots
         ", PRINT, exec, hyprshot --output-folder ~/Pictures --freeze --mode output"
         "$mod, PRINT, exec, hyprshot --output-folder ~/Pictures --freeze --mode window"

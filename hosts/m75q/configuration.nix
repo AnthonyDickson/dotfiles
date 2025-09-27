@@ -9,11 +9,8 @@
     ./../../modules/system/audio.nix
     ./../../modules/system/bootloader.nix
     ./../../modules/system/cachix.nix
-    ./../../modules/system/display-manager.nix
     ./../../modules/system/docker.nix
     ./../../modules/system/fish.nix
-    ./../../modules/system/hyprland.nix
-    ./../../modules/system/hyprlock.nix
     ./../../modules/system/keymap.nix
     ./../../modules/system/keyring.nix
     ./../../modules/system/locale.nix
@@ -68,9 +65,6 @@
     fzf # Fuzzy finder for terminal
     httpie # better curl for testing http requests
     hyperfine # Tool for benchmarking run time of CLI commands
-    hyprcursor # Custom cursors in Hyprland
-    hyprpicker # Color picker
-    hyprshot # Screenshoter
     imagemagick # For image manipulation
     jaq # CLI tool for parsing JSON
     kdePackages.gwenview # Image viewer
@@ -80,7 +74,6 @@
     nixfmt-rfc-style # Formatter for .nix files
     nodejs_22 # node and npm for running and building applications in JavaScript
     obsidian # Note taking
-    playerctl # CLI tool for controlling media playback
     pyright # Python LSP
     qalculate-qt # Full-featured calculator
     ripgrep # better grep, works recursively on folders and is fast
@@ -94,7 +87,12 @@
   ];
 
   programs = {
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      preferences = {
+        "widget.gtk.libadwaita-colors.enabled" = false;
+      };
+    };
     nix-ld.enable = true; # Mainly for uv
     thunderbird.enable = true;
   };
@@ -102,5 +100,10 @@
   services = {
     printing.enable = true;
     tailscale.enable = true;
+
+    # Cosmic DE
+    displayManager.cosmic-greeter.enable = true;
+    desktopManager.cosmic.enable = true;
   };
+
 }

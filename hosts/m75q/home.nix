@@ -5,15 +5,10 @@
     ./../../modules/home/git_credentials.nix
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
-    ./../../modules/home/hypridle.nix
-    ./../../modules/home/hyprland
-    ./../../modules/home/hyprlock.nix
     ./../../modules/home/kitty.nix
     ./../../modules/home/ruff.nix
     ./../../modules/home/starship.nix
     ./../../modules/home/stylix.nix
-    ./../../modules/home/walker.nix
-    ./../../modules/home/waybar/m75q.nix
     ./../../modules/home/yazi.nix
     ./../../modules/home/zellij.nix
     ./../../modules/home/zoxide.nix
@@ -40,12 +35,5 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     lazygit.enable = true;
-    ncspot.enable = true;
-  };
-
-  services = {
-    dunst.enable = true;
-    hyprpaper.enable = true;
-    hyprpolkitagent.enable = true;
   };
 }

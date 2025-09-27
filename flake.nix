@@ -9,8 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    walker.url = "github:abenz1267/walker";
     stylix.url = "github:danth/stylix";
   };
 
@@ -18,7 +16,6 @@
     {
       nixpkgs,
       home-manager,
-      walker,
       stylix,
       ...
     }@inputs:
@@ -51,7 +48,6 @@
               home-manager.users.${username} = {
                 imports = [
                   ./hosts/m75q/home.nix
-                  walker.homeManagerModules.default
                 ];
               };
             }

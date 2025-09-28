@@ -79,6 +79,8 @@
     ripgrep # better grep, works recursively on folders and is fast
     tealdeer # tldr in Rust, provides simple examples for commands
     tokei # Count lines of code
+    typst # Better LaTex
+    tinymist # LSP for Typst
     unzip # unarchive zip files
     uv # Python package manager
     wget # download files from the internet

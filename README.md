@@ -50,17 +50,4 @@ NixOS, Nix and Home Manager are used to manage the system and user environment.
   sudo tailscale login
   ```
 
-- Enter NAS credentials:
-
-  ```shell
-  sudoedit /etc/nixos/smb-secrets
-  ```
-
-  and use the template:
-
-  ```text
-  username=username
-  password=password
-  ```
-
 - Enable rime and mozc in Fcitx 5 Configuration for Chinese and Japanese IMEs.

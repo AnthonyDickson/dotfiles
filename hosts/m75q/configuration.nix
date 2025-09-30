@@ -17,7 +17,6 @@
     ./../../modules/system/libreoffice.nix
     ./../../modules/system/networking.nix
     ./../../modules/system/fonts.nix
-    ./../../modules/system/samba.nix
     ./../../modules/system/stylix
     ./../../modules/system/unfree.nix
     ./../../modules/system/user-accounts.nix

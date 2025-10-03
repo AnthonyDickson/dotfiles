@@ -97,6 +97,12 @@
       };
     };
     nix-ld.enable = true; # Mainly for uv
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
     thunderbird.enable = true;
   };
 

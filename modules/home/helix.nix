@@ -43,10 +43,6 @@
           skip-levels = 1;
         };
       };
-      keys.normal = {
-        "C-s" = ":w";
-        space.q = ":q";
-      };
     };
     languages = {
       language = [

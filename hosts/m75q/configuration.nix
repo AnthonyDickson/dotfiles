@@ -107,6 +107,7 @@
   };
 
   services = {
+    flatpak.enable = true;
     printing.enable = true;
     tailscale.enable = true;
 

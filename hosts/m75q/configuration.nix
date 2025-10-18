@@ -53,6 +53,7 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   environment.systemPackages = with pkgs; [
+    anki # Flash cards
     ast-grep # Structural grep for code
     claude-code # 🤖
     cmake # Build tools for CXX

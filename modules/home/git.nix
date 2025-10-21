@@ -1,14 +1,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Anthony Dickson";
-    userEmail = "anthony.dickson9656@gmail.com";
-    difftastic = {
-      enable = true;
-      enableAsDifftool = true;
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Anthony Dickson";
+      user.email = "anthony.dickson9656@gmail.com";
       init.defaultBranch = "main";
+      credential.helper = "!gh auth git-credential";
     };
   };
 }

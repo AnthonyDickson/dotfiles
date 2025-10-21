@@ -2,7 +2,7 @@
 {
   imports = [
     ./../../modules/home/fish.nix
-    ./../../modules/home/git_credentials.nix
+    ./../../modules/home/difftastic.nix
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/kitty.nix

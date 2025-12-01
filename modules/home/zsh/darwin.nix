@@ -24,4 +24,9 @@
       XDG_CONFIG_HOME = "$HOME/.config";
     };
   };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }

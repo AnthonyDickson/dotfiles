@@ -22,6 +22,7 @@
     sessionVariables = {
       # Set config home used by lazygit
       XDG_CONFIG_HOME = "$HOME/.config";
+      EDITOR = "hx";
     };
   };
 

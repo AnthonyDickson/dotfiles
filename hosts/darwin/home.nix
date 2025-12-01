@@ -11,7 +11,6 @@
     ./../../modules/home/lazygit/darwin.nix
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/programs
-    ./../../modules/home/ruff.nix
     ./../../modules/home/starship/darwin.nix
     ./../../modules/home/zoxide.nix
     ./../../modules/home/zsh/darwin.nix

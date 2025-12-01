@@ -10,7 +10,6 @@
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/kitty
-    ./../../modules/home/micromamba.nix
     ./../../modules/home/lazygit/darwin.nix
     ./../../modules/home/lsd.nix
     ./../../modules/home/nerd-fonts.nix

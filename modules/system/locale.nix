@@ -25,7 +25,7 @@
       addons = with pkgs; [
         libsForQt5.fcitx5-qt
         fcitx5-gtk
-        fcitx5-catppuccin
+        catppuccin-fcitx5
         fcitx5-mozc
         fcitx5-rime
       ];

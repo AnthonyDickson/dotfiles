@@ -5,7 +5,7 @@
 
   # The better Bash
   programs.zsh = {
-    initExtra = ''
+    initContent = ''
       # alt + left arrow
       bindkey "^[[1;3D" backward-word
       # alt + right arrow

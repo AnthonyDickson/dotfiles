@@ -24,6 +24,11 @@
       XDG_CONFIG_HOME = "$HOME/.config";
       EDITOR = "hx";
     };
+    shellAliases = {
+      l = "lsd";
+      lg = "lazygit";
+      sg = "ast-grep";
+    };
   };
 
   programs.fzf = {

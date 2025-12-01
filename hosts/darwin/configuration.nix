@@ -11,9 +11,31 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    vim
-    uv
-    zellij
+    ast-grep # Structural grep for code
+    bat # cat but better
+    btop # htop but better
+    dprint # Code formatter, used for markdown
+    duf # better df with colours and nice formatting
+    dust # better du with graph visualisation
+    fd # better find
+    ffmpeg # multimedia tool for handling audio, video and other multimedia
+    fzf # Fuzzy finder for terminal
+    gh # GitHub CLI for auth
+    httpie # better curl for testing http requests
+    hyperfine # Tool for benchmarking run time of CLI commands
+    jaq # CLI tool for parsing JSON
+    lsd # ls but nicer
+    marksman # Markdown LSP + wiki style links
+    nixd # nix LSP
+    nixfmt-rfc-style # Formatter for .nix files
+    ripgrep # better grep, works recursively on folders and is fast
+    tealdeer # tldr in Rust, provides simple examples for commands
+    tokei # Count lines of code
+    typst # Better LaTex
+    tinymist # LSP for Typst
+    unzip # unarchive zip files
+    uv # Python package manager
+    wget # download files from the internet
   ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.

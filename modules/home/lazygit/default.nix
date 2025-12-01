@@ -7,10 +7,4 @@
   home.file = {
     ".config/lazygit/config.yml".source = ./config.yml;
   };
-
-  programs.zsh = {
-    shellAliases = {
-      lg = "lazygit";
-    };
-  };
 }

@@ -3,14 +3,12 @@
 { username, ... }:
 {
   imports = [
-    ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat/darwin.nix
     ./../../modules/home/btop.nix
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/kitty
     ./../../modules/home/lazygit/darwin.nix
-    ./../../modules/home/lsd.nix
     ./../../modules/home/nerd-fonts.nix
     ./../../modules/home/programs
     ./../../modules/home/ruff.nix

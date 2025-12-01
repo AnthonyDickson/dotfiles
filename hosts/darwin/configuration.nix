@@ -10,12 +10,12 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-    [ pkgs.vim
-    ];
+  environment.systemPackages = [
+    pkgs.vim
+  ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -29,6 +29,9 @@
   users.users.${username}.home = "/Users/${username}";
   home-manager.backupFileExtension = "backup";
 
+  system = {
+    primaryUser = "${username}";
+  };
   system.defaults = {
     dock = {
       autohide = false;
@@ -51,7 +54,7 @@
       };
     };
   };
-  
+
   nix-homebrew = {
     enable = true;
     enableRosetta = true;

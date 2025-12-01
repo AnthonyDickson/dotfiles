@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     vim
     uv
+    zellij
   ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.

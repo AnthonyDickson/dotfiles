@@ -3,7 +3,6 @@
 { username, ... }:
 {
   imports = [
-    ./../../modules/home/aerospace/darwin.nix
     ./../../modules/home/ast-grep.nix
     ./../../modules/home/bat/darwin.nix
     ./../../modules/home/btop.nix

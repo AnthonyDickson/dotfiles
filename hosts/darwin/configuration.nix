@@ -67,8 +67,6 @@
   homebrew = {
     enable = true;
     casks = [
-      # Tiling window manager
-      "aerospace"
       "kitty"
     ];
     taps = [

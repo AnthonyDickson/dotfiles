@@ -58,7 +58,7 @@
   };
   system.defaults = {
     dock = {
-      autohide = false;
+      autohide = true;
       # Groups apps by app in mission control
       expose-group-apps = true;
     };

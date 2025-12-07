@@ -37,6 +37,7 @@
     uv # Python package manager
     wget # download files from the internet
     yazi # TUI file explorer
+    zellij # TUI window manager
   ];
 
   # Create /etc/zshrc that loads the nix-darwin environment.

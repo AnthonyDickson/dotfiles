@@ -55,6 +55,7 @@
   environment.systemPackages = with pkgs; [
     anki # Flash cards
     ast-grep # Structural grep for code
+    cifs-utils # For mounting NAS onto local file system
     claude-code # 🤖
     cmake # Build tools for CXX
     dprint # Code formatter, used for markdown

@@ -72,6 +72,7 @@
     localsend # Cross-platform peer-to-peer file sharing
     lsd # ls but nicer
     marksman # Markdown LSP + wiki style links
+    markdown-oxide # PKMS LSP
     nixd # nix LSP
     nixfmt-rfc-style # Formatter for .nix files
     nodejs_22 # node and npm for running and building applications in JavaScript

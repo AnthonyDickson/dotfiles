@@ -21,7 +21,6 @@ NixOS, Nix and Home Manager are used to manage the system and user environment.
    ```
    and add a host in `flake.nix`.
 
-
 1. Copy over the config you want from existing hosts, ensuring to keep
    `system.stateVersion` in `configuration.nix` from the previous steps and
    rebuild the system:
@@ -51,3 +50,30 @@ NixOS, Nix and Home Manager are used to manage the system and user environment.
   ```
 
 - Enable rime and mozc in Fcitx 5 Configuration for Chinese and Japanese IMEs.
+
+### Migrating from Another Installation
+
+- Copy over Firefox settings:
+  ```shell
+  cp -r /path/to/old/username/home/.mozilla ~/
+  ```
+
+- Copy over Thunderbird settings:
+  ```shell
+  cp -r /path/to/old/username/home/.thunderbird ~/
+  ```
+
+- Copy over ssh keys:
+  ```shell
+  cp -r /path/to/old/username/home/.ssh ~/
+  ```
+
+- Copy over zoxide history:
+  ```shell
+  cp -r /path/to/old/username/home/.local/share/zoxide ~/.local/share/
+  ```
+
+- Copy over fish history:
+  ```shell
+  cp -r /path/to/old/username/home/.local/share/fish ~/.local/share/
+  ```

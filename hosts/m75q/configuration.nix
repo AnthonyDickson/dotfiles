@@ -82,6 +82,7 @@
     qalculate-qt # Full-featured calculator
     ripgrep # better grep, works recursively on folders and is fast
     spotify # 🎵
+    synology-drive-client # Sync with Synology NAS
     tealdeer # tldr in Rust, provides simple examples for commands
     tokei # Count lines of code
     typst # Better LaTex

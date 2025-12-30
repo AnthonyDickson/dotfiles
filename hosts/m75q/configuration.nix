@@ -78,6 +78,7 @@
     nixfmt-rfc-style # Formatter for .nix files
     nodejs_22 # node and npm for running and building applications in JavaScript
     obsidian # Note taking
+    onlyoffice-desktopeditors # I can't believe it's not M*******t Office
     pyright # Python LSP
     qalculate-qt # Full-featured calculator
     ripgrep # better grep, works recursively on folders and is fast

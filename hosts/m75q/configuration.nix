@@ -61,6 +61,7 @@
     dprint # Code formatter, used for markdown
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation
+    feishin # Music Player
     fd # better find
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     fzf # Fuzzy finder for terminal

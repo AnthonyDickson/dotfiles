@@ -76,7 +76,7 @@
     marksman # Markdown LSP + wiki style links
     markdown-oxide # PKMS LSP
     nixd # nix LSP
-    nixfmt-rfc-style # Formatter for .nix files
+    nixfmt # Formatter for .nix files
     nodejs_22 # node and npm for running and building applications in JavaScript
     obsidian # Note taking
     onlyoffice-desktopeditors # I can't believe it's not M*******t Office

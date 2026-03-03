@@ -89,6 +89,7 @@
     wget # download files from the internet
     wl-clipboard # clipboard provider for neovim
     wordbook # Dictionary
+    zip # archive zip files
   ];
 
   programs = {

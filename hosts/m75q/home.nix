@@ -6,7 +6,6 @@
     ./../../modules/home/git.nix
     ./../../modules/home/helix.nix
     ./../../modules/home/kitty.nix
-    ./../../modules/home/ruff.nix
     ./../../modules/home/starship.nix
     ./../../modules/home/stylix.nix
     ./../../modules/home/yazi.nix

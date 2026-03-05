@@ -75,15 +75,12 @@
     obsidian # Note taking
     onlyoffice-desktopeditors # I can't believe it's not M*******t Office
     pinta # Simple image editing
-    pyright # Python LSP
     qalculate-qt # Full-featured calculator
     ripgrep # better grep, works recursively on folders and is fast
     spotify # 🎵
     synology-drive-client # Sync with Synology NAS
     tealdeer # tldr in Rust, provides simple examples for commands
     tokei # Count lines of code
-    typst # Better LaTex
-    tinymist # LSP for Typst
     unzip # unarchive zip files
     uv # Python package manager
     wget # download files from the internet

@@ -32,9 +32,9 @@
             "file-encoding"
           ];
         };
-        end-of-line-diagnostics = "hint";
+        end-of-line-diagnostics = "disable";
         inline-diagnostics = {
-          cursor-line = "error";
+          cursor-line = "disable";
           other-lines = "disable";
         };
         indent-guides = {

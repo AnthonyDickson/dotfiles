@@ -77,6 +77,7 @@
     pinta # Simple image editing
     qalculate-qt # Full-featured calculator
     ripgrep # better grep, works recursively on folders and is fast
+    scooter # interactive find and replace TUI
     spotify # 🎵
     synology-drive-client # Sync with Synology NAS
     tealdeer # tldr in Rust, provides simple examples for commands

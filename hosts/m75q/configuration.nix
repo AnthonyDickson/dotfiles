@@ -63,7 +63,6 @@
     hyperfine # Tool for benchmarking run time of CLI commands
     imagemagick # For image manipulation
     jaq # CLI tool for parsing JSON
-    kdePackages.gwenview # Image viewer
     localsend # Cross-platform peer-to-peer file sharing
     lsd # ls but nicer
     marksman # Markdown LSP + wiki style links

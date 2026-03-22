@@ -47,7 +47,6 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
   environment.systemPackages = with pkgs; [
-    anki # Flash cards
     ast-grep # Structural grep for code
     cifs-utils # For mounting NAS onto local file system
     claude-code # 🤖

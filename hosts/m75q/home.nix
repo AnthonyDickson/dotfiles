@@ -35,4 +35,7 @@
     home-manager.enable = true;
     lazygit.enable = true;
   };
+
+  # This is for silencing the warning for home versions <= 26.05
+  gtk.gtk4.theme = null;
 }

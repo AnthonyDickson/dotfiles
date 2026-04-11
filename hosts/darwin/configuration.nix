@@ -27,7 +27,7 @@
     lsd # ls but nicer
     marksman # Markdown LSP + wiki style links
     nixd # nix LSP
-    nixfmt-rfc-style # Formatter for .nix files
+    nixfmt # Formatter for .nix files
     ripgrep # better grep, works recursively on folders and is fast
     tealdeer # tldr in Rust, provides simple examples for commands
     tokei # Count lines of code

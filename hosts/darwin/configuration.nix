@@ -24,11 +24,13 @@
     httpie # better curl for testing http requests
     hyperfine # Tool for benchmarking run time of CLI commands
     jaq # CLI tool for parsing JSON
+    localsend # Cross-platform peer-to-peer file sharing
     lsd # ls but nicer
     marksman # Markdown LSP + wiki style links
     nixd # nix LSP
     nixfmt # Formatter for .nix files
     ripgrep # better grep, works recursively on folders and is fast
+    scooter # interactive find and replace TUI
     tealdeer # tldr in Rust, provides simple examples for commands
     tokei # Count lines of code
     typst # Better LaTex

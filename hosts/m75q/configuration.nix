@@ -50,6 +50,7 @@
     ast-grep # Structural grep for code
     cifs-utils # For mounting NAS onto local file system
     cmake # Build tools for CXX
+    crush # CLI tool for LLM-assisted coding
     dprint # Code formatter, used for markdown
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation

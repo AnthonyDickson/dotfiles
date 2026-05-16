@@ -59,6 +59,7 @@
     ffmpeg # multimedia tool for handling audio, video and other multimedia
     fzf # Fuzzy finder for terminal
     gh # GitHub CLI for auth
+    ghostty # Terminal
     httpie # better curl for testing http requests
     hyperfine # Tool for benchmarking run time of CLI commands
     imagemagick # For image manipulation

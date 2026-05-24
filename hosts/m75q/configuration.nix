@@ -75,6 +75,7 @@
     obsidian # Note taking
     onlyoffice-desktopeditors # I can't believe it's not M*******t Office
     pinta # Simple image editing
+    pcsx2
     qalculate-qt # Full-featured calculator
     qimgv # Image viewer
     ripgrep # better grep, works recursively on folders and is fast

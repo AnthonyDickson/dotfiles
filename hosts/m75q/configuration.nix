@@ -48,7 +48,7 @@
 
   environment.systemPackages = with pkgs; [
     ast-grep # Structural grep for code
-    inputs.budgeteur.packages.${system}.budgeteur-tui
+    inputs.budgeteur.packages.${stdenv.hostPlatform.system}.budgeteur-tui
     cifs-utils # For mounting NAS onto local file system
     cmake # Build tools for CXX
     crush # CLI tool for LLM-assisted coding

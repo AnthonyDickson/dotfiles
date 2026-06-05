@@ -67,6 +67,19 @@
           };
           rulers = [ 120 ];
         }
+        {
+          name = "html";
+          formatter = {
+            command = "dprint";
+            args = [
+              "fmt"
+              "--config"
+              ./dprint.json
+              "--stdin"
+              "html"
+            ];
+          };
+        }
       ];
 
       language-server = {

@@ -14,6 +14,7 @@
     ast-grep # Structural grep for code
     bat # cat but better
     btop # htop but better
+    dotnet-sdk_10 # For running F#
     dprint # Code formatter, used for markdown
     duf # better df with colours and nice formatting
     dust # better du with graph visualisation

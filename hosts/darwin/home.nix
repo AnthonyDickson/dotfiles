@@ -63,6 +63,20 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings = {
+      "server" = {
+        hostname = "192.168.0.20";
+        port = 22;
+        user = "anthonyd";
+        identityFile = "~/.ssh/nixos_server";
+        identitiesOnly = true;
+      };
+    };
+  };
+
   catppuccin = {
     flavor = "mocha";
   };

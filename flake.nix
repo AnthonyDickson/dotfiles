@@ -55,6 +55,11 @@
             }
           ];
         };
+        m75q_server = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/m75q_server/configuration.nix
+          ];
+        };
       };
     };
 }

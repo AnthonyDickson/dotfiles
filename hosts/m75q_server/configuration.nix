@@ -138,6 +138,11 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [ "--advertise-routes=192.168.0.0/24" ];
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

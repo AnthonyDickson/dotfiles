@@ -76,6 +76,7 @@
     lsd
     duf
     dust
+    starship
   ];
 
   environment.enableAllTerminfo = true;
@@ -100,8 +101,25 @@
       # fzf support
       source ${pkgs.fzf}/share/fzf/completion.bash
       source ${pkgs.fzf}/share/fzf/key-bindings.bash
+
+      # Starship prompt
+      # Only use symbols if we are NOT in a native Linux TTY
+      if [ "$TERM" = "linux" ]; then
+        eval "$(starship init bash --print-full-init)"
+        export STARSHIP_CONFIG=/etc/starship-tty.toml
+      else
+        eval "$(starship init bash)"
+      fi
     '';
   };
+
+  # Write a simplified text-only configuration specifically for the TTY screen
+  environment.etc."starship-tty.toml".text = ''
+    format = "$all"
+    [character]
+    success_symbol = "[>](bold green)"
+    error_symbol = "[x](bold red)"
+  '';
 
   programs.ssh.extraConfig = ''
     Host github.com

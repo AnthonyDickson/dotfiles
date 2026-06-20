@@ -100,6 +100,20 @@
       };
     };
     nix-ld.enable = true; # Mainly for uv
+    ssh = {
+      extraConfig = "
+          Host dsm.anthonyd.co.nz
+            Port 22
+            User anthony
+            IdentityFile ~/.ssh/nas
+
+          Host server
+            Hostname 192.168.0.20
+            Port 22
+            User anthonyd
+            IdentityFile ~/.ssh/server
+        ";
+    };
     steam = {
       enable = true;
       extraCompatPackages = with pkgs; [

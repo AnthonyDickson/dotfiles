@@ -80,6 +80,7 @@
     qimgv # Image viewer
     ripgrep # better grep, works recursively on folders and is fast
     scooter # interactive find and replace TUI
+    sops # For managing secrets for my server
     spotify # 🎵
     synology-drive-client # Sync with Synology NAS
     tealdeer # tldr in Rust, provides simple examples for commands

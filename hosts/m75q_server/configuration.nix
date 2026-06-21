@@ -78,6 +78,7 @@
     duf
     dust
     starship
+    zellij
   ];
 
   environment.enableAllTerminfo = true;

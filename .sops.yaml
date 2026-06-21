@@ -1,0 +1,10 @@
+keys:
+  - &server age1hxhgdlz45z0jz66xwarmka7d2a2785hggssf0zreeqlq76hjnvus24r5r6
+  - &admin age19ahn6k5k9ay9ltssuhsfneym7kryvfwcqa75pqfn09w4yyvc350q8c8tt5
+
+creation_rules:
+  - path_regex: hosts/m75q_server/projects/.*/secrets\.env
+    key_groups:
+      - age:
+          - *server
+          - *admin

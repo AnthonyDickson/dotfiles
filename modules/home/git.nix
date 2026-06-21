@@ -6,6 +6,7 @@
       user.email = "git@anthonyd.co.nz";
       init.defaultBranch = "main";
       credential.helper = "!gh auth git-credential";
+      pull.rebase = true;
     };
   };
 }

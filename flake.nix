@@ -12,6 +12,16 @@
     budgeteur.url = "github:AnthonyDickson/budgeteur-rs";
 
     stylix.url = "github:danth/stylix";
+
+    arion = {
+      url = "github:hercules-ci/arion";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -19,6 +29,8 @@
       nixpkgs,
       home-manager,
       stylix,
+      arion,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -53,6 +65,13 @@
                 ];
               };
             }
+          ];
+        };
+        m75q_server = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/m75q_server/configuration.nix
+            arion.nixosModules.arion
+            sops-nix.nixosModules.sops
           ];
         };
       };

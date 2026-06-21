@@ -119,3 +119,11 @@ NixOS, Nix and Home Manager are used to manage the system and user environment.
 
 - Generate and register a [GitHub deploy key](https://github.com/AnthonyDickson/dotfiles/settings/keys/new) for the config repo.
   Change the upstream URL to `git@github.com:AnthonyDickson/dotfiles.git`
+
+### Secret Management
+
+See [Secret Management](./secret_management.md) for details on how to manage secrets used for containerised applications.
+
+### Docker Management
+
+See [Docker Ops](./docker_ops.md) for details on how to manage containerised applications.

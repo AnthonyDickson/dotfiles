@@ -127,11 +127,20 @@
   services = {
     flatpak.enable = true;
     printing.enable = true;
-    tailscale.enable = true;
 
     # Cosmic DE
     displayManager.cosmic-greeter.enable = true;
     desktopManager.cosmic.enable = true;
+
+    tailscale = {
+      enable = true;
+      # Fixes bug in Tailscale DNS issues on wake
+      extraSetFlags = [ "--accept-dns=false" ];
+    };
+    # Fix for Realtek drivers for RTL8168 in the Lenovo m75q gen 5
+    udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10ec", ATTR{device}=="0x8168", ATTR{power/control}="on"
+    '';
   };
 
 }

@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
-{
+let
+  ports = {
+    ssh = 22;
+    dns = 53;
+    unbound = 5353;
+  };
+in {
   imports =
     [
       # Include the results of the hardware scan.
@@ -137,6 +143,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    ports = [ ports.ssh ];
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
   };
@@ -144,13 +151,38 @@
   services.tailscale = {
     enable = true;
     extraUpFlags = [ "--advertise-routes=192.168.0.0/24" ];
+    extraSetFlags = [ "--accept-dns=false" ];
   };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      address = [
+        "/anthonyd.co.nz/192.168.0.10"
+      ];
+      server = [ "127.0.0.1#${toString ports.unbound}" ];
+    };
+  };
+
+  services.unbound = {
+    enable = true;
+    settings = {
+      server = {
+        port = ports.unbound;
+        interface = [ "127.0.0.1" ];
+      };
+      remote-control = {
+        control-enable = true;
+        control-interface = [ "127.0.0.1" ]; # Restrict to localhost
+      };
+    };
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ ports.dns ];
+    allowedTCPPorts = [ ports.dns ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -13,7 +13,6 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./docker.nix
   ];
 
   # Bootloader.
@@ -94,6 +93,10 @@ in
     dust
     starship
     zellij
+    # Install sops and age CLI tools for managing secrets
+    sops
+    age
+    arion
   ];
 
   environment.enableAllTerminfo = true;
@@ -162,6 +165,9 @@ in
     extraSetFlags = [ "--accept-dns=false" ];
   };
 
+  # DNS
+  # ---
+
   services.dnsmasq = {
     enable = true;
     settings = {
@@ -187,12 +193,41 @@ in
     };
   };
 
+  # Secrets
+  # -------
+
   sops = {
+    defaultSopsFormat = "dotenv";
+
+    # Tell sops-nix to use the server's SSH host key for decryption
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+    secrets.budgeteur-env = {
+      sopsFile = ./projects/budgeteur/secrets.env;
+    };
+
     secrets.cloudflare_api_token = {
       sopsFile = ./cloudflare_secrets.env;
       owner = "caddy";
     };
   };
+
+  # Docker
+  # -------
+
+  virtualisation.docker.enable = true;
+  virtualisation.arion.backend = "docker";
+
+  virtualisation.arion.projects = {
+    budgeteur.settings.imports = [
+      (import ./projects/budgeteur/arion-compose.nix {
+        secretPath = config.sops.secrets.budgeteur-env.path;
+      })
+    ];
+  };
+
+  # Reverse Proxy
+  # -------------
 
   services.caddy = {
     enable = true;
@@ -219,6 +254,9 @@ in
   systemd.services.caddy.serviceConfig = {
     EnvironmentFile = config.sops.secrets.cloudflare_api_token.path;
   };
+
+  # Firewall
+  # --------
 
   networking.firewall = {
     enable = true;

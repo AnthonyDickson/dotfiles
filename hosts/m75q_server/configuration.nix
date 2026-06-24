@@ -1,18 +1,20 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   ports = {
     ssh = 22;
     dns = 53;
     unbound = 5353;
+    http = 80;
+    https = 443;
   };
-in {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./docker.nix
-    ];
+in
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./docker.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -51,10 +53,13 @@ in {
   users.users."anthonyd" = {
     isNormalUser = true;
     description = "Anthony Dickson";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     openssh.authorizedKeys.keys = [
-       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINygoylEUyT2/RFaPKwugriJP9ZvDTB7KropfmhpHBht anthony@m75q"
-       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKLcXHe9+g2j9F6EavUQLw3A5XhoX5NXlj/0R41aff46 anthony@Anthonys-MacBook-Pro.local"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINygoylEUyT2/RFaPKwugriJP9ZvDTB7KropfmhpHBht anthony@m75q"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKLcXHe9+g2j9F6EavUQLw3A5XhoX5NXlj/0R41aff46 anthony@Anthonys-MacBook-Pro.local"
     ];
   };
 
@@ -68,7 +73,10 @@ in {
   };
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -159,6 +167,7 @@ in {
     settings = {
       address = [
         "/anthonyd.co.nz/192.168.0.10"
+        "/s.anthonyd.co.nz/192.168.0.20"
       ];
       server = [ "127.0.0.1#${toString ports.unbound}" ];
     };
@@ -178,10 +187,51 @@ in {
     };
   };
 
+  sops = {
+    secrets.cloudflare_api_token = {
+      sopsFile = ./cloudflare_secrets.env;
+      owner = "caddy";
+    };
+  };
+
+  services.caddy = {
+    enable = true;
+
+    package = pkgs.caddy.withPlugins {
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.4" ];
+      hash = "sha256-8yZDrejNKsaUnUaTUFYbarWNmxafqp2z2rWo+XRsxV8=";
+    };
+
+    globalConfig = ''
+      email anthony.dickson9656@gmail.com
+
+      acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    '';
+
+    virtualHosts."budgeteur.s.anthonyd.co.nz" = {
+      extraConfig = ''
+        reverse_proxy localhost:8080
+      '';
+    };
+  };
+
+  # Point caddy's env to the sops-managed secret path
+  systemd.services.caddy.serviceConfig = {
+    EnvironmentFile = config.sops.secrets.cloudflare_api_token.path;
+  };
+
   networking.firewall = {
     enable = true;
-    allowedUDPPorts = [ ports.dns ];
-    allowedTCPPorts = [ ports.dns ];
+    allowedUDPPorts = [
+      ports.dns
+      ports.http
+      ports.https
+    ];
+    allowedTCPPorts = [
+      ports.dns
+      ports.http
+      ports.https
+    ];
   };
 
   # This value determines the NixOS release from which the default

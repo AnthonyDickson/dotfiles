@@ -8,3 +8,9 @@ creation_rules:
       - age:
           - *server
           - *admin
+
+  - path_regex: hosts/m75q_server/cloudflare_secrets\.env
+    key_groups:
+      - age:
+          - *server
+          - *admin

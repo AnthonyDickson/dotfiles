@@ -3,7 +3,7 @@
   project.name = "budgeteur-rs";
 
   services.web.service = {
-    image = "ghcr.io/anthonydickson/budgeteur:latest";
+    image = "ghcr.io/anthonydickson/budgeteur:0.30.3";
 
     command = [
       "server"

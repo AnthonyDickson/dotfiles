@@ -23,7 +23,7 @@ Adding a new project spans three files. The steps below use `newapp` as an examp
 
 ### 2. Add the secret
 
-On your **local machine**, create and encrypt the secrets file (see [Secret Management](./secret-management.md)):
+On your **local machine**, create and encrypt the secrets file (see [Secret Management](./secret_management.md)):
 
 ```bash
 mkdir -p hosts/myserver/projects/newapp

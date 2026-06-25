@@ -13,6 +13,7 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./projects/homepage/homepage-config.nix
   ];
 
   # Bootloader.
@@ -55,6 +56,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINygoylEUyT2/RFaPKwugriJP9ZvDTB7KropfmhpHBht anthony@m75q"
@@ -218,11 +220,17 @@ in
   virtualisation.docker.enable = true;
   virtualisation.arion.backend = "docker";
 
+  services.homepage-config.enable = true;
+
   virtualisation.arion.projects = {
     budgeteur.settings.imports = [
       (import ./projects/budgeteur/arion-compose.nix {
         secretPath = config.sops.secrets.budgeteur-env.path;
       })
+    ];
+
+    homepage.settings.imports = [
+      (import ./projects/homepage/arion-compose.nix { })
     ];
   };
 
@@ -246,6 +254,12 @@ in
     virtualHosts."budgeteur.s.anthonyd.co.nz" = {
       extraConfig = ''
         reverse_proxy localhost:8080
+      '';
+    };
+
+    virtualHosts."homepage.s.anthonyd.co.nz" = {
+      extraConfig = ''
+        reverse_proxy localhost:3000
       '';
     };
   };

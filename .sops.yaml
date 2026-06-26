@@ -14,3 +14,9 @@ creation_rules:
       - age:
           - *server
           - *admin
+
+  - path_regex: hosts/m75q_server/authelia_secrets\.yaml
+    key_groups:
+      - age:
+          - *server
+          - *admin

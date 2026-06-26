@@ -212,6 +212,49 @@ in
       sopsFile = ./cloudflare_secrets.env;
       owner = "caddy";
     };
+
+    # Authelia — each secret is exposed as a file path that Authelia
+    # reads at runtime via the _FILE environment variables set by the module.
+    secrets.authelia-jwt = {
+      sopsFile = ./authelia_secrets.yaml;
+      format = "yaml";
+      key = "AUTHELIA_JWT_SECRET";
+      owner = "authelia-main";
+    };
+    secrets.authelia-session = {
+      sopsFile = ./authelia_secrets.yaml;
+      format = "yaml";
+      key = "AUTHELIA_SESSION_SECRET";
+      owner = "authelia-main";
+    };
+    secrets.authelia-storage-key = {
+      sopsFile = ./authelia_secrets.yaml;
+      format = "yaml";
+      key = "AUTHELIA_STORAGE_ENCRYPTION_KEY";
+      owner = "authelia-main";
+    };
+    secrets.authelia-user-anthonyd-hash = {
+      sopsFile = ./authelia_secrets.yaml;
+      format = "yaml";
+      key = "AUTHELIA_USER_ANTHONYD_HASH";
+      owner = "authelia-main";
+    };
+  };
+
+  # sops template — inject the password hash into a users.yml at activation
+  # time. The plaintext hash never touches the Nix store.
+  sops.templates."authelia-users.yml" = {
+    owner = "authelia-main";
+    path = "/var/lib/authelia-main/users.yml";
+    content = ''
+      users:
+        anthonyd:
+          displayname: "Anthony Dickson"
+          password: "${config.sops.placeholder.authelia-user-anthonyd-hash}"
+          email: anthony.dickson9656@gmail.com
+          groups:
+            - admins
+    '';
   };
 
   # Docker
@@ -251,22 +294,107 @@ in
       acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     '';
 
-    virtualHosts."budgeteur.s.anthonyd.co.nz" = {
-      extraConfig = ''
-        reverse_proxy localhost:8080
-      '';
-    };
+    extraConfig = ''
+      (authelia) {
+        forward_auth localhost:9091 {
+          uri /api/authz/forward-auth
+          copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+        }
+      }
+    '';
 
-    virtualHosts."homepage.s.anthonyd.co.nz" = {
-      extraConfig = ''
-        reverse_proxy localhost:3000
-      '';
+    virtualHosts = {
+      # Authelia portal — no auth guard on this one
+      "auth.s.anthonyd.co.nz" = {
+        extraConfig = ''
+          reverse_proxy localhost:9091
+        '';
+      };
+
+      "budgeteur.s.anthonyd.co.nz" = {
+        extraConfig = ''
+          import authelia
+          reverse_proxy localhost:8080
+        '';
+      };
+
+      "homepage.s.anthonyd.co.nz" = {
+        extraConfig = ''
+          import authelia
+          reverse_proxy localhost:3000
+        '';
+      };
     };
   };
 
   # Point caddy's env to the sops-managed secret path
   systemd.services.caddy.serviceConfig = {
     EnvironmentFile = config.sops.secrets.cloudflare_api_token.path;
+  };
+
+  # Auth
+  # ----
+
+  services.authelia.instances.main = {
+    enable = true;
+
+    # The module sets the _FILE environment variables that Authelia reads
+    # at startup for secrets — no plaintext secrets reach the Nix store.
+    secrets = {
+      jwtSecretFile = config.sops.secrets.authelia-jwt.path;
+      sessionSecretFile = config.sops.secrets.authelia-session.path;
+      storageEncryptionKeyFile = config.sops.secrets.authelia-storage-key.path;
+    };
+
+    settings = {
+      theme = "dark";
+
+      authentication_backend.file = {
+        path = "/var/lib/authelia-main/users.yml";
+        watch = true;
+      };
+
+      session = {
+        name = "authelia_session";
+        expiration = "1h";
+        inactivity = "5m";
+        cookies = [{
+          domain = "s.anthonyd.co.nz";
+          authelia_url = "https://auth.s.anthonyd.co.nz";
+        }];
+      };
+
+      storage.local.path = "/var/lib/authelia-main/db.sqlite3";
+
+      totp = {
+        issuer = "anthonyd.co.nz";
+        period = 30;
+        skew = 1;
+      };
+
+      webauthn = {
+        display_name = "Anthony's Server";
+        attestation_conveyance_preference = "indirect";
+        selection_criteria = {
+          user_verification = "preferred";
+        };
+      };
+
+      # Filesystem notifier: enrollment links are written to a local file.
+      # Replace with SMTP once Stalwart is set up.
+      notifier.filesystem.filename =
+        "/var/lib/authelia-main/notifications.txt";
+
+      access_control = {
+        default_policy = "deny";
+        rules = [
+          {
+            domain = "*.s.anthonyd.co.nz";
+            policy = "two_factor";
+          }
+        ];
+      };
+    };
   };
 
   # Firewall

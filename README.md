@@ -1,243 +1,39 @@
 # Dotfiles
 
-This repo contains config for my NixOS desktop and server.
-NixOS, Nix and Home Manager are used to manage the system and user environment.
+NixOS, Nix, and Home Manager configurations for my desktop and server.
 
-## Desktop
+## Hosts
 
-### Installation (NixOS)
+| Host          | Type    | Purpose                      |
+| ------------- | ------- | ---------------------------- |
+| `m75q`        | Desktop | Daily driver with Cosmic DE  |
+| `m75q_server` | Server  | Containerised apps via Arion |
 
-1. Clone git repo:
+## Quick Start
 
-   ```shell
-   nix-shell -p git helix
-   git clone https:://github.com/AnthonyDickson/dotfiles ~/.config/nix
-   cd ~/.config/nix
-   ```
+**Desktop**: See [Desktop Setup](docs/desktop.md) for installation and migration.
 
-1. Create a new host for your PC by copying over the default config:
+**Server**: See [Server Setup](docs/server.md) for installation and post-install.
 
-   ```shell
-   mkdir hosts/<host name>
-   cp /etc/nixos/configuration.nix /etc/nixos/hardware-configuration.nix hosts/<host name>/
-   ```
-   and add a host in `flake.nix`.
+## Guides
 
-1. Copy over the config you want from existing hosts, ensuring to keep
-   `system.stateVersion` in `configuration.nix` from the previous steps and
-   rebuild the system:
+- [Desktop Setup](docs/desktop.md) — NixOS desktop installation, post-install steps, and migration from another install
+- [Server Setup](docs/server.md) — NixOS server installation, Tailscale, and deploy keys
+- [Secret Management](docs/secrets.md) — Managing encrypted secrets with sops-nix and age
+- [Docker Operations](docs/docker.md) — Adding projects, updating images, and operational commands for Arion
+- [Authelia](docs/authelia.md) — MFA enrollment, user management, SMTP setup, and troubleshooting
 
-   ```shell
-   sudo nixos-rebuild switch --flake ~/.config/nix#<host name>
-   ```
+## Structure
 
-### Post-Installation Steps
-
-- Log in with GitHub:
-
-  ```shell
-  gh auth login
-  ```
-
-- Clone Cosmic DE config:
-
-  ```shell
-  git clone https://github.com/AnthonyDickson/.config-cosmic.git ~/.config/cosmic
-  ```
-
-- Log in to Tailscale:
-
-  ```shell
-  sudo tailscale login
-  ```
-
-- Enable rime and mozc in Fcitx 5 Configuration for Chinese and Japanese IMEs.
-
-### Migrating from Another Installation
-
-- Copy over Firefox settings:
-  ```shell
-  cp -r /path/to/old/username/home/.mozilla ~/
-  ```
-
-- Copy over Thunderbird settings:
-  ```shell
-  cp -r /path/to/old/username/home/.thunderbird ~/
-  ```
-
-- Copy over ssh keys:
-  ```shell
-  cp -r /path/to/old/username/home/.ssh ~/
-  ```
-
-- Copy over zoxide history:
-  ```shell
-  cp -r /path/to/old/username/home/.local/share/zoxide ~/.local/share/
-  ```
-
-- Copy over fish history:
-  ```shell
-  cp -r /path/to/old/username/home/.local/share/fish ~/.local/share/
-  ```
-
-## Server
-
-1. Clone git repo:
-
-   ```shell
-   nix-shell -p git helix
-   git clone https:://github.com/AnthonyDickson/dotfiles ~/.config/nix
-   cd ~/.config/nix
-   ```
-
-1. Create a new host for your PC by copying over the default config:
-
-   ```shell
-   mkdir hosts/<host name>
-   cp /etc/nixos/configuration.nix /etc/nixos/hardware-configuration.nix hosts/<host name>/
-   ```
-   and add a host in `flake.nix`.
-
-1. Copy over the config you want from existing hosts, ensuring to keep
-   `system.stateVersion` in `configuration.nix` from the previous steps.
-
-1. Update the `openssh.authorizedKeys.keys` field with any public keys you want
-   to use for remote access.
-
-1. Rebuild the system:
-
-   ```shell
-   sudo nixos-rebuild switch --flake ~/.config/nix#<host name>
-   ```
-
-### Post-Installation Steps
-
-- Log in to Tailscale:
-
-  ```shell
-  sudo tailscale login
-
-- Generate and register a [GitHub deploy key](https://github.com/AnthonyDickson/dotfiles/settings/keys/new) for the config repo.
-  Change the upstream URL to `git@github.com:AnthonyDickson/dotfiles.git`
-
-### Secret Management
-
-See [Secret Management](./secret_management.md) for details on how to manage secrets used for containerised applications.
-
-### Docker Management
-
-See [Docker Ops](./docker_ops.md) for details on how to manage containerised applications.
-
-### Authelia — First Login & MFA Enrollment
-
-After deploying, you'll be prompted for a second factor on first login:
-
-1. Visit any protected service, e.g. `https://budgeteur.s.anthonyd.co.nz`
-2. You'll be redirected to `https://auth.s.anthonyd.co.nz`
-3. Log in with your username and password
-4. Authelia will prompt to enroll a second factor — the enrollment link is
-   written to a local file (no email server needed):
-
-   ```shell
-   cat /var/lib/authelia-main/notifications.txt
-   ```
-5. Open the link and choose either:
-   - **One-Time Password** — scan the QR code with an authenticator app
-     (Aegis, 1Password, etc.)
-   - **Security Key** — register a passkey, YubiKey, or platform authenticator
-     (Face ID, Touch ID, Windows Hello)
-
-After enrollment, subsequent logins will prompt for your chosen second factor.
-
-### Adding More Authelia Users
-
-1. Generate a password hash:
-
-   ```shell
-   nix run nixpkgs#authelia -- hash-password 'theirpassword'
-   ```
-
-2. Add their hash to `hosts/m75q_server/authelia_secrets.env`:
-
-   ```env
-   AUTHELIA_USER_ANTHONYD_HASH=$argon2id$...   # existing
-   AUTHELIA_USER_NEWPERSON_HASH=$argon2id$...  # new
-   ```
-
-3. Re-encrypt:
-
-   ```shell
-   sops --encrypt --in-place hosts/m75q_server/authelia_secrets.env
-   ```
-
-4. Add a new `sops.secrets` entry and update the template in
-   `hosts/m75q_server/configuration.nix`:
-
-   ```nix
-   sops.secrets.authelia-user-newperson-hash = {
-     sopsFile = ./authelia_secrets.env;
-     key = "AUTHELIA_USER_NEWPERSON_HASH";
-     owner = "authelia-main";
-   };
-
-   sops.templates."authelia-users.yml" = {
-     owner = "authelia-main";
-     path = "/var/lib/authelia-main/users.yml";
-     content = ''
-       users:
-         anthonyd:
-           displayname: "Anthony Dickson"
-           password: "${config.sops.placeholder.authelia-user-anthonyd-hash}"
-           email: anthony.dickson9656@gmail.com
-           groups:
-             - admins
-         newperson:
-           displayname: "New Person"
-           password: "${config.sops.placeholder.authelia-user-newperson-hash}"
-           email: newperson@example.com
-           groups: []
-     '';
-   };
-   ```
-
-5. Rebuild:
-
-   ```shell
-   sudo nixos-rebuild switch
-   ```
-
-   sops-nix rewrites the users file and Authelia reloads it automatically
-   (`watch = true`). Give the new user their credentials out-of-band — they
-   enroll their own MFA on first login.
-
-### Switching Authelia to SMTP Notifier
-
-When Stalwart (or another SMTP server) is ready, replace the notifier block in
-`configuration.nix`:
-
-```nix
-# Remove:
-notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
-
-# Add:
-notifier.smtp = {
-  host = "127.0.0.1";
-  port = 587;
-  username = "auth@s.anthonyd.co.nz";
-  sender = "Authelia <auth@s.anthonyd.co.nz>";
-};
 ```
-
-Then add `AUTHELIA_NOTIFIER_SMTP_PASSWORD=<password>` to
-`authelia_secrets.env` as a new sops secret (owner: `authelia-main`),
-re-encrypt, and `sudo nixos-rebuild switch`.
-
-### Authelia Troubleshooting
-
-| Symptom                                    | Check                                                               |
-| ------------------------------------------ | ------------------------------------------------------------------- |
-| Redirect loop on protected service         | Confirm `auth.s.anthonyd.co.nz` has no `import authelia`            |
-| 401/403 after login                        | Check `access_control` rules; verify cookie domain matches `s.anthonyd.co.nz` |
-| MFA enrollment link not received           | `cat /var/lib/authelia-main/notifications.txt`                      |
-| Passkey not working                        | Ensure you're accessing via HTTPS; WebAuthn requires a secure context |
-| Service starts but crashes                 | `journalctl -u authelia-main --since "5 min ago"`                   |
+├── flake.nix              # Flake entrypoint
+├── .sops.yaml             # sops encryption rules
+├── modules/
+│   ├── home/              # Home Manager modules
+│   └── system/            # NixOS system modules
+└── hosts/
+    ├── m75q/              # Desktop configuration
+    └── m75q_server/       # Server configuration
+        ├── projects/      # Arion compose configs per app
+        └── *_secrets.env  # Encrypted secrets (safe to commit)
+```

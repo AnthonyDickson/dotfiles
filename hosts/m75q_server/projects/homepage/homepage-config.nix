@@ -24,18 +24,6 @@ let
 
   homepageServices = [
     {
-      "My Services" = [
-        {
-          Budgeteur = {
-            icon = "mdi-finance";
-            href = "https://budgeteur.anthonyd.co.nz";
-            description = "Personal budgeting app";
-            siteMonitor = "https://budgeteur.anthonyd.co.nz/api/health";
-          };
-        }
-      ];
-    }
-    {
       Infrastructure = [
         {
           Caddy = {

@@ -37,7 +37,7 @@
       "homepage.name" = "Budgeteur";
       "homepage.href" = "https://budgeteur.s.anthonyd.co.nz";
       "homepage.description" = "Personal budgeting app";
-      "homepage.icon" = "mdi-finance";
+      "homepage.icon" = "https://budgeteur.s.anthonyd.co.nz/static/favicon-128x128.png";
     };
 
     restart = "unless-stopped";

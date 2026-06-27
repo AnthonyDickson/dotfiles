@@ -17,29 +17,25 @@ let
     layout = [
       { "DateTime" = { style = "row"; columns = 2; }; }
       { "Weather" = { style = "row"; columns = 2; }; }
-      { "Services" = { style = "row"; columns = 4; }; }
+      { "Services" = { style = "row"; columns = 2; }; }
       { "Bookmarks" = { style = "row"; columns = 4; }; }
     ];
   };
 
   homepageServices = [
     {
-      Infrastructure = [
+      Media = [
         {
-          Caddy = {
-            icon = "sh-caddy";
-            href = "https://homepage.s.anthonyd.co.nz";
-            description = "Reverse proxy";
-            widget = {
-              type = "caddy";
-              url = "http://localhost:2019";
-            };
+          Kavita = {
+            icon = "sh-kavita";
+            href = "https://kavita.anthonyd.co.nz";
+            description = "E-book and comic server";
           };
         }
       ];
     }
     {
-      Media = [
+      "Media Management" = [
         {
           Sonarr = {
             icon = "sh-sonarr";
@@ -68,11 +64,19 @@ let
             description = "Torrent client";
           };
         }
+      ];
+    }
+    {
+      Infrastructure = [
         {
-          Kavita = {
-            icon = "sh-kavita";
-            href = "https://kavita.anthonyd.co.nz";
-            description = "E-book and comic server";
+          Caddy = {
+            icon = "sh-caddy";
+            href = "https://homepage.s.anthonyd.co.nz";
+            description = "Reverse proxy";
+            widget = {
+              type = "caddy";
+              url = "http://localhost:2019";
+            };
           };
         }
       ];

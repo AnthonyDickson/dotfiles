@@ -110,7 +110,7 @@ let
         { Metservice = [ { icon = "mdi-weather-cloudy"; href = "https://www.metservice.com/towns-cities/regions/auckland/locations/pakuranga-heights"; } ]; }
         { "1News" = [ { icon = "mdi-newspaper"; href = "https://www.1news.co.nz/new-zealand/"; } ]; }
         { "Al Jazeera" = [ { icon = "mdi-newspaper-variant"; href = "https://www.aljazeera.com/"; } ]; }
-        { "Hacker News" = [ { icon = "sh-ycombinator"; href = "https://news.ycombinator.com/news"; } ]; }
+        { "Hacker News" = [ { icon = "mdi-alpha-y-box-#ff6600"; href = "https://news.ycombinator.com/news"; } ]; }
       ];
     }
     {

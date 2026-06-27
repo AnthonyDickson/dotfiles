@@ -422,6 +422,11 @@ in
         default_policy = "deny";
         rules = [
           {
+            domain = "budgeteur.s.anthonyd.co.nz";
+            policy = "bypass";
+            resources = ["^/api.*$"];
+          }
+          {
             domain = "*.s.anthonyd.co.nz";
             policy = "two_factor";
           }

@@ -16,6 +16,15 @@ in
     ./projects/homepage/homepage-config.nix
   ];
 
+  # NFS mount for NAS media
+  services.rpcbind.enable = true;
+
+  fileSystems."/mnt/media" = {
+    device = "192.168.0.10:/volume1/data/media";
+    fsType = "nfs";
+    options = [ "nfsvers=4.1" "noatime" "hard" "intr" ];
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -66,6 +75,12 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Create Jellyfin state directories at boot
+  systemd.tmpfiles.rules = [
+    "d /var/lib/jellyfin/config 0755 1000 303 -"
+    "d /var/lib/jellyfin/cache 0755 1000 303 -"
+  ];
 
   nix.gc = {
     automatic = true;
@@ -275,6 +290,10 @@ in
     homepage.settings.imports = [
       (import ./projects/homepage/arion-compose.nix { })
     ];
+
+    jellyfin.settings.imports = [
+      (import ./projects/jellyfin/arion-compose.nix { })
+    ];
   };
 
   # Reverse Proxy
@@ -322,6 +341,12 @@ in
         extraConfig = ''
           import authelia
           reverse_proxy localhost:3000
+        '';
+      };
+
+      "jellyfin.s.anthonyd.co.nz" = {
+        extraConfig = ''
+          reverse_proxy localhost:8096
         '';
       };
     };
@@ -412,6 +437,12 @@ in
       ports.http
       ports.https
     ];
+  };
+
+  # Ensure Jellyfin only starts after the NFS media mount is available
+  systemd.services.arion-jellyfin = {
+    after = [ "mnt-media.mount" ];
+    requires = [ "mnt-media.mount" ];
   };
 
   # This value determines the NixOS release from which the default

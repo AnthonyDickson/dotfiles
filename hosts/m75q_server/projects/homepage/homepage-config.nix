@@ -53,13 +53,6 @@ let
     {
       Media = [
         {
-          Jellyfin = {
-            icon = "sh-jellyfin";
-            href = "https://jellyfin.anthonyd.co.nz";
-            description = "Media server";
-          };
-        }
-        {
           Sonarr = {
             icon = "sh-sonarr";
             href = "https://sonarr.anthonyd.co.nz";

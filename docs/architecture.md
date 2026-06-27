@@ -33,7 +33,8 @@ none of which are managed by this NixOS configuration.
          │
 ┌────────┴────────┐
 │  Synology NAS   │  192.168.0.10
-│  (external)     │  NFS export for media
+│  (external)     │  NFS exports for media
+│                 │  and backups
 └─────────────────┘
 ```
 
@@ -73,12 +74,19 @@ injected into Caddy's environment at boot.
 
 ### Synology NAS
 
-A Synology NAS at **`192.168.0.10`** exports `/volume1/data/media` via NFSv4.1.
-The server mounts it at `/mnt/media` as a read-only media library for Jellyfin.
+A Synology NAS at **`192.168.0.10`** exports two NFSv4.1 shares:
+
+- **`/volume1/data/media`** — read-only media library for Jellyfin, mounted at
+  `/mnt/media`
+- **`/volume1/server_backup`** — backup staging area, mounted at `/mnt/backups`
+  (see [Backups](backups.md))
 
 The `arion-jellyfin` systemd service has a hard dependency on
 `mnt-media.mount` — the container starts only after the NAS is reachable and
 the share is mounted.
+
+The `server-backup` systemd service has a soft dependency (`wants`) on
+`mnt-backups.mount` — it skips the backup run if the NAS isn't reachable.
 
 Jellyfin runs inside its container as **uid 1000 / gid 303** (gid 303 is the
 `render` group for `/dev/dri` hardware transcoding). The NFS export on the NAS
@@ -86,16 +94,20 @@ must squash all access to these same IDs — otherwise the container cannot read
 media files. In DSM, set **Squash → Map all users to admin** on the NFS
 permissions rule, or configure explicit `anonuid=1000,anongid=303`.
 
+The backup share uses the same squash setting (map all to admin) — the backup
+script runs as root on the server and the NAS squashes access to a single
+account.
+
 **Assumptions**:
 
 - NAS is at a static IP (`192.168.0.10`) and always powered on
-- NFSv4.1 is enabled on the NAS with the media share exported
-- The share is accessible without authentication (network trust) — the NixOS
+- NFSv4.1 is enabled on the NAS with both shares exported
+- Both shares are accessible without authentication (network trust) — the NixOS
   config does not set up Kerberos, `sec=krb5`, or explicit NFS credentials
-- NFS squash is configured to map access to uid 1000 / gid 303 (the Jellyfin
-  container user); without this, Jellyfin gets permission-denied on all media
-- The directory layout under the share is what Jellyfin expects (the NAS
-  manages its own folder structure)
+- NFS squash is configured to map all access to admin for both shares
+- The directory layout under `/volume1/data/media` is what Jellyfin expects
+  (the NAS manages its own folder structure)
+- `/volume1/server_backup` has a quota configured (100 GB at time of writing)
 
 ### Tailscale
 

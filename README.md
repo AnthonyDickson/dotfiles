@@ -20,6 +20,7 @@ NixOS, Nix, and Home Manager configurations for my desktop and server.
 - [Desktop Setup](docs/desktop.md) — NixOS desktop installation, post-install steps, and migration from another install
 - [Server Architecture](docs/architecture.md) — High-level server design, external dependencies, and networking
 - [Server Setup](docs/server.md) — NixOS server installation, Tailscale, and deploy keys
+- [Backups](docs/backups.md) — Daily backups to Synology NAS, restore procedures, adding new services
 - [Secret Management](docs/secrets.md) — Managing encrypted secrets with sops-nix and age
 - [Docker Operations](docs/docker.md) — Adding projects, updating images, and operational commands for Arion
 - [Authelia](docs/authelia.md) — MFA enrollment, user management, SMTP setup, and troubleshooting

@@ -25,6 +25,12 @@ in
     options = [ "nfsvers=4.1" "noatime" "hard" "intr" ];
   };
 
+  fileSystems."/mnt/backups" = {
+    device = "192.168.0.10:/volume1/server_backup";
+    fsType = "nfs";
+    options = [ "nfsvers=4.1" "noatime" "hard" "intr" ];
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -80,6 +86,8 @@ in
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/config 0755 1000 303 -"
     "d /var/lib/jellyfin/cache 0755 1000 303 -"
+    "d /var/backup 0755 root root -"
+    "d /var/log/backups 0755 root root -"
   ];
 
   nix.gc = {
@@ -443,6 +451,69 @@ in
   systemd.services.arion-jellyfin = {
     after = [ "mnt-media.mount" ];
     requires = [ "mnt-media.mount" ];
+  };
+
+  # Backup
+  # ------
+
+  systemd.services.server-backup = let
+    backupScript = pkgs.writeShellScriptBin "server-backup" ''
+      set -euo pipefail
+
+      STAGING=/var/backup
+      NAS=/mnt/backups
+
+      if ! grep -q " /mnt/backups " /proc/mounts; then
+        echo "Backup NFS mount not available"
+        exit 1
+      fi
+
+      mkdir -p "$NAS"
+      rm -rf "$STAGING"/*
+      mkdir -p "$STAGING"/{budgeteur,authelia,jellyfin,homepage}
+
+      echo "Dumping Budgeteur database..."
+      ${pkgs.sqlite}/bin/sqlite3 /var/lib/budgeteur/budgeteur.db \
+        ".backup $STAGING/budgeteur/budgeteur.db"
+
+      echo "Dumping Authelia database..."
+      ${pkgs.sqlite}/bin/sqlite3 /var/lib/authelia-main/db.sqlite3 \
+        ".backup $STAGING/authelia/db.sqlite3"
+
+      echo "Linking Jellyfin config..."
+      cp -al /var/lib/jellyfin/config/* "$STAGING/jellyfin/" || true
+
+      echo "Linking Homepage config..."
+      cp -al /var/lib/homepage/config/* "$STAGING/homepage/" || true
+
+      LOGDIR=/var/log/backups
+      mkdir -p "$LOGDIR"
+      LOGFILE="$LOGDIR/$(date +%Y-%m-%d_%H-%M-%S).log"
+
+      echo "Syncing to NAS (log: $LOGFILE)..."
+      ${pkgs.rsync}/bin/rsync -rltD --chmod=D755,F644 --delete --stats \
+        "$STAGING"/ "$NAS"/ > "$LOGFILE" 2>&1
+
+      echo "Backup complete"
+    '';
+  in {
+    description = "Stage and sync server backups to NAS";
+    after = [ "mnt-backups.mount" "network-online.target" ];
+    wants = [ "mnt-backups.mount" "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${backupScript}/bin/server-backup";
+    };
+  };
+
+  systemd.timers.server-backup = {
+    description = "Daily server backup to NAS";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = 600;
+    };
   };
 
   # This value determines the NixOS release from which the default

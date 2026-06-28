@@ -31,7 +31,7 @@ After enrollment, subsequent logins will prompt for your chosen second factor.
    nix run nixpkgs#authelia -- crypto hash generate argon2 --password 'theirpassword'
    ```
 
-2. Add their hash to `hosts/m75q_server/authelia_secrets.yaml`:
+2. Add their hash to `hosts/m75q_server/modules/authelia/secrets.yaml`:
 
    ```yaml
    AUTHELIA_USER_ANTHONYD_HASH: $argon2id$...   # existing
@@ -41,15 +41,15 @@ After enrollment, subsequent logins will prompt for your chosen second factor.
 3. Re-encrypt:
 
    ```shell
-   sops --encrypt --in-place hosts/m75q_server/authelia_secrets.yaml
+   sops --encrypt --in-place hosts/m75q_server/modules/authelia/secrets.yaml
    ```
 
 4. Add a new `sops.secrets` entry and update the template in
-   `hosts/m75q_server/configuration.nix`:
+   `hosts/m75q_server/modules/authelia/default.nix`:
 
    ```nix
    sops.secrets.authelia-user-newperson-hash = {
-     sopsFile = ./authelia_secrets.yaml;
+     sopsFile = ./secrets.yaml;
      format = "yaml";
      key = "AUTHELIA_USER_NEWPERSON_HASH";
      owner = "authelia-main";
@@ -88,7 +88,7 @@ After enrollment, subsequent logins will prompt for your chosen second factor.
 ## Switching to SMTP Notifier
 
 When Stalwart (or another SMTP server) is ready, replace the notifier block in
-`configuration.nix`:
+`hosts/m75q_server/modules/authelia/default.nix`:
 
 ```nix
 # Remove:
@@ -104,7 +104,7 @@ notifier.smtp = {
 ```
 
 Then add `AUTHELIA_NOTIFIER_SMTP_PASSWORD: <password>` to
-`authelia_secrets.yaml` as a new sops secret (owner: `authelia-main`),
+`hosts/m75q_server/modules/authelia/secrets.yaml` as a new sops secret (owner: `authelia-main`),
 re-encrypt, and `sudo nixos-rebuild switch`.
 
 ## Troubleshooting

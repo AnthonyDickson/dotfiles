@@ -3,19 +3,7 @@ keys:
   - &admin age19ahn6k5k9ay9ltssuhsfneym7kryvfwcqa75pqfn09w4yyvc350q8c8tt5
 
 creation_rules:
-  - path_regex: hosts/m75q_server/projects/.*/secrets\.env
-    key_groups:
-      - age:
-          - *server
-          - *admin
-
-  - path_regex: hosts/m75q_server/cloudflare_secrets\.env
-    key_groups:
-      - age:
-          - *server
-          - *admin
-
-  - path_regex: hosts/m75q_server/authelia_secrets\.yaml
+  - path_regex: hosts/m75q_server/modules/.*/secrets\.(env|yaml)
     key_groups:
       - age:
           - *server

@@ -61,7 +61,7 @@ ports 80/443 reachable from the internet — domain validation happens via DNS
 TXT records that Caddy creates through the Cloudflare API.
 
 A scoped Cloudflare API token with DNS edit permission on `anthonyd.co.nz` is
-required. It lives in `cloudflare_secrets.env` (encrypted with sops) and is
+required. It lives in `modules/caddy/secrets.env` (encrypted with sops) and is
 injected into Caddy's environment at boot.
 
 **Assumptions**:

@@ -7,7 +7,7 @@ Adding a new project spans three files. The steps below use `newapp` as an examp
 ### 1. Create the arion compose config
 
 ```nix
-# hosts/myserver/projects/newapp/arion-compose.nix
+# hosts/myserver/modules/newapp/arion-compose.nix
 { secretPath }: # receives the secret path from docker.nix
 { pkgs, ... }: {
   project.name = "newapp";
@@ -26,17 +26,17 @@ Adding a new project spans three files. The steps below use `newapp` as an examp
 On your **local machine**, create and encrypt the secrets file (see [Secret Management](./secrets.md)):
 
 ```bash
-mkdir -p hosts/myserver/projects/newapp
+mkdir -p hosts/myserver/modules/newapp
 
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt \
-  sops --input-type dotenv --output-type dotenv hosts/myserver/projects/newapp/secrets.env
+  sops --input-type dotenv --output-type dotenv hosts/myserver/modules/newapp/secrets.env
 ```
 
 ### 3. Declare the secret in sops.nix
 
 ```nix
 secrets.newapp-env = {
-  sopsFile = ./projects/newapp/secrets.env;
+  sopsFile = ./secrets.env;
   format = "dotenv";
   path = "/run/secrets/newapp.env";
 };
@@ -49,7 +49,7 @@ virtualisation.arion.projects = {
   budgeteur.settings.imports = [ ... ]; # existing
 
   newapp.settings.imports = [
-    (import ./projects/newapp/arion-compose.nix {
+    (import ./arion-compose.nix {
       secretPath = config.sops.secrets.newapp-env.path;
     })
   ];

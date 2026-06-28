@@ -21,7 +21,7 @@ On your **local machine**:
 
 ```bash
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt \
-  sops --input-type dotenv --output-type dotenv hosts/myserver/projects/myapp/secrets.env
+  sops --input-type dotenv --output-type dotenv hosts/myserver/modules/myapp/secrets.env
 ```
 
 This opens `$EDITOR` with the decrypted contents. Make your changes, save, and close — sops re-encrypts automatically.
@@ -29,7 +29,7 @@ This opens `$EDITOR` with the decrypted contents. Make your changes, save, and c
 Then commit and push:
 
 ```bash
-git add hosts/myserver/projects/myapp/secrets.env
+git add hosts/myserver/modules/myapp/secrets.env
 git commit -m "update myapp secrets"
 git push
 ```
@@ -47,16 +47,16 @@ On your **local machine**:
 
 1. Create the secrets file:
 ```bash
-mkdir -p hosts/myserver/projects/newapp
+mkdir -p hosts/myserver/modules/newapp
 
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt \
-  sops --input-type dotenv --output-type dotenv hosts/myserver/projects/newapp/secrets.env
+  sops --input-type dotenv --output-type dotenv hosts/myserver/modules/newapp/secrets.env
 ```
 
 2. Declare the secret in `sops.nix`:
 ```nix
 secrets.newapp-env = {
-  sopsFile = ./projects/newapp/secrets.env;
+  sopsFile = ./secrets.env;
   format = "dotenv";
   path = "/run/secrets/newapp.env";
 };
@@ -100,7 +100,7 @@ creation_rules:
 3. On your **local machine**, re-encrypt all secrets using your admin key:
 ```bash
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops updatekeys \
-  hosts/myserver/projects/myapp/secrets.env
+  hosts/myserver/modules/myapp/secrets.env
 ```
 
 Repeat for each secrets file, then commit and push.
@@ -120,7 +120,7 @@ If both the old server and the admin key are lost, the encrypted secrets are unr
 3. On your **local machine**, re-create each secrets file with regenerated values (reissue API keys, generate new passwords, etc.):
 ```bash
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt \
-  sops --input-type dotenv --output-type dotenv hosts/myserver/projects/myapp/secrets.env
+  sops --input-type dotenv --output-type dotenv hosts/myserver/modules/myapp/secrets.env
 ```
 4. Commit, push, then on the **new server** clone the repo and rebuild.
 

@@ -12,6 +12,7 @@
     ./modules/caddy
     ./modules/authelia
     ./modules/backup.nix
+    ./modules/ntfy
     ./modules/budgeteur
     ./modules/homepage
     ./modules/jellyfin

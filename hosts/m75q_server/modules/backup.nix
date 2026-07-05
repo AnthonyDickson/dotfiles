@@ -79,6 +79,7 @@ in
       description = "Stage and sync server backups to NAS";
       after = [ "mnt-backups.mount" "network-online.target" ];
       wants = [ "mnt-backups.mount" "network-online.target" ];
+      onFailure = [ "ntfy-backup-failure.service" ];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${backupScript}/bin/server-backup";

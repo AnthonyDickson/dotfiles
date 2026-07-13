@@ -23,6 +23,20 @@
     owner = "authelia-main";
   };
 
+  sops.secrets.authelia-oidc-private-key = {
+    sopsFile = ./secrets.yaml;
+    format = "yaml";
+    key = "AUTHELIA_OIDC_PRIVATE_KEY";
+    owner = "authelia-main";
+  };
+
+  sops.secrets.authelia-oidc-hmac = {
+    sopsFile = ./secrets.yaml;
+    format = "yaml";
+    key = "AUTHELIA_OIDC_HMAC_SECRET";
+    owner = "authelia-main";
+  };
+
   sops.secrets.authelia-user-anthonyd-hash = {
     sopsFile = ./secrets.yaml;
     format = "yaml";
@@ -30,7 +44,19 @@
     owner = "authelia-main";
   };
 
-  # Generate users.yml at activation time — hash never touches Nix store
+  # Generate fles with secrets at activation time so the secrets never land in the Nix store
+  sops.templates."authelia-oidc-hmac" = {
+    owner = "authelia-main";
+    path = "/var/lib/authelia-main/oidc-hmac";
+    content = config.sops.placeholder.authelia-oidc-hmac;
+  };
+
+  sops.templates."authelia-oidc-private-key.pem" = {
+    owner = "authelia-main";
+    path = "/var/lib/authelia-main/oidc-private.pem";
+    content = config.sops.placeholder.authelia-oidc-private-key;
+  };
+
   sops.templates."authelia-users.yml" = {
     owner = "authelia-main";
     path = "/var/lib/authelia-main/users.yml";
@@ -77,6 +103,8 @@
       jwtSecretFile = config.sops.secrets.authelia-jwt.path;
       sessionSecretFile = config.sops.secrets.authelia-session.path;
       storageEncryptionKeyFile = config.sops.secrets.authelia-storage-key.path;
+      oidcIssuerPrivateKeyFile = "/var/lib/authelia-main/oidc-private.pem";
+      oidcHmacSecretFile = "/var/lib/authelia-main/oidc-hmac";
     };
 
     settings = {
@@ -115,6 +143,28 @@
 
       notifier.filesystem.filename =
         "/var/lib/authelia-main/notifications.txt";
+
+      identity_providers.oidc = {
+        clients = [
+          {
+            client_id = "elmish-todos";
+            client_name = "Elmish Todos";
+            # TODO: Regenerate the secret when adding the docker compose for Elmish Todos
+            client_secret = "$pbkdf2-sha512$310000$bmyKd6d6FP9t/IbgDDyH2g$cjQoII37ystknXMpyKTRBy5rIaZLWiR1icGS7b/Vue3WJMyjrXLRLdekAIh7H2ZwzYTYCm09yc1uIsDZt.8eTQ";
+            public = false;
+            redirect_uris = [
+              "http://localhost:5000/signin-oidc"
+            ];
+            scopes = [ "openid" "profile" "email" "offline_access" ];
+            grant_types = [ "authorization_code" "refresh_token" ];
+            response_types = [ "code" ];
+            response_modes = [ "query" "form_post" ];
+            authorization_policy = "one_factor";
+            consent_mode = "implicit";
+            token_endpoint_auth_method = "client_secret_post";
+          }
+        ];
+      };
 
       access_control = {
         default_policy = "deny";

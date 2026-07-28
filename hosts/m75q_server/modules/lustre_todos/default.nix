@@ -16,44 +16,52 @@ in
   virtualisation.arion.projects.lustre-todos.settings =  {
     project.name = "lustre-todos";
 
-    services.web.service = {
-      image = "ghcr.io/anthonydickson/lustre-todos:0.1.0";
+    services.web = {
+      service = {
+        image = "ghcr.io/anthonydickson/lustre-todos:0.1.0";
 
-      environment = {
-        Login__ReturnUrl= "https://${domain}";
-        Oidc__Authority= "https://auth.s.anthonyd.co.nz";
-        Oidc__ClientId= client_id;
-        Oidc__CallbackPath= "/signin-oidc";
-        ConnectionStrings__Default= "Data Source=/data/${db_filename}";
+        environment = {
+          Login__ReturnUrl= "https://${domain}";
+          Oidc__Authority= "https://auth.s.anthonyd.co.nz";
+          Oidc__ClientId= client_id;
+          Oidc__CallbackPath= "/signin-oidc";
+          ConnectionStrings__Default= "Data Source=/data/${db_filename}";
+        };
+
+        ports = [ "${toString port}:5000" ];
+
+        # Expected to define the env var Oidc__ClientSecret
+        env_file = [ config.sops.secrets.lustre-todos-env.path ];
+
+        volumes = [
+          "${docker_volume}:/data"
+        ];
+
+        healthcheck = {
+          test= ["CMD" "bash" "-c" "</dev/tcp/localhost/5000"];
+          interval= "30s";
+          timeout= "5s";
+          retries= 3;
+          start_period= "10s";
+        };
+
+        labels = {
+          "homepage.group" = "Services";
+          "homepage.name" = "Lustre Todos";
+          "homepage.href" = "https://${domain}";
+          "homepage.description" = "Lustre Todos";
+          "homepage.icon" = "https://${domain}/favicon.svg";
+        };
+
+        restart = "unless-stopped";
+
       };
 
-      ports = [ "${toString port}:5000" ];
-
-      # Expected to define the env var Oidc__ClientSecret
-      env_file = [ config.sops.secrets.lustre-todos-env.path ];
-
-      volumes = [
-        "${docker_volume}:/data"
-      ];
-
-      healthcheck = {
-        test= ["CMD" "bash" "-c" "</dev/tcp/localhost/5000"];
-        interval= "30s";
-        timeout= "5s";
-        retries= 3;
-        start_period= "10s";
+      out.service.deploy.resources.limits = {
+          cpus = "1.0";
+          memory = "256mb";
+        };
       };
-
-      labels = {
-        "homepage.group" = "Services";
-        "homepage.name" = "Lustre Todos";
-        "homepage.href" = "https://${domain}";
-        "homepage.description" = "Lustre Todos";
-        "homepage.icon" = "https://${domain}/favicon.svg";
-      };
-
-      restart = "unless-stopped";
-    };
   };
 
   services.caddy.virtualHosts."${domain}" = {

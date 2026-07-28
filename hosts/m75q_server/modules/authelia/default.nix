@@ -144,28 +144,6 @@
       notifier.filesystem.filename =
         "/var/lib/authelia-main/notifications.txt";
 
-      identity_providers.oidc = {
-        clients = [
-          {
-            client_id = "elmish-todos";
-            client_name = "Elmish Todos";
-            # TODO: Regenerate the secret when adding the docker compose for Elmish Todos
-            client_secret = "$pbkdf2-sha512$310000$bmyKd6d6FP9t/IbgDDyH2g$cjQoII37ystknXMpyKTRBy5rIaZLWiR1icGS7b/Vue3WJMyjrXLRLdekAIh7H2ZwzYTYCm09yc1uIsDZt.8eTQ";
-            public = false;
-            redirect_uris = [
-              "http://localhost:5000/signin-oidc"
-            ];
-            scopes = [ "openid" "profile" "email" "offline_access" ];
-            grant_types = [ "authorization_code" "refresh_token" ];
-            response_types = [ "code" ];
-            response_modes = [ "query" "form_post" ];
-            authorization_policy = "one_factor";
-            consent_mode = "implicit";
-            token_endpoint_auth_method = "client_secret_post";
-          }
-        ];
-      };
-
       access_control = {
         default_policy = "deny";
         rules = [

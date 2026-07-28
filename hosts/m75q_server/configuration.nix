@@ -15,6 +15,7 @@
     ./modules/ntfy
     ./modules/budgeteur
     ./modules/homepage
+    ./modules/lustre_todos
     ./modules/jellyfin
   ];
 

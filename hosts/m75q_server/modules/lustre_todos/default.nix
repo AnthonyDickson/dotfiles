@@ -6,7 +6,7 @@ let
   db_filename = "todos.sqlite3";
   docker_volume = "/var/lib/lustre_todos";
   client_id = "lustre-todos";
-  image_tag = "0.2.0";
+  image_tag = "0.2.1";
 in
 {
   sops.secrets.lustre-todos-env = {

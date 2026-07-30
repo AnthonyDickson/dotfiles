@@ -6,6 +6,7 @@ let
   db_filename = "todos.sqlite3";
   docker_volume = "/var/lib/lustre_todos";
   client_id = "lustre-todos";
+  image_tag = "0.2.0";
 in
 {
   sops.secrets.lustre-todos-env = {
@@ -18,7 +19,7 @@ in
 
     services.web = {
       service = {
-        image = "ghcr.io/anthonydickson/lustre-todos:0.1.0";
+        image = "ghcr.io/anthonydickson/lustre-todos:${image_tag}";
 
         environment = {
           Login__ReturnUrl= "https://${domain}";
@@ -26,6 +27,7 @@ in
           Oidc__ClientId= client_id;
           Oidc__CallbackPath= "/signin-oidc";
           ConnectionStrings__Default= "Data Source=/data/${db_filename}";
+          Logging__FilePath = "/data/logs.jsonl";
         };
 
         ports = [ "${toString port}:5000" ];

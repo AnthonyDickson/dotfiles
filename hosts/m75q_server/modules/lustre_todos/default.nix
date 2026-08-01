@@ -6,13 +6,18 @@ let
   db_filename = "todos.sqlite3";
   docker_volume = "/var/lib/lustre_todos";
   client_id = "lustre-todos";
-  image_tag = "0.2.1";
+  image_tag = "0.3.0";
 in
 {
   sops.secrets.lustre-todos-env = {
     # Expected to define the env var Oidc__ClientSecret
     sopsFile = ./secrets.env;
   };
+
+  # Needed for the bind mount to work for the image's non-root user
+  systemd.tmpfiles.rules = [
+    "d ${docker_volume} 0755 1000 1000 -"
+  ];
 
   virtualisation.arion.projects.lustre-todos.settings =  {
     project.name = "lustre-todos";
@@ -62,8 +67,8 @@ in
       out.service.deploy.resources.limits = {
           cpus = "1.0";
           memory = "256mb";
-        };
       };
+    };
   };
 
   services.caddy.virtualHosts."${domain}" = {

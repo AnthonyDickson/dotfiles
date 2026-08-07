@@ -4,7 +4,7 @@
 
   services.web = {
      service = {
-      image = "ghcr.io/anthonydickson/budgeteur:0.30.3";
+      image = "ghcr.io/anthonydickson/budgeteur:0.31.0";
 
       command = [
         "server"

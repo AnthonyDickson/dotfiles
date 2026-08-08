@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    budgeteur.url = "github:AnthonyDickson/budgeteur-rs/v0.30.3";
+    budgeteur.url = "github:AnthonyDickson/budgeteur-rs/v0.31.0";
 
     stylix.url = "github:danth/stylix";
 

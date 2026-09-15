@@ -14,7 +14,7 @@
     stylix.url = "github:danth/stylix";
 
     arion = {
-      url = "github:hercules-ci/arion";
+      url = "github:AnthonyDickson/arion";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,7 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
   outputs =
     {
       nixpkgs,

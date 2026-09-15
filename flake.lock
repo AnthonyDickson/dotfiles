@@ -9,15 +9,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1770259557,
-        "narHash": "sha256-EvZ09k9+mzXAngPzU2K7oLLUDlKoT1numb4bDb3Gtl4=",
-        "owner": "hercules-ci",
+        "lastModified": 1789457100,
+        "narHash": "sha256-BUlVM7k16QZIh74YIcaEBNGG5gjGO65wVqXgjbOp5G0=",
+        "owner": "AnthonyDickson",
         "repo": "arion",
-        "rev": "9b24cf65c72cb0e9616e437d55e1ac8e5c6bc715",
+        "rev": "1bfc128ccb7d76846cd995211b23dce596bb6858",
         "type": "github"
       },
       "original": {
-        "owner": "hercules-ci",
+        "owner": "AnthonyDickson",
         "repo": "arion",
         "type": "github"
       }

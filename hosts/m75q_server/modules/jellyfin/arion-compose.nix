@@ -3,7 +3,7 @@
 
   services.jellyfin = {
     service = {
-      image = "jellyfin/jellyfin:10.11.11";
+      image = "jellyfin/jellyfin:12.1.20260915-010956";
 
       ports = [ "8096:8096" ];
 

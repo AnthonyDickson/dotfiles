@@ -1,6 +1,7 @@
 # Server Setup
 
-NixOS server configuration for containerised applications using Arion and sops-nix.
+NixOS server configuration for containerised applications using Arion and
+sops-nix.
 
 ## Installation
 
@@ -40,11 +41,15 @@ NixOS server configuration for containerised applications using Arion and sops-n
   sudo tailscale login
   ```
 
-- Generate and register a [GitHub deploy key](https://github.com/AnthonyDickson/dotfiles/settings/keys/new) for the config repo.
-  Change the upstream URL to `git@github.com:AnthonyDickson/dotfiles.git`
+- Generate and register a
+  [GitHub deploy key](https://github.com/AnthonyDickson/dotfiles/settings/keys/new)
+  for the config repo. Change the upstream URL to
+  `git@github.com:AnthonyDickson/dotfiles.git`
 
 ## Related Docs
 
-- [Secret Management](./secrets.md) — managing encrypted secrets for containerised apps
+- [Secret Management](./secrets.md) — managing encrypted secrets for
+  containerised apps
 - [Docker Operations](./docker.md) — managing containerised applications
-- [Authelia](./authelia.md) — authentication, MFA enrollment, and user management
+- [Authelia](./authelia.md) — authentication, MFA enrollment, and user
+  management

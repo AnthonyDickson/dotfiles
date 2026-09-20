@@ -8,10 +8,11 @@ A systemd timer triggers a oneshot service each day. The service:
 
 1. **SQLite databases** — runs `.backup` (consistent snapshot, ~few MB each)
 2. **Config trees** — creates a hardlink tree (`cp -al`, zero extra disk usage)
-3. **Syncs to NAS** — `rsync --delete` mirrors the staging tree to `/mnt/backups/`
+3. **Syncs to NAS** — `rsync --delete` mirrors the staging tree to
+   `/mnt/backups/`
 
-See the `server-backup` service in `hosts/m75q_server/configuration.nix` for
-the current list of backed-up paths.
+See the `server-backup` service in `hosts/m75q_server/configuration.nix` for the
+current list of backed-up paths.
 
 The NAS exports `/volume1/server_backup` via NFSv4.1 (squashed to admin) and
 Hyper Backup snapshots the share on its own schedule, providing versioned

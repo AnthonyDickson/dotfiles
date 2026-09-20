@@ -1,6 +1,7 @@
 # Desktop Setup
 
-NixOS desktop configuration managed via flakes with Home Manager for user environment.
+NixOS desktop configuration managed via flakes with Home Manager for user
+environment.
 
 ## Installation (NixOS)
 

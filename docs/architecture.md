@@ -56,9 +56,9 @@ managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
 | `jellyfin.s.anthonyd.co.nz`  | Jellyfin  |
 
 Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
-certificates for `*.s.anthonyd.co.nz`. This means the server does not need
-ports 80/443 reachable from the internet — domain validation happens via DNS
-TXT records that Caddy creates through the Cloudflare API.
+certificates for `*.s.anthonyd.co.nz`. This means the server does not need ports
+80/443 reachable from the internet — domain validation happens via DNS TXT
+records that Caddy creates through the Cloudflare API.
 
 A scoped Cloudflare API token with DNS edit permission on `anthonyd.co.nz` is
 required. It lives in `modules/caddy/secrets.env` (encrypted with sops) and is
@@ -68,8 +68,8 @@ injected into Caddy's environment at boot.
 
 - Cloudflare account is active and the domain is delegated to Cloudflare
   nameservers
-- DNS records for the subdomains above exist (Caddy manages ACME records but
-  not the A/AAAA records)
+- DNS records for the subdomains above exist (Caddy manages ACME records but not
+  the A/AAAA records)
 - The API token has `Zone:DNS:Edit` permission on `anthonyd.co.nz`
 
 ### Synology NAS
@@ -81,9 +81,8 @@ A Synology NAS at **`192.168.0.10`** exports two NFSv4.1 shares:
 - **`/volume1/server_backup`** — backup staging area, mounted at `/mnt/backups`
   (see [Backups](backups.md))
 
-The `arion-jellyfin` systemd service has a hard dependency on
-`mnt-media.mount` — the container starts only after the NAS is reachable and
-the share is mounted.
+The `arion-jellyfin` systemd service has a hard dependency on `mnt-media.mount`
+— the container starts only after the NAS is reachable and the share is mounted.
 
 The `server-backup` systemd service has a soft dependency (`wants`) on
 `mnt-backups.mount` — it skips the backup run if the NAS isn't reachable.
@@ -105,8 +104,8 @@ account.
 - Both shares are accessible without authentication (network trust) — the NixOS
   config does not set up Kerberos, `sec=krb5`, or explicit NFS credentials
 - NFS squash is configured to map all access to admin for both shares
-- The directory layout under `/volume1/data/media` is what Jellyfin expects
-  (the NAS manages its own folder structure)
+- The directory layout under `/volume1/data/media` is what Jellyfin expects (the
+  NAS manages its own folder structure)
 - `/volume1/server_backup` has a quota configured (100 GB at time of writing)
 
 ### Tailscale

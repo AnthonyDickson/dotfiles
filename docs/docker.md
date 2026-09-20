@@ -2,7 +2,8 @@
 
 ## Adding a New Project
 
-Adding a new project spans three files. The steps below use `newapp` as an example.
+Adding a new project spans three files. The steps below use `newapp` as an
+example.
 
 ### 1. Create the arion compose config
 
@@ -23,7 +24,8 @@ Adding a new project spans three files. The steps below use `newapp` as an examp
 
 ### 2. Add the secret
 
-On your **local machine**, create and encrypt the secrets file (see [Secret Management](./secrets.md)):
+On your **local machine**, create and encrypt the secrets file (see
+[Secret Management](./secrets.md)):
 
 ```bash
 mkdir -p hosts/myserver/modules/newapp
@@ -56,11 +58,14 @@ virtualisation.arion.projects = {
 };
 ```
 
-The `secretPath` argument is necessary because the arion compose config does not have access to the NixOS `config` module — the path must be passed in explicitly from `docker.nix` where `config.sops` is in scope.
+The `secretPath` argument is necessary because the arion compose config does not
+have access to the NixOS `config` module — the path must be passed in explicitly
+from `docker.nix` where `config.sops` is in scope.
 
 ### 5. Commit, push, and rebuild
 
 On your **local machine**:
+
 ```bash
 git add .
 git commit -m "add newapp project"
@@ -68,6 +73,7 @@ git push
 ```
 
 On the **server**:
+
 ```bash
 git pull
 sudo nixos-rebuild switch --flake .#myserver
@@ -95,14 +101,17 @@ git pull && sudo nixos-rebuild switch --flake .#myserver
 
 ### Floating tag (e.g. `myapp:latest`)
 
-The image tag in the config hasn't changed, so nixos-rebuild won't pull a new image automatically. Pull it manually first on the **server**, then restart the service:
+The image tag in the config hasn't changed, so nixos-rebuild won't pull a new
+image automatically. Pull it manually first on the **server**, then restart the
+service:
 
 ```bash
 docker pull myorg/myapp:latest
 systemctl restart arion-myapp.service
 ```
 
-> Pinned tags are recommended for reproducibility — `latest` can change unexpectedly and makes rollbacks harder.
+> Pinned tags are recommended for reproducibility — `latest` can change
+> unexpectedly and makes rollbacks harder.
 
 ---
 

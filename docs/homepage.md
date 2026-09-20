@@ -8,19 +8,20 @@ Authelia using OpenID Connect.
 
 - **Caddy** reverse proxies the domain and enforces Authelia forward-auth
   (`import authelia`).
-- **Authelia** is the OIDC provider; Homepage is registered as the `homepage` client.
+- **Authelia** is the OIDC provider; Homepage is registered as the `homepage`
+  client.
 - **Homepage** v2 has its own login gate, so it also redirects to Authelia to
   establish its own session. The client uses PKCE with `one_factor`, which the
   existing Authelia session satisfies, so you only complete 2FA once.
 
 ## Configuration
 
-| File                              | Contents                                                                   |
-| --------------------------------- | -------------------------------------------------------------------------- |
-| `default.nix`                     | Arion project, Caddy vhost, Authelia access control rule and OIDC client    |
-| `arion-compose.nix`               | Container definition and `HOMEPAGE_*` OIDC environment variables            |
-| `homepage-config.nix`             | Dashboard settings, services, bookmarks and widgets                         |
-| `secrets.env`                     | Encrypted secrets (see below)                                               |
+| File                  | Contents                                                                 |
+| --------------------- | ------------------------------------------------------------------------ |
+| `default.nix`         | Arion project, Caddy vhost, Authelia access control rule and OIDC client |
+| `arion-compose.nix`   | Container definition and `HOMEPAGE_*` OIDC environment variables         |
+| `homepage-config.nix` | Dashboard settings, services, bookmarks and widgets                      |
+| `secrets.env`         | Encrypted secrets (see below)                                            |
 
 The OIDC callback registered with Authelia is
 `https://homepage.s.anthonyd.co.nz/api/auth/callback/homepage-oidc`.
@@ -29,10 +30,10 @@ The OIDC callback registered with Authelia is
 
 `secrets.env` defines:
 
-| Key                           | Purpose                                  |
-| ----------------------------- | ---------------------------------------- |
+| Key                           | Purpose                                     |
+| ----------------------------- | ------------------------------------------- |
 | `HOMEPAGE_AUTH_SECRET`        | Signs and encrypts Homepage session cookies |
-| `HOMEPAGE_OIDC_CLIENT_SECRET` | OIDC client secret shared with Authelia  |
+| `HOMEPAGE_OIDC_CLIENT_SECRET` | OIDC client secret shared with Authelia     |
 
 ### First-time setup
 
@@ -48,8 +49,8 @@ The OIDC callback registered with Authelia is
 2. Put the digest in `client_secret` in `default.nix`, replacing
    `REPLACE_WITH_CLIENT_SECRET_HASH`.
 
-3. Create the encrypted secrets file using the plaintext secret from step 1 and a
-   fresh auth secret (`nix run nixpkgs#openssl -- rand -hex 32`):
+3. Create the encrypted secrets file using the plaintext secret from step 1 and
+   a fresh auth secret (`nix run nixpkgs#openssl -- rand -hex 32`):
 
    ```shell
    SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt \
@@ -61,8 +62,8 @@ The OIDC callback registered with Authelia is
    HOMEPAGE_OIDC_CLIENT_SECRET=<plaintext secret from step 1>
    ```
 
-4. Commit and push, then on the server run
-   `git pull && sudo nixos-rebuild switch --flake .#m75q_server`.
+4. Commit and push, then on the server run `git pull && sudo nixos-rebuild
+   switch --flake .#m75q_server`.
 
 ### Rotating the client secret
 
@@ -71,8 +72,8 @@ Repeat step 1, then update both the digest in `default.nix` and
 
 ## Troubleshooting
 
-| Symptom                                   | Check                                                                       |
-| ----------------------------------------- | --------------------------------------------------------------------------- |
-| `invalid_client` returned by Authelia      | The digest in `client_secret` must match `HOMEPAGE_OIDC_CLIENT_SECRET`       |
-| Redirect loop at `/api/auth/callback/...`  | `HOMEPAGE_EXTERNAL_URL` must be the public HTTPS URL                         |
-| Configuration error on the sign-in page    | `HOMEPAGE_AUTH_SECRET` must be at least 32 characters                        |
+| Symptom                                   | Check                                                                  |
+| ----------------------------------------- | ---------------------------------------------------------------------- |
+| `invalid_client` returned by Authelia     | The digest in `client_secret` must match `HOMEPAGE_OIDC_CLIENT_SECRET` |
+| Redirect loop at `/api/auth/callback/...` | `HOMEPAGE_EXTERNAL_URL` must be the public HTTPS URL                   |
+| Configuration error on the sign-in page   | `HOMEPAGE_AUTH_SECRET` must be at least 32 characters                  |

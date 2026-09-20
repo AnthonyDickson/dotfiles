@@ -24,6 +24,7 @@ NixOS, Nix, and Home Manager configurations for my desktop and server.
 - [Secret Management](docs/secrets.md) — Managing encrypted secrets with sops-nix and age
 - [Docker Operations](docs/docker.md) — Adding projects, updating images, and operational commands for Arion
 - [Authelia](docs/authelia.md) — MFA enrollment, user management, SMTP setup, and troubleshooting
+- [Homepage](docs/homepage.md) — Dashboard configuration, OIDC login, and secret rotation
 
 ## Structure
 

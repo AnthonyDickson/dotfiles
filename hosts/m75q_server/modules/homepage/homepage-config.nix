@@ -87,7 +87,7 @@ let
     {
       Productivity = [
         { Vikunja = [ { icon = "sh-vikunja"; href = "https://vikunja.anthonyd.co.nz"; } ]; }
-        { Paperless = [ { icon = "sh-paperless-ngx"; href = "https://paperless.anthonyd.co.nz"; } ]; }
+        { Paperless = [ { icon = "sh-paperless-ngx"; href = "https://paperless.s.anthonyd.co.nz"; } ]; }
         { Forgejo = [ { icon = "sh-forgejo"; href = "https://forgejo.anthonyd.co.nz"; } ]; }
         { Vaultwarden = [ { icon = "sh-vaultwarden"; href = "https://vaultwarden.anthonyd.co.nz"; } ]; }
         { "Proton Mail" = [ { icon = "sh-proton-mail"; href = "https://mail.proton.me"; } ]; }

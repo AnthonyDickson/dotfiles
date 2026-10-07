@@ -17,6 +17,7 @@
     ./modules/homepage
     ./modules/lustre_todos
     ./modules/jellyfin
+    ./modules/paperless
   ];
 
   system.stateVersion = "26.05";

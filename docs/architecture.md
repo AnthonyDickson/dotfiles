@@ -27,6 +27,7 @@ none of which are managed by this NixOS configuration.
 │  Homepage ──────┤  Service dashboard
 │  Jellyfin ──────┤  Media server
 │  Budgeteur ─────┤  Personal budgeting
+│  Paperless ─────┤  Document management
 │  dnsmasq ───────┤  Local DNS forwarder
 │  unbound ───────┤  Recursive resolver
 └────────┬────────┘
@@ -54,6 +55,7 @@ managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
 | `budgeteur.s.anthonyd.co.nz` | Budgeteur |
 | `homepage.s.anthonyd.co.nz`  | Homepage  |
 | `jellyfin.s.anthonyd.co.nz`  | Jellyfin  |
+| `paperless.s.anthonyd.co.nz` | Paperless |
 
 Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
 certificates for `*.s.anthonyd.co.nz`. This means the server does not need ports
@@ -183,7 +185,7 @@ the DNS resolver, or clients must configure it manually.
 | 443  | TCP+UDP  | Caddy   | HTTPS termination   |
 
 All other ports (Authelia :9091, Budgeteur :8080, Homepage :3000, Jellyfin
-:8096, unbound :5353) are internal and blocked by the firewall.
+:8096, Paperless :8777, unbound :5353) are internal and blocked by the firewall.
 
 ## Secret Management
 

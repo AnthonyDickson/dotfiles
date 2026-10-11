@@ -1,7 +1,7 @@
 {pkgs, ...}:
 {
   environment.systemPackages = with pkgs; [
-    libreoffice-still
+    libreoffice-stable
     hunspell
     hunspellDicts.en-au
   ];

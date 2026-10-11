@@ -37,6 +37,8 @@ Run `dprint fmt **/*.md` to format all markdown files
   and troubleshooting
 - [Homepage](docs/homepage.md) — Dashboard configuration, OIDC login, and secret
   rotation
+- [Forgejo](docs/forgejo.md) — Git hosting, Authelia SSO setup, SSH and HTTPS
+  access, and backups
 
 ## Structure
 

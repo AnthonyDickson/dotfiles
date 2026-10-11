@@ -28,6 +28,7 @@ none of which are managed by this NixOS configuration.
 │  Jellyfin ──────┤  Media server
 │  Budgeteur ─────┤  Personal budgeting
 │  Paperless ─────┤  Document management
+│  Forgejo ───────┤  Git hosting
 │  dnsmasq ───────┤  Local DNS forwarder
 │  unbound ───────┤  Recursive resolver
 └────────┬────────┘
@@ -53,6 +54,7 @@ managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
 | ---------------------------- | --------- |
 | `auth.s.anthonyd.co.nz`      | Authelia  |
 | `budgeteur.s.anthonyd.co.nz` | Budgeteur |
+| `git.s.anthonyd.co.nz`       | Forgejo   |
 | `homepage.s.anthonyd.co.nz`  | Homepage  |
 | `jellyfin.s.anthonyd.co.nz`  | Jellyfin  |
 | `paperless.s.anthonyd.co.nz` | Paperless |
@@ -183,9 +185,11 @@ the DNS resolver, or clients must configure it manually.
 | 53   | TCP+UDP  | dnsmasq | Local DNS           |
 | 80   | TCP+UDP  | Caddy   | HTTP→HTTPS redirect |
 | 443  | TCP+UDP  | Caddy   | HTTPS termination   |
+| 2222 | TCP      | Forgejo | Git over SSH        |
 
 All other ports (Authelia :9091, Budgeteur :8080, Homepage :3000, Jellyfin
-:8096, Paperless :8777, unbound :5353) are internal and blocked by the firewall.
+:8096, Paperless :8777, Forgejo :3030, unbound :5353) are internal and blocked
+by the firewall.
 
 ## Secret Management
 

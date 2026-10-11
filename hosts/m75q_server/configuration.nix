@@ -18,6 +18,7 @@
     ./modules/lustre_todos
     ./modules/jellyfin
     ./modules/paperless
+    ./modules/forgejo
   ];
 
   system.stateVersion = "26.05";

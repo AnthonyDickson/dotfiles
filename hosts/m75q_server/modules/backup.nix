@@ -48,7 +48,10 @@ in
         options = {
           name = lib.mkOption {
             type = lib.types.str;
-            description = "Subdirectory name in the backup staging area.";
+            description = ''
+              Subdirectory in the backup staging area. May be nested (e.g.
+              `paperless/data`) so the backup mirrors the source's layout.
+            '';
           };
           source = lib.mkOption {
             type = lib.types.str;

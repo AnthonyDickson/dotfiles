@@ -53,12 +53,12 @@ in
   # Backup — documents (media) and the SQLite database (data)
   services.backup.paths = [
     {
-      name = "paperless-media";
+      name = "paperless/media";
       source = "/var/lib/paperless/media";
       method = "copy-dir";
     }
     {
-      name = "paperless-data";
+      name = "paperless/data";
       source = "/var/lib/paperless/data/db.sqlite3";
       method = "sqlite-dump";
     }

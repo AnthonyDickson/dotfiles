@@ -48,7 +48,8 @@ Paperless stores its state under `/var/lib/paperless` (created at boot by
 | `/var/lib/paperless/redis`   | `/data`                      | no        |
 
 Drop files into `/var/lib/paperless/consume` to have them ingested. Backups dump
-`data/db.sqlite3` and hardlink `media/` (see [Backups](./backups.md)).
+`data/db.sqlite3` and hardlink `media/` into `/mnt/backups/paperless/`, keeping
+the same layout (see [Backups](./backups.md)).
 
 ## Secrets
 

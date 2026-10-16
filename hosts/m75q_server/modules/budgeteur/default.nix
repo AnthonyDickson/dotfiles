@@ -99,13 +99,6 @@ in
       source = "${docker_volume}/${db_filename}";
       method = "sqlite-dump";
     }
-    # The retired Rust app's database. The backup mirrors staging to the NAS
-    # with --delete, so dropping this entry deletes its last dump there.
-    {
-      name = "budgeteur";
-      source = "/var/lib/budgeteur/budgeteur.db";
-      method = "sqlite-dump";
-    }
   ];
 
   services.authelia.instances.main.settings = {

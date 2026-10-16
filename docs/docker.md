@@ -48,7 +48,7 @@ secrets.newapp-env = {
 
 ```nix
 virtualisation.arion.projects = {
-  budgeteur.settings.imports = [ ... ]; # existing
+  budgeteur.settings = { ... }; # existing
 
   newapp.settings.imports = [
     (import ./arion-compose.nix {
@@ -136,7 +136,7 @@ docker ps
 journalctl -u arion-budgeteur.service -f
 
 # Via docker (per container)
-docker logs budgeteur-rs-web-1 -f
+docker logs budgeteur-fs-web-1 -f
 ```
 
 ### Starting and stopping

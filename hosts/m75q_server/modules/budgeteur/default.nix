@@ -6,7 +6,7 @@ let
   db_filename = "budgeteur.sqlite3";
   docker_volume = "/var/lib/budgeteur-fs";
   client_id = "budgeteur-fs";
-  image_tag = "1.0.0-rc1";
+  image_tag = "1.0.0-rc2";
   # PBKDF2 digest of the OIDC client secret, from
   # `authelia crypto hash generate pbkdf2 --random`. The plaintext goes in
   # secrets.env as Oidc__ClientSecret.
@@ -43,6 +43,9 @@ in
           Oidc__Authority = "https://auth.s.anthonyd.co.nz";
           Oidc__ClientId = client_id;
           Oidc__CallbackPath = "/signin-oidc";
+          # Authelia does not support RP-initiated logout; its logout page ends
+          # the provider session, then follows rd back to the signed out page.
+          Oidc__LogoutUrl = "https://auth.s.anthonyd.co.nz/logout?rd=https://${domain}/signed-out";
           ConnectionStrings__Default = "Data Source=/data/${db_filename}";
           Logging__FilePath = "/data/logs/app.log";
           DataProtection__KeysPath = "/data/keys";

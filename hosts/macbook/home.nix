@@ -54,9 +54,12 @@
           src = pkgs.fishPlugins.fzf-fish.src;
         }
       ];
-      # Nix's PATH setup lives in /etc/zshrc, which fish doesn't read.
       loginShellInit = ''
+        # Nix's PATH setup lives in /etc/zshrc, which fish doesn't read.
         fish_add_path --prepend --move /nix/var/nix/profiles/default/bin $HOME/.nix-profile/bin
+        # The login shell is still zsh, so point tools that read $SHELL
+        # (e.g. zellij) at fish.
+        set -gx SHELL ${pkgs.fish}/bin/fish
       '';
     };
 

@@ -78,7 +78,7 @@
       enableDefaultConfig = false;
       settings = {
         "server" = {
-          hostname = "192.168.0.20";
+          hostname = "100.111.59.85";
           port = 22;
           user = "anthonyd";
           identityFile = "~/.ssh/nixos_server";

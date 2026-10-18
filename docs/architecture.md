@@ -15,7 +15,7 @@ none of which are managed by this NixOS configuration.
          │
   ┌──────┴──────┐
   │  Tailscale  │  VPN for remote access
-  │  (external) │  Advertises 192.168.0.0/24
+  │  (external) │  Server at 100.111.59.85
   └──────┬──────┘
          │
 ┌────────┴────────┐
@@ -119,14 +119,19 @@ account.
 ### Tailscale
 
 The server joins a Tailscale tailnet for remote SSH and HTTPS access when off
-the local network. It advertises the **`192.168.0.0/24`** subnet route so
-connected clients can reach the NAS and other local devices.
+the local network. Its Tailscale IP is **`100.111.59.85`**, and the public
+Cloudflare records for `*.s.anthonyd.co.nz` point there, so tailnet clients
+reach services directly. On the local network, dnsmasq answers with the LAN IP
+instead.
+
+It does **not** advertise a subnet route: `192.168.0.0/24` is a common home
+range and would clash with other networks. To reach other local devices
+remotely (e.g. the router), hop through the server with SSH (`ssh -L`, `ssh -D`
+or `ssh -J`).
 
 **Assumptions**:
 
 - A Tailscale account (free tier is sufficient) with the server node approved
-- The advertised subnet route `192.168.0.0/24` is approved in the Tailscale
-  admin console
 - Tailscale's MagicDNS is disabled on the server (`--accept-dns=false`) because
   local resolution is handled by dnsmasq/unbound — the server does not want
   Tailscale overriding its DNS
@@ -182,7 +187,11 @@ Subdomain:   s.anthonyd.co.nz (services)
 
 The server runs dnsmasq so local clients can resolve these domains to the NAS
 and server without public DNS — the router's DHCP should hand out the server as
-the DNS resolver, or clients must configure it manually.
+the DNS resolver, or clients must configure it manually. Hand out **only** the
+server: macOS queries all listed resolvers in parallel, so a public secondary
+(e.g. `1.1.1.1`) can win and return the Tailscale IP, which is unreachable
+without Tailscale. If the server is down for a while, temporarily add `1.1.1.1`
+in the router and remove it afterwards.
 
 | Port | Protocol | Service | Purpose             |
 | ---- | -------- | ------- | ------------------- |

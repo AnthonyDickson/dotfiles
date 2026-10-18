@@ -1,5 +1,5 @@
 {
-  description = "My NixOS system configurations";
+  description = "My NixOS and Home Manager configurations";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -69,6 +69,25 @@
             ./hosts/m75q_server/configuration.nix
             arion.nixosModules.arion
             sops-nix.nixosModules.sops
+          ];
+        };
+      };
+
+      # Build MacBook (standalone Home Manager) flake using:
+      # $ home-manager build --flake .#anthony@macbook
+      homeConfigurations = {
+        "${username}@macbook" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            # Same as modules/system/unfree.nix on NixOS.
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            username = username;
+          };
+          modules = [
+            ./hosts/macbook/home.nix
+            stylix.homeModules.stylix
           ];
         };
       };

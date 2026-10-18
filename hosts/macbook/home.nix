@@ -26,6 +26,12 @@
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # Spotlight doesn't index symlinked apps, so copy them instead.
+  targets.darwin = {
+    copyApps.enable = true;
+    linkApps.enable = false;
+  };
+
   # Same scheme as modules/system/stylix on NixOS.
   stylix = {
     enable = true;

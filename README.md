@@ -1,6 +1,6 @@
 # Dotfiles
 
-NixOS, Nix, and Home Manager configurations for my desktop and server.
+NixOS, Nix, and Home Manager configurations for my desktop, server, and MacBook.
 
 ## Hosts
 
@@ -8,6 +8,7 @@ NixOS, Nix, and Home Manager configurations for my desktop and server.
 | ------------- | ------- | ---------------------------- |
 | `m75q`        | Desktop | Daily driver with Cosmic DE  |
 | `m75q_server` | Server  | Containerised apps via Arion |
+| `macbook`     | Laptop  | Standalone Home Manager      |
 
 ## Quick Start
 
@@ -17,12 +18,17 @@ migration.
 **Server**: See [Server Setup](docs/server.md) for installation and
 post-install.
 
+**MacBook**: See [MacBook Setup](docs/macbook.md) for installation and macOS
+settings.
+
 Run `dprint fmt **/*.md` to format all markdown files
 
 ## Guides
 
 - [Desktop Setup](docs/desktop.md) — NixOS desktop installation, post-install
   steps, and migration from another install
+- [MacBook Setup](docs/macbook.md) — Standalone Home Manager on macOS and
+  one-time macOS settings
 - [Server Architecture](docs/architecture.md) — High-level server design,
   external dependencies, and networking
 - [Server Setup](docs/server.md) — NixOS server installation, Tailscale, and

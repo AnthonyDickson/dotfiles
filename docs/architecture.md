@@ -30,6 +30,7 @@ none of which are managed by this NixOS configuration.
 │  Paperless ─────┤  Document management
 │  Forgejo ───────┤  Git hosting
 │  Vikunja ───────┤  Task management
+│  Vaultwarden ───┤  Password manager
 │  dnsmasq ───────┤  Local DNS forwarder
 │  unbound ───────┤  Recursive resolver
 └────────┬────────┘
@@ -51,15 +52,16 @@ these move, change IP, or are decommissioned, this server config breaks.
 The domain **`anthonyd.co.nz`** is registered with Cloudflare and its DNS is
 managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
 
-| Hostname                     | Backend   |
-| ---------------------------- | --------- |
-| `auth.s.anthonyd.co.nz`      | Authelia  |
-| `budgeteur.s.anthonyd.co.nz` | Budgeteur |
-| `git.s.anthonyd.co.nz`       | Forgejo   |
-| `homepage.s.anthonyd.co.nz`  | Homepage  |
-| `jellyfin.s.anthonyd.co.nz`  | Jellyfin  |
-| `paperless.s.anthonyd.co.nz` | Paperless |
-| `vikunja.s.anthonyd.co.nz`   | Vikunja   |
+| Hostname                       | Backend     |
+| ------------------------------ | ----------- |
+| `auth.s.anthonyd.co.nz`        | Authelia    |
+| `budgeteur.s.anthonyd.co.nz`   | Budgeteur   |
+| `git.s.anthonyd.co.nz`         | Forgejo     |
+| `homepage.s.anthonyd.co.nz`    | Homepage    |
+| `jellyfin.s.anthonyd.co.nz`    | Jellyfin    |
+| `paperless.s.anthonyd.co.nz`   | Paperless   |
+| `vaultwarden.s.anthonyd.co.nz` | Vaultwarden |
+| `vikunja.s.anthonyd.co.nz`     | Vikunja     |
 
 Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
 certificates for `*.s.anthonyd.co.nz`. This means the server does not need ports
@@ -191,8 +193,8 @@ the DNS resolver, or clients must configure it manually.
 | 2222 | TCP      | Forgejo | Git over SSH        |
 
 All other ports (Authelia :9091, Budgeteur :8080, Homepage :3000, Jellyfin
-:8096, Paperless :8777, Forgejo :3030, Vikunja :3456, unbound :5353) are
-internal and blocked by the firewall.
+:8096, Paperless :8777, Forgejo :3030, Vikunja :3456, Vaultwarden :8222, unbound
+:5353) are internal and blocked by the firewall.
 
 ## Secret Management
 

@@ -19,6 +19,7 @@
     ./modules/jellyfin
     ./modules/paperless
     ./modules/forgejo
+    ./modules/vaultwarden
     ./modules/vikunja
   ];
 

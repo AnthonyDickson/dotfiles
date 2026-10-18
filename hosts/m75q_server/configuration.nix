@@ -19,6 +19,7 @@
     ./modules/jellyfin
     ./modules/paperless
     ./modules/forgejo
+    ./modules/vikunja
   ];
 
   system.stateVersion = "26.05";

@@ -29,6 +29,7 @@ none of which are managed by this NixOS configuration.
 │  Budgeteur ─────┤  Personal budgeting
 │  Paperless ─────┤  Document management
 │  Forgejo ───────┤  Git hosting
+│  Vikunja ───────┤  Task management
 │  dnsmasq ───────┤  Local DNS forwarder
 │  unbound ───────┤  Recursive resolver
 └────────┬────────┘
@@ -58,6 +59,7 @@ managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
 | `homepage.s.anthonyd.co.nz`  | Homepage  |
 | `jellyfin.s.anthonyd.co.nz`  | Jellyfin  |
 | `paperless.s.anthonyd.co.nz` | Paperless |
+| `vikunja.s.anthonyd.co.nz`   | Vikunja   |
 
 Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
 certificates for `*.s.anthonyd.co.nz`. This means the server does not need ports
@@ -145,7 +147,8 @@ the server to `git pull` config updates without an interactive login.
 ### Container Registries
 
 Public images are pulled from `ghcr.io` (Budgeteur, Homepage) and Docker Hub
-(Jellyfin) at `nixos-rebuild` time. No registry credentials are needed.
+(Jellyfin, Vikunja) at `nixos-rebuild` time. No registry credentials are
+needed.
 
 **Assumptions**:
 
@@ -188,8 +191,8 @@ the DNS resolver, or clients must configure it manually.
 | 2222 | TCP      | Forgejo | Git over SSH        |
 
 All other ports (Authelia :9091, Budgeteur :8080, Homepage :3000, Jellyfin
-:8096, Paperless :8777, Forgejo :3030, unbound :5353) are internal and blocked
-by the firewall.
+:8096, Paperless :8777, Forgejo :3030, Vikunja :3456, unbound :5353) are
+internal and blocked by the firewall.
 
 ## Secret Management
 

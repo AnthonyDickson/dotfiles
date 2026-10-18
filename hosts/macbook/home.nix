@@ -31,6 +31,8 @@
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";
+    # Use Ghostty's default font like on NixOS, which has ligatures.
+    targets.ghostty.fonts.enable = false;
   };
 
   programs = {

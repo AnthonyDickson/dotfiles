@@ -2,13 +2,6 @@
 
 Things to work on for the server config
 
-## Migration from NAS
-
-- Vikunja?
-- Vaultwarden?
-- Media management (e.g., Sonarr) will stay on the NAS due to the size of my
-  library
-
 ## Monitoring
 
 - [ ] Host-level monitoring

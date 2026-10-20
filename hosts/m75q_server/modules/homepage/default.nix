@@ -12,6 +12,13 @@ in
 
   services.homepage-config.enable = true;
 
+  systemd.tmpfiles.rules = [
+    # Holds the Docker socket proxy's filtered socket (nobody:docker)
+    "d /run/homepage-docker 0750 65534 131 -"
+    # Empty mount point for the disk usage widget
+    "d /var/lib/homepage/rootfs 0755 root root -"
+  ];
+
   # Expected to define HOMEPAGE_AUTH_SECRET and HOMEPAGE_OIDC_CLIENT_SECRET
   sops.secrets.homepage-env = {
     sopsFile = ./secrets.env;

@@ -155,7 +155,7 @@ let
   ];
 
   homepageDocker = {
-    local.socket = "/var/run/docker.sock";
+    local.socket = "/run/docker-proxy/docker.sock";
   };
 
   # Write config directory

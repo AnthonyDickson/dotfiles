@@ -8,7 +8,6 @@
     ./hardware-configuration.nix
     ./../../modules/system/audio.nix
     ./../../modules/system/bootloader.nix
-    ./../../modules/system/cachix.nix
     ./../../modules/system/docker.nix
     ./../../modules/system/fish.nix
     ./../../modules/system/keymap.nix

@@ -39,7 +39,7 @@
         USERMAP_GID = "100";
 
         PAPERLESS_ADMIN_USER = "anthony";
-        PAPERLESS_ADMIN_MAIL = "admin@anthond.co.nz";
+        PAPERLESS_ADMIN_MAIL = "admin@anthonyd.co.nz";
 
         PAPERLESS_REDIS = "redis://paperless-redis:6379";
         PAPERLESS_TIKA_ENABLED = "1";

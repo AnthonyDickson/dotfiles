@@ -9,7 +9,7 @@
       container_name = "forgejo";
 
       ports = [
-        "${toString port}:3000"
+        "127.0.0.1:${toString port}:3000"
         "${toString sshPort}:2222"
       ];
 

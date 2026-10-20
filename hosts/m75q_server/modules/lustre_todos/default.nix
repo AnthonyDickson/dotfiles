@@ -35,7 +35,7 @@ in
           Logging__FilePath = "/data/logs.jsonl";
         };
 
-        ports = [ "${toString port}:5000" ];
+        ports = [ "127.0.0.1:${toString port}:5000" ];
 
         # Expected to define the env var Oidc__ClientSecret
         env_file = [ config.sops.secrets.lustre-todos-env.path ];

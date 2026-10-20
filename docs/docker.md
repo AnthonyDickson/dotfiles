@@ -15,7 +15,7 @@ example.
 
   services.web.service = {
     image = "myorg/newapp:latest";
-    ports = [ "8081:8081" ];
+    ports = [ "127.0.0.1:8081:8081" ]; # loopback only: Docker bypasses the firewall
     env_file = [ secretPath ];
     restart = "unless-stopped";
   };

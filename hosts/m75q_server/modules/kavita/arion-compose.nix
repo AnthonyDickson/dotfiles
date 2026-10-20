@@ -5,7 +5,7 @@
     service = {
       image = "linuxserver/kavita:v0.9.1.4-ls128";
 
-      ports = [ "5000:5000" ];
+      ports = [ "127.0.0.1:5000:5000" ];
 
       environment = {
         PUID = "1000";

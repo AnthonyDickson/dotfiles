@@ -5,7 +5,7 @@
     service = {
       image = "jellyfin/jellyfin:12.1.20260915-010956";
 
-      ports = [ "8096:8096" ];
+      ports = [ "127.0.0.1:8096:8096" ];
 
       environment = {
         TZ = "Pacific/Auckland";

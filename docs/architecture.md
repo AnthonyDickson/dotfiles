@@ -202,8 +202,10 @@ in the router and remove it afterwards.
 | 2222 | TCP      | Forgejo | Git over SSH        |
 
 All other ports (Authelia :9091, Budgeteur :8080, Homepage :3000, Jellyfin
-:8096, Paperless :8777, Forgejo :3030, Vikunja :3456, Vaultwarden :8222, unbound
-:5353) are internal and blocked by the firewall.
+:8096, Kavita :5000, Lustre Todos :8088, Paperless :8777, Forgejo :3030, Vikunja
+:3456, Vaultwarden :8222, unbound :5353) are internal and blocked by the
+firewall. Docker writes its own iptables rules that bypass the NixOS firewall,
+so container ports are published on `127.0.0.1` only.
 
 ## Secret Management
 

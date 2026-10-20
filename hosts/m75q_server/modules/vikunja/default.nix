@@ -46,7 +46,7 @@ in
           VIKUNJA_MAILER_ENABLED = "false";
         };
 
-        ports = [ "${toString port}:3456" ];
+        ports = [ "127.0.0.1:${toString port}:3456" ];
 
         # Expected to define VIKUNJA_SERVICE_SECRET and
         # VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_CLIENTSECRET

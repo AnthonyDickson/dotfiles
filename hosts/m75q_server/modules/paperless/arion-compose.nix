@@ -23,7 +23,7 @@
     service = {
       image = "ghcr.io/paperless-ngx/paperless-ngx:2.20.15";
 
-      ports = [ "8777:8000" ];
+      ports = [ "127.0.0.1:8777:8000" ];
 
       depends_on = [
         "broker"

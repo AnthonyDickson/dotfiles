@@ -75,9 +75,9 @@ let
   homepageBookmarks = [
     {
       Productivity = [
-        { Vikunja = [ { icon = "sh-vikunja"; href = "https://vikunja.anthonyd.co.nz"; } ]; }
+        { Vikunja = [ { icon = "sh-vikunja"; href = "https://vikunja.s.anthonyd.co.nz"; } ]; }
         { Paperless = [ { icon = "sh-paperless-ngx"; href = "https://paperless.s.anthonyd.co.nz"; } ]; }
-        { Forgejo = [ { icon = "sh-forgejo"; href = "https://forgejo.anthonyd.co.nz"; } ]; }
+        { Forgejo = [ { icon = "sh-forgejo"; href = "https://git.s.anthonyd.co.nz"; } ]; }
         { Vaultwarden = [ { icon = "sh-vaultwarden"; href = "https://vaultwarden.s.anthonyd.co.nz"; } ]; }
         { "Proton Mail" = [ { icon = "sh-proton-mail"; href = "https://mail.proton.me"; } ]; }
       ];

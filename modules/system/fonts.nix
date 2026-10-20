@@ -14,7 +14,7 @@
       defaultFonts= {
         serif = [ "Noto Serif" "Noto Serif CJK JP" "Noto Serif CJK SC" "Noto Serif CJK TC" "Noto Serif CJK KR" "FiraCode Nerd Font Propo"];
         sansSerif = [ "Noto Sans" "Noto Sans CJK JP" "Noto Sans CJK SC" "Noto Sans CJK TC" "Noto Sans CJK KR" "FiraCode Nerd Font Propo"];
-        monospace = [ "Noto Mono" "Noto Mono CJK JP" "Noto Mono CJK SC" "Noto Mono CJK TC" "Noto Mono CJK KR" "FiraCode Nerd Font Mono"];
+        monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" "Noto Sans Mono CJK SC" "Noto Sans Mono CJK TC" "Noto Sans Mono CJK KR" "FiraCode Nerd Font Mono"];
         emoji = ["Noto Color Emoji"];
       };
     };

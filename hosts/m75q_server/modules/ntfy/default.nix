@@ -13,6 +13,15 @@ in
     owner = "ntfy-sh";
   };
 
+  # bcrypt hash for the read-only `reader` user that clients subscribe with,
+  # from `ntfy user hash`
+  sops.secrets.ntfy-reader-pass-hash = {
+    sopsFile = ./secrets.yaml;
+    format = "yaml";
+    key = "ntfy-reader-pass-hash";
+    owner = "ntfy-sh";
+  };
+
   sops.secrets.ntfy-token = {
     sopsFile = ./secrets.yaml;
     format = "yaml";
@@ -29,7 +38,8 @@ in
       # https://docs.ntfy.sh/known-issues/#ios-app-not-receiving-notifications-anymore
       upstream-base-url = "https://ntfy.sh";
       behind-proxy = true;
-      auth-default-access = "read-only";
+      # Topics carry backup logs and the container list, so clients sign in
+      auth-default-access = "deny-all";
     };
   };
 
@@ -44,7 +54,8 @@ in
     let
       cfg = config.services.ntfy-sh;
       startScript = pkgs.writeShellScript "ntfy-start" ''
-        export NTFY_AUTH_USERS="server:$(cat ${config.sops.secrets.ntfy-pass-hash.path}):admin"
+        export NTFY_AUTH_USERS="server:$(cat ${config.sops.secrets.ntfy-pass-hash.path}):admin,reader:$(cat ${config.sops.secrets.ntfy-reader-pass-hash.path}):user"
+        export NTFY_AUTH_ACCESS="reader:*:ro"
         export NTFY_AUTH_TOKENS="server:$(cat ${config.sops.secrets.ntfy-token.path}):publish"
         exec ${cfg.package}/bin/ntfy serve "$@"
       '';

@@ -17,6 +17,7 @@
     ./modules/homepage
     ./modules/lustre_todos
     ./modules/jellyfin
+    ./modules/kavita
     ./modules/paperless
     ./modules/forgejo
     ./modules/vaultwarden

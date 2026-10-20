@@ -45,6 +45,7 @@ Run `dprint fmt **/*.md` to format all markdown files
   rotation
 - [Forgejo](docs/forgejo.md) — Git hosting, Authelia SSO setup, SSH and HTTPS
   access, and backups
+- [Kavita](docs/kavita.md) — E-book server, adding books, and library scans
 
 ## Structure
 

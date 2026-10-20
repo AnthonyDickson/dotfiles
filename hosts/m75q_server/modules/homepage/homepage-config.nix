@@ -24,17 +24,6 @@ let
 
   homepageServices = [
     {
-      Media = [
-        {
-          Kavita = {
-            icon = "sh-kavita";
-            href = "https://kavita.anthonyd.co.nz";
-            description = "E-book and comic server";
-          };
-        }
-      ];
-    }
-    {
       "Media Management" = [
         {
           Sonarr = {

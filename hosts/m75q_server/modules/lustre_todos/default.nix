@@ -117,7 +117,7 @@ in
           "query"
           "form_post"
         ];
-        authorization_policy = "one_factor";
+        authorization_policy = "two_factor";
         consent_mode = "implicit";
         token_endpoint_auth_method = "client_secret_post";
       }

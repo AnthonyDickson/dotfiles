@@ -50,7 +50,10 @@ let
     LOGFILE="$LOGDIR/$(date +%Y-%m-%d_%H-%M-%S).log"
 
     echo "Syncing to NAS (log: $LOGFILE)..."
-    ${pkgs.rsync}/bin/rsync -rltD --chmod=D755,F644 --delete --stats \
+    # Owner and group only: the backups hold keys and databases. The NAS squashes
+    # root to a user in group users, which the admin account is also in. -p so
+    # the modes also apply to files already on the NAS.
+    ${pkgs.rsync}/bin/rsync -rltpD --chmod=D750,F640 --delete --stats \
       "$STAGING"/ "$NAS"/ > "$LOGFILE" 2>&1
 
     echo "Backup complete"
@@ -97,7 +100,7 @@ in
 
   config = lib.mkIf (cfg.paths != []) {
     systemd.tmpfiles.rules = [
-      "d /var/backup 0755 root root -"
+      "d /var/backup 0700 root root -"
       "d /var/log/backups 0755 root root -"
     ];
 

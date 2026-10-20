@@ -108,8 +108,12 @@ in
 
       UPTIME=$(awk '{print int($1)}' /proc/uptime)
 
-      # Snapshot every container's name and status line, sorted for stable comparison
-      CURRENT=$(docker ps -a --format '{{.Names}} {{.Status}}' 2>/dev/null | sort || true)
+      # Snapshot every container's name, state and health, sorted for stable
+      # comparison. Not `docker ps` Status, which includes the uptime and so
+      # changes as time passes.
+      CURRENT=$(docker ps -aq 2>/dev/null \
+        | xargs -r docker inspect -f '{{slice .Name 1}} {{.State.Status}}{{if .State.Health}} ({{.State.Health.Status}}){{end}}' 2>/dev/null \
+        | sort || true)
       # Docker daemon isn't running — nothing to monitor
       if [ -z "$CURRENT" ] && ! systemctl -q is-active docker.service; then
         exit 0

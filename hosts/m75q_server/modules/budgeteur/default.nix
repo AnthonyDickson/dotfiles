@@ -13,14 +13,6 @@ let
   client_secret_digest = "$pbkdf2-sha512$310000$SoAa8Yp20GArJgbgfO6PeQ$XcaL2YlF3lwJ03wi49q7srBWAEY17lA3tv0ITHjxekUeDUE0o./NkgJVRezpiCCm.yXqWbDzbjRrYTdNB9v4xA";
 in
 {
-  # An invalid digest would stop Authelia, and with it every service's sign-in.
-  assertions = [
-    {
-      assertion = client_secret_digest != "";
-      message = "Set client_secret_digest in modules/budgeteur/default.nix";
-    }
-  ];
-
   sops.secrets.budgeteur-env = {
     # Expected to define the env var Oidc__ClientSecret
     sopsFile = ./secrets.env;

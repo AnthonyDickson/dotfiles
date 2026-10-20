@@ -23,12 +23,22 @@ in
     '';
   };
 
-  # Backup — hardlink config directory contents
-  services.backup.paths = [{
-    name = "jellyfin";
-    source = "/var/lib/jellyfin/config";
-    method = "copy-dir";
-  }];
+  # Backup — hardlink config directory contents, plus a consistent dump of the
+  # database, which the copy only picks up live. The dump stays out of
+  # `jellyfin/`: writing it over the hardlinked copy would write to the live
+  # database.
+  services.backup.paths = [
+    {
+      name = "jellyfin";
+      source = "/var/lib/jellyfin/config";
+      method = "copy-dir";
+    }
+    {
+      name = "jellyfin-db";
+      source = "/var/lib/jellyfin/config/data/jellyfin.db";
+      method = "sqlite-dump";
+    }
+  ];
 
   # Ensure Jellyfin only starts after the NFS media mount is available
   systemd.services.arion-jellyfin = {

@@ -3,16 +3,31 @@
 let
   cfg = config.services.backup;
 
-  backupCmd = { name, source, method }: ''
-    echo "Backing up ${name}..."
-    mkdir -p "$STAGING/${name}"
-  ''
-  + (if method == "sqlite-dump" then ''
-    ${pkgs.sqlite}/bin/sqlite3 ${source} \
-      ".backup $STAGING/${name}/$(basename ${source})"
-  '' else ''
-    cp -al ${source}/* "$STAGING/${name}/" || true
-  '');
+  # A missing source fails the backup (sqlite3 would otherwise create an empty
+  # database) unless the path is marked optional.
+  backupCmd = { name, source, method, optional }:
+    let
+      onMissing =
+        if optional then
+          ''echo "Skipping ${name}: ${source} does not exist"''
+        else
+          ''echo "Backup source ${source} for ${name} does not exist" >&2; exit 1'';
+      # `/.` copies the directory's contents, including dotfiles
+      copy =
+        if method == "sqlite-dump" then
+          ''${pkgs.sqlite}/bin/sqlite3 ${source} ".backup $STAGING/${name}/$(basename ${source})"''
+        else
+          ''cp -al ${source}/. "$STAGING/${name}/"'';
+    in
+    ''
+      echo "Backing up ${name}..."
+      if [ ! -e ${source} ]; then
+        ${onMissing}
+      else
+        mkdir -p "$STAGING/${name}"
+        ${copy}
+      fi
+    '';
 
   backupScript = pkgs.writeShellScriptBin "server-backup" ''
     set -euo pipefail
@@ -63,6 +78,14 @@ in
               Backup method:
               `sqlite-dump` — runs `sqlite3 .backup` (safe export).
               `copy-dir` — hardlinks directory contents with `cp -al`.
+            '';
+          };
+          optional = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = ''
+              Skip the path when it does not exist instead of failing the
+              backup, for directories an app only creates once it needs them.
             '';
           };
         };

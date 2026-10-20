@@ -96,6 +96,8 @@ in
       name = "forgejo/data/attachments";
       source = "${stateDir}/data/attachments";
       method = "copy-dir";
+      # Created on the first upload
+      optional = true;
     }
   ];
 }

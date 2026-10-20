@@ -35,8 +35,13 @@
       automatic = true;
       dates = [ "21:00" ];
     };
-  };
 
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 90d";
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

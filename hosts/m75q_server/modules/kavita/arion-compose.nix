@@ -3,8 +3,7 @@
 
   services.kavita = {
     service = {
-      # Pinned to the version migrated from the NAS
-      image = "linuxserver/kavita:0.9.0";
+      image = "linuxserver/kavita:v0.9.1.4-ls128";
 
       ports = [ "5000:5000" ];
 

@@ -21,7 +21,7 @@ rather than adding a new mount, or Kavita treats the series as new and loses
 reading progress.
 
 Backups dump `kavita.db` and hardlink `config/` and `data/` into
-`/mnt/backups/kavita/` (see [Backups](./backups.md)).
+`/mnt/backups/mirror/kavita/` (see [Backups](./backups.md)).
 
 ## Adding books
 

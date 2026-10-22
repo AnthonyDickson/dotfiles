@@ -203,10 +203,10 @@ form.
 
 The daily backup (see [Backups](./backups.md)) dumps the SQLite database and
 hardlinks the repositories, LFS objects and attachments into
-`/mnt/backups/forgejo/`, mirroring the layout of `/var/lib/forgejo`:
+`/mnt/backups/mirror/forgejo/`, mirroring the layout of `/var/lib/forgejo`:
 
 ```
-/mnt/backups/forgejo/
+/mnt/backups/mirror/forgejo/
 ├── data/
 │   ├── gitea.db
 │   └── attachments/
@@ -219,7 +219,7 @@ To restore, stop the project, copy the tree back, fix ownership, and start it:
 
 ```shell
 sudo systemctl stop arion-forgejo.service
-sudo rsync -a /mnt/backups/forgejo/ /var/lib/forgejo/
+sudo rsync -a /mnt/backups/mirror/forgejo/ /var/lib/forgejo/
 sudo chown -R 1000:1000 /var/lib/forgejo
 sudo systemctl start arion-forgejo.service
 ```

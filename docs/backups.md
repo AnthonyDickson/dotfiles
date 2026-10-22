@@ -9,7 +9,8 @@ A systemd timer triggers a oneshot service each day. The service:
 1. **SQLite databases** — runs `.backup` (consistent snapshot, ~few MB each)
 2. **Config trees** — creates a hardlink tree (`cp -al`, zero extra disk usage)
 3. **Syncs to NAS** — `rsync --delete` mirrors the staging tree to
-   `/mnt/backups/`
+   `/mnt/backups/mirror/` (a subdirectory: the squashed NFS user cannot change
+   the share root's permissions)
 
 See the `server-backup` service in `hosts/m75q_server/configuration.nix` for the
 current list of backed-up paths.
@@ -53,10 +54,10 @@ Files on the NAS are a plain mirror (not a backup format). To restore:
 
 ```bash
 # Copy specific file
-sudo cp /mnt/backups/<service>/data.db /var/lib/<service>/
+sudo cp /mnt/backups/mirror/<service>/data.db /var/lib/<service>/
 
 # Full restore of a service's config tree
-sudo rsync -a /mnt/backups/<service>/ /var/lib/<service>/config/
+sudo rsync -a /mnt/backups/mirror/<service>/ /var/lib/<service>/config/
 ```
 
 Hyper Backup also provides a point-and-click restore from the DSM GUI if you

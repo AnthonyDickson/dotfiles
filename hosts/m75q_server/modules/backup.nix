@@ -33,7 +33,9 @@ let
     set -euo pipefail
 
     STAGING=/var/backup
-    NAS=/mnt/backups
+    # A subdirectory of the share, because the squashed NFS user cannot chmod
+    # the share root, which fails rsync -p
+    NAS=/mnt/backups/mirror
 
     if ! grep -q " /mnt/backups " /proc/mounts; then
       echo "Backup NFS mount not available"

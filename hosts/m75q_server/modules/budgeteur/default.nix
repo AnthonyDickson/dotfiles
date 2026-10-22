@@ -6,7 +6,7 @@ let
   db_filename = "budgeteur.sqlite3";
   docker_volume = "/var/lib/budgeteur-fs";
   client_id = "budgeteur-fs";
-  image_tag = "1.0.0-rc3";
+  image_tag = "1.0.0";
   # PBKDF2 digest of the OIDC client secret, from
   # `authelia crypto hash generate pbkdf2 --random`. The plaintext goes in
   # secrets.env as Oidc__ClientSecret.

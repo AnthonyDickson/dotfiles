@@ -17,6 +17,8 @@
 
       restart = "unless-stopped";
     };
+
+    out.service.deploy.resources.limits.memory = "256mb";
   };
 
   services.webserver = {
@@ -95,21 +97,30 @@
     };
   };
 
-  services.gotenberg.service = {
-    image = "gotenberg/gotenberg:8.34.0";
+  services.gotenberg = {
+    service = {
+      image = "gotenberg/gotenberg:8.34.0";
 
-    command = [
-      "gotenberg"
-      "--chromium-disable-javascript=true"
-      "--chromium-allow-list=file:///tmp/.*"
-    ];
+      command = [
+        "gotenberg"
+        "--chromium-disable-javascript=true"
+        "--chromium-allow-list=file:///tmp/.*"
+      ];
 
-    restart = "unless-stopped";
+      restart = "unless-stopped";
+    };
+
+    out.service.deploy.resources.limits.memory = "1gb";
   };
 
-  services.tika.service = {
-    image = "apache/tika:3.3.1.0";
+  # The JVM sizes its default heap from the container's memory limit
+  services.tika = {
+    service = {
+      image = "apache/tika:3.3.1.0";
 
-    restart = "unless-stopped";
+      restart = "unless-stopped";
+    };
+
+    out.service.deploy.resources.limits.memory = "1gb";
   };
 }

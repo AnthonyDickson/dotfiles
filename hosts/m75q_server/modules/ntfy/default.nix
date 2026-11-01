@@ -43,9 +43,20 @@ in
     };
   };
 
-  # Disable DynamicUser so the ntfy-sh process runs as the static ntfy-sh
-  # user, which can read its sops-owned secret files.
-  systemd.services.ntfy-sh.serviceConfig.DynamicUser = lib.mkForce false;
+  # The nixpkgs module no longer defines a static ntfy-sh user, so declare one
+  # here. Disable DynamicUser so the ntfy-sh process runs as this user, which
+  # can read its sops-owned secret files.
+  users.users.ntfy-sh = {
+    isSystemUser = true;
+    group = "ntfy-sh";
+  };
+  users.groups.ntfy-sh = { };
+
+  systemd.services.ntfy-sh.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "ntfy-sh";
+    Group = "ntfy-sh";
+  };
 
   # Override ExecStart with a wrapper that reads auth secrets at runtime.
   # sops.placeholder returns full dotenv lines (KEY=VALUE), but .path files

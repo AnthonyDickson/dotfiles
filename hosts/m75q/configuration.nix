@@ -51,47 +51,19 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
   environment.systemPackages = with pkgs; [
-    ast-grep # Structural grep for code
     cifs-utils # For mounting NAS onto local file system
-    cmake # Build tools for CXX
-    crush # CLI tool for LLM-assisted coding
-    dprint # Code formatter, used for markdown
-    duf # better df with colours and nice formatting
-    dust # better du with graph visualisation
     feishin # Music Player
-    fd # better find
-    ffmpeg # multimedia tool for handling audio, video and other multimedia
-    fzf # Fuzzy finder for terminal
-    gh # GitHub CLI for auth
-    httpie # better curl for testing http requests
-    hyperfine # Tool for benchmarking run time of CLI commands
-    imagemagick # For image manipulation
-    jaq # CLI tool for parsing JSON
-    localsend # Cross-platform peer-to-peer file sharing
-    lsd # ls but nicer
-    marksman # Markdown LSP + wiki style links
-    nixd # nix LSP
-    nixfmt # Formatter for .nix files
-    nodejs_22 # node and npm for running and building applications in JavaScript
     obsidian # Note taking
     onlyoffice-desktopeditors # I can't believe it's not M*******t Office
     pinta # Simple image editing
     pcsx2
     qalculate-qt # Full-featured calculator
     qimgv # Image viewer
-    ripgrep # better grep, works recursively on folders and is fast
-    scooter # interactive find and replace TUI
     sops # For managing secrets for my server
     spotify # 🎵
     synology-drive-client # Sync with Synology NAS
-    tealdeer # tldr in Rust, provides simple examples for commands
-    tokei # Count lines of code
-    unzip # unarchive zip files
-    uv # Python package manager
-    wget # download files from the internet
     wl-clipboard # clipboard provider for neovim
     wordbook # Dictionary
-    zip # archive zip files
   ];
 
   programs = {

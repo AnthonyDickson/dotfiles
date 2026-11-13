@@ -1,18 +1,8 @@
 { username, ... }:
 {
   imports = [
-    ./../../modules/home/fish.nix
-    ./../../modules/home/delta.nix
-    ./../../modules/home/difftastic.nix
-    ./../../modules/home/ghostty.nix
-    ./../../modules/home/git.nix
-    ./../../modules/home/helix.nix
+    ./../../modules/home
     ./../../modules/home/kitty.nix
-    ./../../modules/home/starship.nix
-    ./../../modules/home/stylix.nix
-    ./../../modules/home/yazi.nix
-    ./../../modules/home/zellij.nix
-    ./../../modules/home/zoxide.nix
   ];
 
   home.username = username;

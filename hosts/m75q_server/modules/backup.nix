@@ -114,6 +114,10 @@ in
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "${backupScript}/bin/server-backup";
+        # The NFS mount is `hard`, so I/O blocks while the NAS is away and
+        # resumes when it returns. Without a limit, a NAS that stays down
+        # would hang the run forever and never reach onFailure.
+        TimeoutStartSec = "1h";
       };
     };
 

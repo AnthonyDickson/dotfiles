@@ -5,8 +5,11 @@ let
 
   # A missing source fails the backup (sqlite3 would otherwise create an empty
   # database) unless the path is marked optional.
-  backupCmd = { name, source, method, optional }:
+  backupCmd = { name, source, method, optional, exclude }:
     let
+      excludeCmd = lib.concatMapStringsSep "\n" (pattern:
+        ''find "$STAGING/${name}" -type f -name ${lib.escapeShellArg pattern} -delete''
+      ) exclude;
       onMissing =
         if optional then
           ''echo "Skipping ${name}: ${source} does not exist"''
@@ -17,7 +20,10 @@ let
         if method == "sqlite-dump" then
           ''${pkgs.sqlite}/bin/sqlite3 ${source} ".backup $STAGING/${name}/$(basename ${source})"''
         else
-          ''cp -al ${source}/. "$STAGING/${name}/"'';
+          ''
+            cp -al ${source}/. "$STAGING/${name}/"
+            ${excludeCmd}
+          '';
     in
     ''
       echo "Backing up ${name}..."
@@ -88,6 +94,19 @@ in
             description = ''
               Skip the path when it does not exist instead of failing the
               backup, for directories an app only creates once it needs them.
+            '';
+          };
+          exclude = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+            example = [ "db.sqlite3*" ];
+            description = ''
+              File name patterns (as for `find -name`) to leave out of a
+              `copy-dir` backup, matched at any depth. Use it for a live
+              SQLite database and its `-wal` and `-shm` files when the
+              database is backed up by a separate `sqlite-dump`: the live
+              copy may be inconsistent, and a stale `-wal` restored next to
+              the dump can corrupt it.
             '';
           };
         };

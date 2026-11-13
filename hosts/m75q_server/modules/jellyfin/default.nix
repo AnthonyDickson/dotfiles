@@ -23,15 +23,15 @@ in
     '';
   };
 
-  # Backup — hardlink config directory contents, plus a consistent dump of the
-  # database, which the copy only picks up live. The dump stays out of
-  # `jellyfin/`: writing it over the hardlinked copy would write to the live
-  # database.
+  # Backup — hardlink config directory contents, leaving out the live
+  # database, plus a consistent dump of it. The dump stays out of `jellyfin/`
+  # so it can never be written over a hardlink to the live database.
   services.backup.paths = [
     {
       name = "jellyfin";
       source = "/var/lib/jellyfin/config";
       method = "copy-dir";
+      exclude = [ "jellyfin.db*" ];
     }
     {
       name = "jellyfin-db";

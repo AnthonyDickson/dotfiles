@@ -92,7 +92,7 @@ in
     script = ''
       TOKEN=$(cat ${config.sops.secrets.ntfy-token.path})
       LOGS=$(journalctl -u server-backup.service -n 30 --no-pager -o short 2>/dev/null || echo "(no logs)")
-      curl -s -o /dev/null \
+      curl -fsS -o /dev/null \
         -H "Authorization: Bearer $TOKEN" \
         -H "Title: Backup failed" \
         -H "Priority: high" \

@@ -197,7 +197,7 @@ in the router and remove it afterwards.
 | ---- | -------- | ------- | ------------------- |
 | 22   | TCP      | OpenSSH | Remote admin access |
 | 53   | TCP+UDP  | dnsmasq | Local DNS           |
-| 80   | TCP+UDP  | Caddy   | HTTP→HTTPS redirect |
+| 80   | TCP      | Caddy   | HTTP→HTTPS redirect |
 | 443  | TCP+UDP  | Caddy   | HTTPS termination   |
 | 2222 | TCP      | Forgejo | Git over SSH        |
 

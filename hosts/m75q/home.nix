@@ -2,6 +2,7 @@
 {
   imports = [
     ./../../modules/home/fish.nix
+    ./../../modules/home/delta.nix
     ./../../modules/home/difftastic.nix
     ./../../modules/home/ghostty.nix
     ./../../modules/home/git.nix

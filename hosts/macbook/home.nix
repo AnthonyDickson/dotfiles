@@ -1,6 +1,7 @@
 { pkgs, username, ... }:
 {
   imports = [
+    ./../../modules/home/delta.nix
     ./../../modules/home/difftastic.nix
     ./../../modules/home/fish.nix
     ./../../modules/home/ghostty.nix

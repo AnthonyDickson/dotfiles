@@ -139,6 +139,7 @@
     ports = [ 22 ];
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = "no";
   };
 
   # SOPS base config — per-service secrets are in their respective modules

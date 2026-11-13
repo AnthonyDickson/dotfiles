@@ -3,6 +3,8 @@
 {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
+  # Keeps old generations from filling /boot
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Time zone

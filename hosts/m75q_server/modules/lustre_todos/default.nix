@@ -16,7 +16,7 @@ in
 
   # Needed for the bind mount to work for the image's non-root user
   systemd.tmpfiles.rules = [
-    "d ${docker_volume} 0755 1000 1000 -"
+    "d ${docker_volume} 0750 1000 1000 -"
   ];
 
   virtualisation.arion.projects.lustre-todos.settings =  {

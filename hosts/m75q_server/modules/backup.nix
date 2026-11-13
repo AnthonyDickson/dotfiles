@@ -74,14 +74,30 @@ let
     # root to a user in group users, which the admin account is also in. -p so
     # the modes also apply to files already on the NAS.
     # Output goes to the journal, so the failure notification includes it.
+    # last-success is written below, not staged, so --delete must spare it.
     ${pkgs.rsync}/bin/rsync -rltpD --chmod=D750,F640 --delete --stats \
+      --exclude=/last-success \
       "$STAGING"/ "$NAS"/
+
+    # Read by the stale backup check, and on the NAS it dates the mirror
+    date --iso-8601=seconds > ${cfg.stampFile}
+    cp ${cfg.stampFile} "$NAS/last-success"
 
     echo "Backup complete"
   '';
 in
 {
   options.services.backup = {
+    stampFile = lib.mkOption {
+      type = lib.types.str;
+      default = "/var/lib/server-backup/last-success";
+      readOnly = true;
+      description = ''
+        File the backup rewrites each time it completes. Its modification
+        time is when the last successful backup finished.
+      '';
+    };
+
     paths = lib.mkOption {
       type = lib.types.listOf (lib.types.submodule {
         options = {
@@ -135,6 +151,7 @@ in
   config = lib.mkIf (cfg.paths != []) {
     systemd.tmpfiles.rules = [
       "d /var/backup 0700 root root -"
+      "d ${dirOf cfg.stampFile} 0755 root root -"
     ];
 
     systemd.services.server-backup = {

@@ -5,6 +5,17 @@ let
   # Thresholds for the daily health check
   staleBackupHours = 30;
   diskUsedPercent = 85;
+
+  # Run by smartd, as root, with the problem described in SMARTD_* variables
+  smartdNotify = pkgs.writeShellScript "smartd-ntfy" ''
+    # smartd may find a problem at boot, before ntfy is listening
+    ${pkgs.curl}/bin/curl -fsS -o /dev/null --retry 5 --retry-connrefused \
+      -H "Authorization: Bearer $(${pkgs.coreutils}/bin/cat ${config.sops.secrets.ntfy-token.path})" \
+      -H "Title: $SMARTD_SUBJECT" \
+      -H "Priority: high" \
+      -H "Tags: warning" \
+      -d "$SMARTD_MESSAGE" "http://localhost:${toString port}/disk"
+  '';
 in
 {
   # --- Secrets ---
@@ -165,6 +176,19 @@ in
           -d "$CURRENT" "http://localhost:${toString port}/docker"
       fi
     '';
+  };
+
+  # --- Disk health (SMART) ---
+
+  # smartd reads the drives' health counters and error logs every 30 minutes,
+  # which puts no load on them. No self-tests are scheduled.
+  services.smartd = {
+    enable = true;
+    # Only the ntfy notifier below
+    notifications.wall.enable = false;
+    # -a: all health checks; -W: note 70°C, warn at 80°C; -M daily: repeat
+    # the warning each day while the problem lasts
+    defaults.monitored = "-a -W 0,70,80 -m <nomailer> -M daily -M exec ${smartdNotify}";
   };
 
   # --- Daily check for a stale backup and low disk space ---

@@ -64,6 +64,17 @@ let
       exit 1
     fi
 
+    # A rebuilt server starts every service with empty state, and mirroring
+    # that would overwrite the backup it needs to restore from. Such a server
+    # has no stamp of its own while the mirror has one, so it refuses until
+    # `server-restore --all` (or a deliberate touch) creates the stamp.
+    if [ ! -e ${cfg.stampFile} ] && [ -e "$NAS/last-success" ]; then
+      echo "Refusing to back up: this server has never completed a backup, but" >&2
+      echo "$NAS holds one from $(cat "$NAS/last-success")." >&2
+      echo "Restore it with: server-restore --all" >&2
+      echo "Or, to replace it with this server's data: touch ${cfg.stampFile}" >&2
+      exit 1
+    fi
 
     mkdir -p "$NAS"
     rm -rf "$STAGING"/*
@@ -167,11 +178,15 @@ let
       usage() {
         cat >&2 <<EOF
       Usage: server-restore <service> [--from DIR] [--test DIR]
+             server-restore --all [--from DIR] [--test DIR]
 
       Restores a service's data from the backup mirror, sets its ownership and
       restarts it. Files in the backup replace their live versions; live files
       that are not in the backup are left alone.
 
+        --all       Restore every service, then let backups run again: for a
+                    rebuilt server, whose backups are refused until it has
+                    been restored
         --from DIR  Restore from DIR instead of /mnt/backups/mirror, e.g. an
                     older revision restored from Hyper Backup
         --test DIR  Test restore: restore under DIR instead of /, without
@@ -187,9 +202,11 @@ let
       # an empty ROOT, decides whether this is a live restore.
       ROOT=
       SERVICE=
+      ALL=
       TEST=
       while [ $# -gt 0 ]; do
         case "$1" in
+          --all) ALL=1; shift ;;
           --from) [ $# -ge 2 ] || usage; SRC=$2; shift 2 ;;
           --test)
             if [ $# -lt 2 ] || [ -z "$2" ]; then usage; fi
@@ -271,18 +288,42 @@ let
         echo "Restored $1 from $SRC"
       }
 
-      [ -n "$SERVICE" ] || usage
+      if [ -n "$ALL" ]; then
+        [ -z "$SERVICE" ] || usage
+        SERVICES=(${lib.escapeShellArgs (lib.attrNames services)})
+      else
+        [ -n "$SERVICE" ] || usage
+        SERVICES=("$SERVICE")
+      fi
 
       # Check everything before touching anything
-      load_service "$SERVICE"
-      check
+      for service in "''${SERVICES[@]}"; do
+        load_service "$service"
+        check
+      done
 
       if [ "$(id -u)" -ne 0 ]; then
         echo "server-restore must run as root" >&2
         exit 1
       fi
 
-      restore_service "$SERVICE"
+
+      for service in "''${SERVICES[@]}"; do
+        restore_service "$service"
+      done
+
+      # The backup refuses to run on a server without this stamp while the
+      # mirror has one. Everything is restored, so it can run again. Keeping
+      # the mirror's timestamp keeps the stale backup check honest.
+      if [ -n "$ALL" ] && [ -z "$TEST" ]; then
+        mkdir -p ${dirOf cfg.stampFile}
+        if [ -e "$SRC/last-success" ]; then
+          cp --preserve=timestamps "$SRC/last-success" ${cfg.stampFile}
+        else
+          touch ${cfg.stampFile}
+        fi
+        echo "Backups are enabled again"
+      fi
     '';
   };
 in

@@ -72,7 +72,11 @@
   };
 
   # Backup — SQLite dump
-  services.backup.paths = [{
+  services.backup.paths = map (path: path // {
+    owner = "authelia-main";
+    group = "authelia-main";
+    units = [ "authelia-main.service" ];
+  }) [{
     name = "authelia";
     source = "/var/lib/authelia-main/db.sqlite3";
     method = "sqlite-dump";

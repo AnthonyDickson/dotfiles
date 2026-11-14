@@ -2,6 +2,20 @@
 let
   domain = "ntfy.s.anthonyd.co.nz";
   port = 2586;
+  # Thresholds for the daily health check
+  staleBackupHours = 30;
+  diskUsedPercent = 85;
+
+  # Run by smartd, as root, with the problem described in SMARTD_* variables
+  smartdNotify = pkgs.writeShellScript "smartd-ntfy" ''
+    # smartd may find a problem at boot, before ntfy is listening
+    ${pkgs.curl}/bin/curl -fsS -o /dev/null --retry 5 --retry-connrefused \
+      -H "Authorization: Bearer $(${pkgs.coreutils}/bin/cat ${config.sops.secrets.ntfy-token.path})" \
+      -H "Title: $SMARTD_SUBJECT" \
+      -H "Priority: high" \
+      -H "Tags: warning" \
+      -d "$SMARTD_MESSAGE" "http://localhost:${toString port}/disk"
+  '';
 in
 {
   # --- Secrets ---
@@ -92,7 +106,7 @@ in
     script = ''
       TOKEN=$(cat ${config.sops.secrets.ntfy-token.path})
       LOGS=$(journalctl -u server-backup.service -n 30 --no-pager -o short 2>/dev/null || echo "(no logs)")
-      curl -s -o /dev/null \
+      curl -fsS -o /dev/null \
         -H "Authorization: Bearer $TOKEN" \
         -H "Title: Backup failed" \
         -H "Priority: high" \
@@ -161,6 +175,79 @@ in
           -H "Tags: docker" \
           -d "$CURRENT" "http://localhost:${toString port}/docker"
       fi
+    '';
+  };
+
+  # --- Disk health (SMART) ---
+
+  # smartd reads the drives' health counters and error logs every 30 minutes,
+  # which puts no load on them. No self-tests are scheduled.
+  services.smartd = {
+    enable = true;
+    # Only the ntfy notifier below
+    notifications.wall.enable = false;
+    # -a: all health checks; -W: note 70°C, warn at 80°C; -M daily: repeat
+    # the warning each day while the problem lasts
+    defaults.monitored = "-a -W 0,70,80 -m <nomailer> -M daily -M exec ${smartdNotify}";
+  };
+
+  # --- Daily check for a stale backup and low disk space ---
+
+  # The backup's own failure notification covers a run that fails. This
+  # covers a run that never happens, and a disk filling up, which would break
+  # the database dumps. It repeats daily for as long as the problem lasts.
+  systemd.timers.server-health-check = {
+    description = "Daily check for a stale backup and low disk space";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # Well after the backup, which starts at midnight
+      OnCalendar = "09:00";
+      Persistent = true;
+    };
+  };
+
+  systemd.services.server-health-check = {
+    description = "Notify when the backup is stale or the disk is filling up";
+    after = [ "ntfy-sh.service" ];
+    wants = [ "ntfy-sh.service" ];
+    path = [ pkgs.curl ];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      TOKEN=$(cat ${config.sops.secrets.ntfy-token.path})
+
+      # notify <topic> <title> <message>
+      notify() {
+        curl -fsS -o /dev/null --retry 5 --retry-connrefused \
+          -H "Authorization: Bearer $TOKEN" \
+          -H "Title: $2" \
+          -H "Priority: high" \
+          -H "Tags: warning" \
+          -d "$3" "http://localhost:${toString port}/$1"
+      }
+
+      # A notification that cannot be sent must not skip the checks after it
+      FAILED=0
+
+      STAMP=${config.services.backup.stampFile}
+      if [ ! -e "$STAMP" ]; then
+        notify backups "Backup is stale" "No backup has completed on this server yet." || FAILED=1
+      else
+        AGE_HOURS=$(( ($(date +%s) - $(stat -c %Y "$STAMP")) / 3600 ))
+        # A daily backup that last finished just after midnight is 33 hours
+        # old by the morning after a missed run
+        if [ "$AGE_HOURS" -ge ${toString staleBackupHours} ]; then
+          notify backups "Backup is stale" \
+            "The last successful backup finished $AGE_HOURS hours ago ($(cat "$STAMP"))." || FAILED=1
+        fi
+      fi
+
+      # /var is on the root filesystem
+      USED=$(df --output=pcent / | tail -n 1 | tr -dc '0-9')
+      if [ "$USED" -ge ${toString diskUsedPercent} ]; then
+        notify disk "Disk space low" "The root filesystem is $USED% full." || FAILED=1
+      fi
+
+      exit "$FAILED"
     '';
   };
 }

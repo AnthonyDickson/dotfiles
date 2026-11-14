@@ -7,7 +7,8 @@
 
   networking.firewall = {
     enable = true;
-    allowedUDPPorts = [ 53 80 443 ];
+    # 443 for HTTP/3; HTTP on port 80 is TCP only
+    allowedUDPPorts = [ 53 443 ];
     allowedTCPPorts = [ 53 80 443 ];
   };
 }

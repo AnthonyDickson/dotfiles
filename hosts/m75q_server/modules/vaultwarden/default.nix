@@ -44,9 +44,12 @@ in
   };
 
   # Backup — SQLite database, plus the RSA keys, attachments and sends. The
-  # copy-dir also picks up a live copy of the database, which the dump makes
-  # redundant.
-  services.backup.paths = [
+  # copy-dir leaves out the live database, which the dump covers.
+  services.backup.paths = map (path: path // {
+    owner = "vaultwarden";
+    group = "vaultwarden";
+    units = [ "vaultwarden.service" ];
+  }) [
     {
       name = "vaultwarden/db";
       source = "${stateDir}/db.sqlite3";
@@ -56,6 +59,7 @@ in
       name = "vaultwarden/data";
       source = stateDir;
       method = "copy-dir";
+      exclude = [ "db.sqlite3*" ];
     }
   ];
 }

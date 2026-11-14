@@ -16,7 +16,7 @@ in
 
   # Needed for the bind mount to work for the image's non-root user
   systemd.tmpfiles.rules = [
-    "d ${docker_volume} 0755 1000 1000 -"
+    "d ${docker_volume} 0750 1000 1000 -"
   ];
 
   virtualisation.arion.projects.lustre-todos.settings =  {
@@ -77,7 +77,11 @@ in
     '';
   };
 
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "1000";
+    units = [ "arion-lustre-todos.service" ];
+  }) [
     {
       name = "lustre_todos";
       source = "${docker_volume}/${db_filename}";

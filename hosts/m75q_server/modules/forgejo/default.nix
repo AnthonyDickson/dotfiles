@@ -79,9 +79,15 @@ in
     ];
   };
 
-  # Backup — SQLite database, repositories (incl. LFS) and attachments.
-  # app.ini is skipped on purpose: it contains the secrets, which live in sops.
-  services.backup.paths = [
+  # Backup — SQLite database, repositories (incl. LFS), attachments, avatars,
+  # the package registry's files and the SSH server's host keys (so clients
+  # see the same host after a restore). app.ini is skipped on purpose: it
+  # contains the secrets, which live in sops.
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "1000";
+    units = [ "arion-forgejo.service" ];
+  }) [
     {
       name = "forgejo/data";
       source = "${stateDir}/data/gitea.db";
@@ -98,6 +104,30 @@ in
       method = "copy-dir";
       # Created on the first upload
       optional = true;
+    }
+    {
+      name = "forgejo/data/avatars";
+      source = "${stateDir}/data/avatars";
+      method = "copy-dir";
+      # Created on the first upload
+      optional = true;
+    }
+    {
+      name = "forgejo/data/repo-avatars";
+      source = "${stateDir}/data/repo-avatars";
+      method = "copy-dir";
+      # Created on the first upload
+      optional = true;
+    }
+    {
+      name = "forgejo/ssh";
+      source = "${stateDir}/ssh";
+      method = "copy-dir";
+    }
+    {
+      name = "forgejo/packages";
+      source = "${stateDir}/packages";
+      method = "copy-dir";
     }
   ];
 }

@@ -54,7 +54,10 @@ Forgejo stores its state under `/var/lib/forgejo` (created at boot by
 | `/var/lib/forgejo/git/repositories`    | Bare git repositories                  | yes             |
 | `/var/lib/forgejo/git/lfs`             | Git LFS objects                        | yes             |
 | `/var/lib/forgejo/data/attachments`    | Issue/release attachments              | yes             |
-| `/var/lib/forgejo/data/` (other)       | Avatars, sessions, SSH host keys, logs | no              |
+| `/var/lib/forgejo/data/avatars`        | User avatars (also `repo-avatars`)     | yes             |
+| `/var/lib/forgejo/packages`            | Package registry files                 | yes             |
+| `/var/lib/forgejo/ssh`                 | SSH server host keys                   | yes             |
+| `/var/lib/forgejo/` (other)            | Indexes, queues, Actions, signing keys | no              |
 | `/var/lib/forgejo/custom/conf/app.ini` | Generated config, **contains secrets** | no (deliberate) |
 
 The database is named `gitea.db` because that is the rootless image's default.
@@ -202,26 +205,29 @@ form.
 ## Backups
 
 The daily backup (see [Backups](./backups.md)) dumps the SQLite database and
-hardlinks the repositories, LFS objects and attachments into
-`/mnt/backups/mirror/forgejo/`, mirroring the layout of `/var/lib/forgejo`:
+hardlinks the repositories, LFS objects, attachments, avatars, packages and SSH
+host keys into `/mnt/backups/mirror/forgejo/`, mirroring the layout of
+`/var/lib/forgejo`:
 
 ```
 /mnt/backups/mirror/forgejo/
 ├── data/
 │   ├── gitea.db
-│   └── attachments/
-└── git/
-    ├── repositories/
-    └── lfs/
+│   ├── attachments/
+│   ├── avatars/
+│   └── repo-avatars/
+├── git/
+│   ├── repositories/
+│   └── lfs/
+├── packages/
+└── ssh/
 ```
 
-To restore, stop the project, copy the tree back, fix ownership, and start it:
+To restore, run `server-restore`, which stops the project, copies the tree back,
+sets ownership and starts it again:
 
 ```shell
-sudo systemctl stop arion-forgejo.service
-sudo rsync -a /mnt/backups/mirror/forgejo/ /var/lib/forgejo/
-sudo chown -R 1000:1000 /var/lib/forgejo
-sudo systemctl start arion-forgejo.service
+sudo server-restore forgejo
 ```
 
 `app.ini` is regenerated from the environment on start, and the secrets come

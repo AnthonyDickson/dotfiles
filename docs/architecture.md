@@ -93,7 +93,8 @@ The `arion-jellyfin` systemd service has a hard dependency on `mnt-media.mount`
 — the container starts only after the NAS is reachable and the share is mounted.
 
 The `server-backup` systemd service has a soft dependency (`wants`) on
-`mnt-backups.mount` — it skips the backup run if the NAS isn't reachable.
+`mnt-backups.mount` — if the NAS isn't reachable the backup run fails and sends
+a notification.
 
 Jellyfin runs inside its container as **uid 1000 / gid 303** (gid 303 is the
 `render` group for `/dev/dri` hardware transcoding). The NFS export on the NAS
@@ -197,7 +198,7 @@ in the router and remove it afterwards.
 | ---- | -------- | ------- | ------------------- |
 | 22   | TCP      | OpenSSH | Remote admin access |
 | 53   | TCP+UDP  | dnsmasq | Local DNS           |
-| 80   | TCP+UDP  | Caddy   | HTTP→HTTPS redirect |
+| 80   | TCP      | Caddy   | HTTP→HTTPS redirect |
 | 443  | TCP+UDP  | Caddy   | HTTPS termination   |
 | 2222 | TCP      | Forgejo | Git over SSH        |
 

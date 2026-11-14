@@ -3,6 +3,8 @@
 {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
+  # Keeps old generations from filling /boot
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Time zone
@@ -137,6 +139,7 @@
     ports = [ 22 ];
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = "no";
   };
 
   # SOPS base config — per-service secrets are in their respective modules

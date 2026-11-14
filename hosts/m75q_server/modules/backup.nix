@@ -51,8 +51,20 @@ let
       fi
     '';
 
+  # Held by a backup or a live restore for as long as it runs
+  lockFile = "/run/server-backup.lock";
+
   backupScript = pkgs.writeShellScriptBin "server-backup" ''
     set -euo pipefail
+
+    # A backup during a restore would mirror the half-restored data and delete
+    # the rest from the mirror, which the restore is still reading. So wait
+    # for the restore; the unit's timeout bounds the wait.
+    exec 9> ${lockFile}
+    if ! ${pkgs.util-linux}/bin/flock -n 9; then
+      echo "Waiting for server-restore to finish..."
+      ${pkgs.util-linux}/bin/flock 9
+    fi
 
     STAGING=/var/backup
     # A subdirectory of the share, because the squashed NFS user cannot chmod
@@ -173,7 +185,7 @@ let
 
   restoreScript = pkgs.writeShellApplication {
     name = "server-restore";
-    runtimeInputs = [ pkgs.coreutils pkgs.rsync pkgs.sqlite pkgs.systemd ];
+    runtimeInputs = [ pkgs.coreutils pkgs.rsync pkgs.sqlite pkgs.systemd pkgs.util-linux ];
     text = ''
       usage() {
         cat >&2 <<EOF
@@ -307,6 +319,16 @@ let
         exit 1
       fi
 
+      # Keeps a backup from running until the restore is done (see the backup
+      # script). A test restore changes nothing live, so it does not need it.
+      if [ -z "$TEST" ]; then
+        exec 9> ${lockFile}
+        if ! flock -n 9; then
+          echo "A backup is running. Try again when it has finished:" >&2
+          echo "  systemctl status server-backup" >&2
+          exit 1
+        fi
+      fi
 
       for service in "''${SERVICES[@]}"; do
         restore_service "$service"

@@ -45,7 +45,11 @@ in
 
   # Backup — SQLite database, plus the RSA keys, attachments and sends. The
   # copy-dir leaves out the live database, which the dump covers.
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "vaultwarden";
+    group = "vaultwarden";
+    units = [ "vaultwarden.service" ];
+  }) [
     {
       name = "vaultwarden/db";
       source = "${stateDir}/db.sqlite3";

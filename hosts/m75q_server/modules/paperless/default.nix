@@ -51,7 +51,11 @@ in
   ];
 
   # Backup — documents (media) and the SQLite database (data)
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "100";
+    units = [ "arion-paperless.service" ];
+  }) [
     {
       name = "paperless/media";
       source = "/var/lib/paperless/media";

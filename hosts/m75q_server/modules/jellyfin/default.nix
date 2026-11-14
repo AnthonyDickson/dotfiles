@@ -24,17 +24,22 @@ in
   };
 
   # Backup — hardlink config directory contents, leaving out the live
-  # database, plus a consistent dump of it. The dump stays out of `jellyfin/`
-  # so it can never be written over a hardlink to the live database.
-  services.backup.paths = [
+  # database, plus a consistent dump of it. The dump stays out of
+  # `jellyfin/config/` so it can never be written over a hardlink to the live
+  # database.
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "303";
+    units = [ "arion-jellyfin.service" ];
+  }) [
     {
-      name = "jellyfin";
+      name = "jellyfin/config";
       source = "/var/lib/jellyfin/config";
       method = "copy-dir";
       exclude = [ "jellyfin.db*" ];
     }
     {
-      name = "jellyfin-db";
+      name = "jellyfin/db";
       source = "/var/lib/jellyfin/config/data/jellyfin.db";
       method = "sqlite-dump";
     }

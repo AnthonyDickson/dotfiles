@@ -83,7 +83,11 @@ in
   # the package registry's files and the SSH server's host keys (so clients
   # see the same host after a restore). app.ini is skipped on purpose: it
   # contains the secrets, which live in sops.
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "1000";
+    units = [ "arion-forgejo.service" ];
+  }) [
     {
       name = "forgejo/data";
       source = "${stateDir}/data/gitea.db";

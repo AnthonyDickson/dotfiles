@@ -88,7 +88,11 @@ in
     '';
   };
 
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1654";
+    group = "1654";
+    units = [ "arion-budgeteur.service" ];
+  }) [
     {
       name = "budgeteur-fs";
       source = "${docker_volume}/${db_filename}";

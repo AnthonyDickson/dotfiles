@@ -28,7 +28,11 @@ in
   # Backup — SQLite database, config (covers, bookmarks, themes) and the
   # library itself. The copy-dir of the config leaves out the live database,
   # which the dump covers.
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "100";
+    units = [ "arion-kavita.service" ];
+  }) [
     {
       name = "kavita/db";
       source = "/var/lib/kavita/config/kavita.db";

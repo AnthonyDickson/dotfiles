@@ -93,7 +93,11 @@ in
   };
 
   # Backup — SQLite database and task attachments
-  services.backup.paths = [
+  services.backup.paths = map (path: path // {
+    owner = "1000";
+    group = "1000";
+    units = [ "arion-vikunja.service" ];
+  }) [
     {
       name = "vikunja/db";
       source = "${stateDir}/db/vikunja.db";

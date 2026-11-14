@@ -18,7 +18,23 @@ let
       # `/.` copies the directory's contents, including dotfiles
       copy =
         if method == "sqlite-dump" then
-          ''${pkgs.sqlite}/bin/sqlite3 ${source} ".backup $STAGING/${name}/$(basename ${source})"''
+          ''
+            DUMP="$STAGING/${name}/$(basename ${source})"
+            # If a copy-dir staged a file here, it is a hardlink to a live
+            # file, and dumping onto it would write into that. Removing it
+            # only removes the link.
+            rm -f "$DUMP" "$DUMP-wal" "$DUMP-shm" "$DUMP-journal"
+            ${pkgs.sqlite}/bin/sqlite3 ${source} ".backup $DUMP"
+            # Fail the run instead of mirroring a corrupt database
+            CHECK=$(${pkgs.sqlite}/bin/sqlite3 "$DUMP" "PRAGMA integrity_check;" 2>&1) || true
+            if [ "$CHECK" != "ok" ]; then
+              echo "Integrity check failed for $DUMP:" >&2
+              echo "$CHECK" >&2
+              exit 1
+            fi
+            # Opening a WAL-mode dump for the check can leave these behind
+            rm -f "$DUMP-wal" "$DUMP-shm"
+          ''
         else
           ''
             cp -al ${source}/. "$STAGING/${name}/"

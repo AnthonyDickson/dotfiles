@@ -223,13 +223,11 @@ host keys into `/mnt/backups/mirror/forgejo/`, mirroring the layout of
 └── ssh/
 ```
 
-To restore, stop the project, copy the tree back, fix ownership, and start it:
+To restore, run `server-restore`, which stops the project, copies the tree back,
+sets ownership and starts it again:
 
 ```shell
-sudo systemctl stop arion-forgejo.service
-sudo rsync -a /mnt/backups/mirror/forgejo/ /var/lib/forgejo/
-sudo chown -R 1000:1000 /var/lib/forgejo
-sudo systemctl start arion-forgejo.service
+sudo server-restore forgejo
 ```
 
 `app.ini` is regenerated from the environment on start, and the secrets come

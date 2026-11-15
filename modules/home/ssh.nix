@@ -27,6 +27,13 @@
         identityFile = "~/.ssh/forgejo";
         identitiesOnly = true;
       };
+      "github.com" = {
+        hostname = "github.com";
+        port = 22;
+        user = "git";
+        identityFile = "~/.ssh/github";
+        identitiesOnly = true;
+      };
     };
   };
 }

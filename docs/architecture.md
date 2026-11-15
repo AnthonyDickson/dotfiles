@@ -50,7 +50,10 @@ these move, change IP, or are decommissioned, this server config breaks.
 ### Cloudflare
 
 The domain **`anthonyd.co.nz`** is registered with Cloudflare and its DNS is
-managed there. Subdomains under `s.anthonyd.co.nz` point at the server:
+managed there. Subdomains under `s.anthonyd.co.nz` point at the server, and
+subdomains under `nas.anthonyd.co.nz` (e.g. `dsm.nas.anthonyd.co.nz`,
+`sonarr.nas.anthonyd.co.nz`) are services on the NAS (dnsmasq resolves them to
+`192.168.0.10` on the local network):
 
 | Hostname                       | Backend     |
 | ------------------------------ | ----------- |
@@ -126,9 +129,9 @@ reach services directly. On the local network, dnsmasq answers with the LAN IP
 instead.
 
 It does **not** advertise a subnet route: `192.168.0.0/24` is a common home
-range and would clash with other networks. To reach other local devices
-remotely (e.g. the router), hop through the server with SSH (`ssh -L`, `ssh -D`
-or `ssh -J`).
+range and would clash with other networks. To reach other local devices remotely
+(e.g. the router), hop through the server with SSH (`ssh -L`, `ssh -D` or `ssh
+-J`).
 
 **Assumptions**:
 
@@ -155,8 +158,7 @@ the server to `git pull` config updates without an interactive login.
 ### Container Registries
 
 Public images are pulled from `ghcr.io` (Budgeteur, Homepage) and Docker Hub
-(Jellyfin, Vikunja) at `nixos-rebuild` time. No registry credentials are
-needed.
+(Jellyfin, Vikunja) at `nixos-rebuild` time. No registry credentials are needed.
 
 **Assumptions**:
 
@@ -183,7 +185,8 @@ ACME challenges go through Cloudflare DNS, not HTTP.
 Server IP:   192.168.0.20
 NAS IP:      192.168.0.10
 Domain:      anthonyd.co.nz
-Subdomain:   s.anthonyd.co.nz (services)
+Subdomains:  s.anthonyd.co.nz (server services)
+             nas.anthonyd.co.nz (NAS services)
 ```
 
 The server runs dnsmasq so local clients can resolve these domains to the NAS

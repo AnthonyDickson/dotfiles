@@ -28,28 +28,28 @@ let
         {
           Sonarr = {
             icon = "sh-sonarr";
-            href = "https://sonarr.anthonyd.co.nz";
+            href = "https://sonarr.nas.anthonyd.co.nz";
             description = "TV series management";
           };
         }
         {
           Radarr = {
             icon = "sh-radarr";
-            href = "https://radarr.anthonyd.co.nz";
+            href = "https://radarr.nas.anthonyd.co.nz";
             description = "Movie management";
           };
         }
         {
           Jackett = {
             icon = "sh-jackett";
-            href = "https://jackett.anthonyd.co.nz";
+            href = "https://jackett.nas.anthonyd.co.nz";
             description = "Torrent indexer proxy";
           };
         }
         {
           Deluge = {
             icon = "sh-deluge";
-            href = "https://deluge.anthonyd.co.nz";
+            href = "https://deluge.nas.anthonyd.co.nz";
             description = "Torrent client";
           };
         }
@@ -84,10 +84,10 @@ let
     }
     {
       Synology = [
-        { DSM = [ { icon = "sh-synology"; href = "https://dsm.anthonyd.co.nz"; } ]; }
-        { Photos = [ { icon = "sh-synology-photos"; href = "https://photos.anthonyd.co.nz?launchApp=SYNO.Foto.AppInstance"; } ]; }
-        { Drive = [ { icon = "sh-drive-synology"; href = "https://drive.anthonyd.co.nz"; } ]; }
-        { "File Station" = [ { icon = "sh-file-station"; href = "https://files.anthonyd.co.nz"; } ]; }
+        { DSM = [ { icon = "sh-synology"; href = "https://dsm.nas.anthonyd.co.nz"; } ]; }
+        { Photos = [ { icon = "sh-synology-photos"; href = "https://photos.nas.anthonyd.co.nz?launchApp=SYNO.Foto.AppInstance"; } ]; }
+        { Drive = [ { icon = "sh-drive-synology"; href = "https://drive.nas.anthonyd.co.nz"; } ]; }
+        { "File Station" = [ { icon = "sh-file-station"; href = "https://files.nas.anthonyd.co.nz"; } ]; }
       ];
     }
     {

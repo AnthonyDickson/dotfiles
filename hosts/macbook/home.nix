@@ -61,6 +61,12 @@
         # Start fish from Ghostty so the login shell stays zsh.
         command = "${pkgs.fish}/bin/fish --login";
         macos-option-as-alt = true;
+        # Ghostty's macOS defaults map opt+left/right to esc:b/esc:f (word
+        # movement), which stops zellij from seeing alt+left/right.
+        keybind = [
+          "alt+arrow_left=unbind"
+          "alt+arrow_right=unbind"
+        ];
       };
     };
   };

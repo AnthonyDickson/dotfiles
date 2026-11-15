@@ -20,6 +20,13 @@
         identityFile = "~/.ssh/nas";
         identitiesOnly = true;
       };
+      "git.anthonyd.co.nz" = {
+        hostname = "git.anthonyd.co.nz";
+        port = 2222;
+        user = "git";
+        identityFile = "~/.ssh/forgejo";
+        identitiesOnly = true;
+      };
     };
   };
 }

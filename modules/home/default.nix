@@ -9,6 +9,7 @@
     ./ghostty.nix
     ./git.nix
     ./helix.nix
+    ./ssh.nix
     ./starship.nix
     ./stylix.nix
     ./yazi.nix

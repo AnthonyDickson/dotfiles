@@ -50,10 +50,22 @@ these move, change IP, or are decommissioned, this server config breaks.
 ### Cloudflare
 
 The domain **`anthonyd.co.nz`** is registered with Cloudflare and its DNS is
-managed there. Subdomains directly under `anthonyd.co.nz` point at the server, and
-subdomains under `nas.anthonyd.co.nz` (e.g. `dsm.nas.anthonyd.co.nz`,
-`sonarr.nas.anthonyd.co.nz`) are services on the NAS (dnsmasq resolves them to
-`192.168.0.10` on the local network):
+managed there. All records are **DNS only** (not proxied) and point at
+Tailscale IPs, so they only resolve to something reachable from inside the
+tailnet:
+
+| Record                 | Type | Value           | Target |
+| ---------------------- | ---- | --------------- | ------ |
+| `anthonyd.co.nz`       | A    | `100.111.59.85` | Server |
+| `*.anthonyd.co.nz`     | A    | `100.111.59.85` | Server |
+| `nas.anthonyd.co.nz`   | A    | `100.85.96.45`  | NAS    |
+| `*.nas.anthonyd.co.nz` | A    | `100.85.96.45`  | NAS    |
+
+On the local network, dnsmasq overrides these and answers with the LAN IPs
+instead (`192.168.0.20` for the server, `192.168.0.10` for `nas.anthonyd.co.nz`
+and its subdomains).
+
+The apex serves SSH (`ssh server`) and first-level subdomains are the server's services:
 
 | Hostname                     | Backend     |
 | ---------------------------- | ----------- |
@@ -69,8 +81,8 @@ subdomains under `nas.anthonyd.co.nz` (e.g. `dsm.nas.anthonyd.co.nz`,
 | `vaultwarden.anthonyd.co.nz` | Vaultwarden |
 | `vikunja.anthonyd.co.nz`     | Vikunja     |
 
-Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
-certificates for `*.anthonyd.co.nz`. This means the server does not need ports
+Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain TLS
+certificates for each hostname above. This means the server does not need ports
 80/443 reachable from the internet — domain validation happens via DNS TXT
 records that Caddy creates through the Cloudflare API.
 
@@ -82,13 +94,13 @@ injected into Caddy's environment at boot.
 
 - Cloudflare account is active and the domain is delegated to Cloudflare
   nameservers
-- DNS records for the subdomains above exist (Caddy manages ACME records but not
+- The A records in the table above exist (Caddy manages ACME records but not
   the A/AAAA records)
 - The API token has `Zone:DNS:Edit` permission on `anthonyd.co.nz`
 
 ### Synology NAS
 
-A Synology NAS at **`192.168.0.10`** exports two NFSv4.1 shares:
+A Synology NAS at **`192.168.0.10`** (`nas.anthonyd.co.nz`) exports two NFSv4.1 shares:
 
 - **`/volume1/data/media`** — read-only media library for Jellyfin, mounted at
   `/mnt/media`
@@ -127,9 +139,10 @@ account.
 
 The server joins a Tailscale tailnet for remote SSH and HTTPS access when off
 the local network. Its Tailscale IP is **`100.111.59.85`**, and the public
-Cloudflare records for `*.anthonyd.co.nz` point there, so tailnet clients
-reach services directly. On the local network, dnsmasq answers with the LAN IP
-instead.
+Cloudflare records for `anthonyd.co.nz` and `*.anthonyd.co.nz` point there, so
+tailnet clients reach services directly. The NAS is also on the tailnet
+(**`100.85.96.45`**, via `nas.anthonyd.co.nz` and `*.nas.anthonyd.co.nz`). On
+the local network, dnsmasq answers with the LAN IPs instead.
 
 It does **not** advertise a subnet route: `192.168.0.0/24` is a common home
 range and would clash with other networks. To reach other local devices remotely
@@ -138,7 +151,8 @@ range and would clash with other networks. To reach other local devices remotely
 
 **Assumptions**:
 
-- A Tailscale account (free tier is sufficient) with the server node approved
+- A Tailscale account (free tier is sufficient) with the server and NAS nodes
+  approved
 - Tailscale's MagicDNS is disabled on the server (`--accept-dns=false`) because
   local resolution is handled by dnsmasq/unbound — the server does not want
   Tailscale overriding its DNS

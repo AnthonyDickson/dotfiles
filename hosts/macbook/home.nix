@@ -63,26 +63,5 @@
         macos-option-as-alt = true;
       };
     };
-
-    ssh = {
-      enable = true;
-      enableDefaultConfig = false;
-      settings = {
-        "server" = {
-          hostname = "100.111.59.85";
-          port = 22;
-          user = "anthonyd";
-          identityFile = "~/.ssh/nixos_server";
-          identitiesOnly = true;
-        };
-        "nas" = {
-          hostname = "dsm.nas.anthonyd.co.nz";
-          port = 22;
-          user = "anthony";
-          identityFile = "~/.ssh/dsm";
-          identitiesOnly = true;
-        };
-      };
-    };
   };
 }

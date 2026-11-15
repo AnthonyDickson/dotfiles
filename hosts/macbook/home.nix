@@ -75,7 +75,8 @@
           identityFile = "~/.ssh/nixos_server";
           identitiesOnly = true;
         };
-        "dsm.nas.anthonyd.co.nz" = {
+        "nas" = {
+          hostname = "dsm.nas.anthonyd.co.nz";
           port = 22;
           user = "anthony";
           identityFile = "~/.ssh/dsm";

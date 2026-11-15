@@ -76,7 +76,8 @@
     nix-ld.enable = true; # Mainly for uv
     ssh = {
       extraConfig = "
-          Host dsm.nas.anthonyd.co.nz
+          Host nas
+            Hostname dsm.nas.anthonyd.co.nz
             Port 22
             User anthony
             IdentityFile ~/.ssh/nas

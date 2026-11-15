@@ -1,6 +1,6 @@
 # Forgejo
 
-Git hosting at `https://git.s.anthonyd.co.nz`, running the rootless
+Git hosting at `https://git.anthonyd.co.nz`, running the rootless
 `codeberg.org/forgejo/forgejo` image as an Arion project with SQLite. Sign-in is
 only through Authelia (OpenID Connect).
 
@@ -15,7 +15,7 @@ rootless image runs as uid/gid **1000** and keeps all of its state, including
 | 3030      | 3000           | Web UI, API and git over HTTPS (via Caddy)   |
 | 2222      | 2222           | Forgejo's built-in SSH server (git over SSH) |
 
-Caddy reverse proxies `git.s.anthonyd.co.nz` to port 3030 **without** Authelia
+Caddy reverse proxies `git.anthonyd.co.nz` to port 3030 **without** Authelia
 forward-auth. Forward-auth would block `git clone`/`push` over HTTPS and API
 clients, so Forgejo handles authentication itself:
 
@@ -120,7 +120,7 @@ deploy. Until this is done the login page has no way to sign in.
      --provider openidConnect \
      --key forgejo \
      --secret "$OIDC_CLIENT_SECRET" \
-     --auto-discover-url https://auth.s.anthonyd.co.nz/.well-known/openid-configuration \
+     --auto-discover-url https://auth.anthonyd.co.nz/.well-known/openid-configuration \
      --scopes "openid email profile groups" \
      --group-claim-name groups \
      --admin-group admins \
@@ -148,7 +148,7 @@ deploy. Until this is done the login page has no way to sign in.
    Authelia rejects it with "There was an error processing the authorization
    request".
 
-4. Visit `https://git.s.anthonyd.co.nz`, click **Sign in with authelia**, and
+4. Visit `https://git.anthonyd.co.nz`, click **Sign in with authelia**, and
    log in. Your account is created automatically on first login.
 
 5. Add an SSH key under **Settings → SSH / GPG Keys**.
@@ -176,19 +176,19 @@ deploy, then run the `update-oauth` commands above.
 **SSH** (port 2222, using the key added in Forgejo):
 
 ```shell
-git clone ssh://git@git.s.anthonyd.co.nz:2222/anthonyd/repo.git
+git clone ssh://git@git.anthonyd.co.nz:2222/anthonyd/repo.git
 ```
 
 Or set the port once in `~/.ssh/config` and use the short form:
 
 ```
-Host git.s.anthonyd.co.nz
+Host git.anthonyd.co.nz
   Port 2222
   User git
 ```
 
 ```shell
-git clone git@git.s.anthonyd.co.nz:anthonyd/repo.git
+git clone git@git.anthonyd.co.nz:anthonyd/repo.git
 ```
 
 **HTTPS**: SSO accounts have no Forgejo password, so create an access token

@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "homepage.s.anthonyd.co.nz";
+  domain = "homepage.anthonyd.co.nz";
   port = 3000;
   client_id = "homepage";
 in

@@ -34,7 +34,7 @@
       labels = {
         "homepage.group" = "Media";
         "homepage.name" = "Jellyfin";
-        "homepage.href" = "https://jellyfin.s.anthonyd.co.nz";
+        "homepage.href" = "https://jellyfin.anthonyd.co.nz";
         "homepage.description" = "Media server";
         "homepage.icon" = "sh-jellyfin";
       };

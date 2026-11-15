@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  domain = "jellyfin.s.anthonyd.co.nz";
+  domain = "jellyfin.anthonyd.co.nz";
   port = 8096;
 in
 {

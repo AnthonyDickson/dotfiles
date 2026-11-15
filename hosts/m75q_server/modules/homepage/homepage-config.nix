@@ -60,7 +60,7 @@ let
         {
           Caddy = {
             icon = "sh-caddy";
-            href = "https://homepage.s.anthonyd.co.nz";
+            href = "https://homepage.anthonyd.co.nz";
             description = "Reverse proxy";
             widget = {
               type = "caddy";
@@ -75,10 +75,10 @@ let
   homepageBookmarks = [
     {
       Productivity = [
-        { Vikunja = [ { icon = "sh-vikunja"; href = "https://vikunja.s.anthonyd.co.nz"; } ]; }
-        { Paperless = [ { icon = "sh-paperless-ngx"; href = "https://paperless.s.anthonyd.co.nz"; } ]; }
-        { Forgejo = [ { icon = "sh-forgejo"; href = "https://git.s.anthonyd.co.nz"; } ]; }
-        { Vaultwarden = [ { icon = "sh-vaultwarden"; href = "https://vaultwarden.s.anthonyd.co.nz"; } ]; }
+        { Vikunja = [ { icon = "sh-vikunja"; href = "https://vikunja.anthonyd.co.nz"; } ]; }
+        { Paperless = [ { icon = "sh-paperless-ngx"; href = "https://paperless.anthonyd.co.nz"; } ]; }
+        { Forgejo = [ { icon = "sh-forgejo"; href = "https://git.anthonyd.co.nz"; } ]; }
+        { Vaultwarden = [ { icon = "sh-vaultwarden"; href = "https://vaultwarden.anthonyd.co.nz"; } ]; }
         { "Proton Mail" = [ { icon = "sh-proton-mail"; href = "https://mail.proton.me"; } ]; }
       ];
     }

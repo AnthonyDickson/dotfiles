@@ -9,7 +9,7 @@ in
     settings = {
       address = [
         "/nas.anthonyd.co.nz/192.168.0.10"
-        "/s.anthonyd.co.nz/192.168.0.20"
+        "/anthonyd.co.nz/192.168.0.20"
       ];
       server = [ "127.0.0.1#${toString unboundPort}" ];
     };

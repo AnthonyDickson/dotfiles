@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "vikunja.s.anthonyd.co.nz";
+  domain = "vikunja.anthonyd.co.nz";
   port = 3456;
   stateDir = "/var/lib/vikunja";
   client_id = "vikunja";
@@ -40,7 +40,7 @@ in
           VIKUNJA_AUTH_LOCAL_ENABLED = "false";
           VIKUNJA_AUTH_OPENID_ENABLED = "true";
           VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_NAME = "Authelia";
-          VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_AUTHURL = "https://auth.s.anthonyd.co.nz";
+          VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_AUTHURL = "https://auth.anthonyd.co.nz";
           VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_CLIENTID = client_id;
 
           VIKUNJA_MAILER_ENABLED = "false";

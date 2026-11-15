@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  domain = "kavita.s.anthonyd.co.nz";
+  domain = "kavita.anthonyd.co.nz";
   port = 5000;
 in
 {

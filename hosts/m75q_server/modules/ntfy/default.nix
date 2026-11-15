@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  domain = "ntfy.s.anthonyd.co.nz";
+  domain = "ntfy.anthonyd.co.nz";
   port = 2586;
   # Thresholds for the daily health check
   staleBackupHours = 30;

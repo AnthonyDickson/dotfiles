@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "paperless.s.anthonyd.co.nz";
+  domain = "paperless.anthonyd.co.nz";
   port = 8777;
 in
 {

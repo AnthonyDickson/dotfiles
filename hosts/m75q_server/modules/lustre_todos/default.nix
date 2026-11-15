@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "todos.s.anthonyd.co.nz";
+  domain = "todos.anthonyd.co.nz";
   port = 8088;
   db_filename = "todos.sqlite3";
   docker_volume = "/var/lib/lustre_todos";
@@ -28,7 +28,7 @@ in
 
         environment = {
           Login__ReturnUrl= "https://${domain}";
-          Oidc__Authority= "https://auth.s.anthonyd.co.nz";
+          Oidc__Authority= "https://auth.anthonyd.co.nz";
           Oidc__ClientId= client_id;
           Oidc__CallbackPath= "/signin-oidc";
           ConnectionStrings__Default= "Data Source=/data/${db_filename}";

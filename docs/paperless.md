@@ -1,6 +1,6 @@
 # Paperless-ngx
 
-Document management at `https://paperless.s.anthonyd.co.nz`, running
+Document management at `https://paperless.anthonyd.co.nz`, running
 `ghcr.io/paperless-ngx/paperless-ngx` as an Arion project with a Redis broker,
 Gotenberg and Tika.
 
@@ -15,7 +15,7 @@ The Arion project (`paperless`) runs four containers:
 | `gotenberg` | `gotenberg/gotenberg`                 | Office document → PDF conversion     |
 | `tika`      | `apache/tika`                         | MIME/content extraction              |
 
-Caddy reverse proxies `paperless.s.anthonyd.co.nz` to the `webserver` container
+Caddy reverse proxies `paperless.anthonyd.co.nz` to the `webserver` container
 on port 8777 and enforces Authelia forward-auth (`import authelia`). The `/api`
 namespace bypasses Authelia so token-based API clients (such as the QuickScan
 mobile app) can connect directly, authenticated by a Paperless API token (see
@@ -100,12 +100,12 @@ dropdown → **My Profile**, and click the circular arrow next to the API token
 field. Alternatively:
 
 ```shell
-nix run nixpkgs#curl -- -s -X POST https://paperless.s.anthonyd.co.nz/api/token/ \
+nix run nixpkgs#curl -- -s -X POST https://paperless.anthonyd.co.nz/api/token/ \
   -H 'Content-Type: application/json' \
   -d '{"username":"anthony","password":"<password>"}'
 ```
 
-Then in QuickScan set the server URL to `https://paperless.s.anthonyd.co.nz` and
+Then in QuickScan set the server URL to `https://paperless.anthonyd.co.nz` and
 paste the token. Treat the token as a secret: it grants full API access to the
 account, and anyone holding it can reach `/api` without Authelia.
 

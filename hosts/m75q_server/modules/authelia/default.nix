@@ -93,7 +93,7 @@
   '';
 
   # Authelia portal — not guarded by forward-auth
-  services.caddy.virtualHosts."auth.s.anthonyd.co.nz" = {
+  services.caddy.virtualHosts."auth.anthonyd.co.nz" = {
     extraConfig = ''
       reverse_proxy localhost:9091
     '';
@@ -124,8 +124,8 @@
         expiration = "1h";
         inactivity = "5m";
         cookies = [{
-          domain = "s.anthonyd.co.nz";
-          authelia_url = "https://auth.s.anthonyd.co.nz";
+          domain = "anthonyd.co.nz";
+          authelia_url = "https://auth.anthonyd.co.nz";
         }];
       };
 

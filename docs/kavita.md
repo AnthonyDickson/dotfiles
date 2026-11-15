@@ -1,6 +1,6 @@
 # Kavita
 
-E-book and comic server at `https://kavita.s.anthonyd.co.nz`, running
+E-book and comic server at `https://kavita.anthonyd.co.nz`, running
 `linuxserver/kavita` as an Arion project. Kavita handles its own logins, so
 Caddy does not put Authelia in front of it (OPDS readers and mobile apps cannot
 follow the login redirect).

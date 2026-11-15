@@ -30,7 +30,7 @@
       labels = {
         "homepage.group" = "Media";
         "homepage.name" = "Kavita";
-        "homepage.href" = "https://kavita.s.anthonyd.co.nz";
+        "homepage.href" = "https://kavita.anthonyd.co.nz";
         "homepage.description" = "E-book and comic server";
         "homepage.icon" = "sh-kavita";
       };

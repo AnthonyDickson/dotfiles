@@ -1,6 +1,6 @@
 # Homepage
 
-Service dashboard at `https://homepage.s.anthonyd.co.nz`, running
+Service dashboard at `https://homepage.anthonyd.co.nz`, running
 `ghcr.io/gethomepage/homepage` as an Arion project. Authentication is handled by
 Authelia using OpenID Connect.
 
@@ -24,7 +24,7 @@ Authelia using OpenID Connect.
 | `secrets.env`         | Encrypted secrets (see below)                                            |
 
 The OIDC callback registered with Authelia is
-`https://homepage.s.anthonyd.co.nz/api/auth/callback/homepage-oidc`.
+`https://homepage.anthonyd.co.nz/api/auth/callback/homepage-oidc`.
 
 ## Secrets
 

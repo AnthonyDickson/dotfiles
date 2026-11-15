@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  domain = "vaultwarden.s.anthonyd.co.nz";
+  domain = "vaultwarden.anthonyd.co.nz";
   port = 8222;
   # Fixed by the NixOS module for stateVersion >= 24.11
   stateDir = "/var/lib/vaultwarden";

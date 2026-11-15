@@ -7,8 +7,8 @@ proxy.
 
 After deploying, you'll be prompted for a second factor on first login:
 
-1. Visit any protected service, e.g. `https://budgeteur.s.anthonyd.co.nz`
-2. You'll be redirected to `https://auth.s.anthonyd.co.nz`
+1. Visit any protected service, e.g. `https://budgeteur.anthonyd.co.nz`
+2. You'll be redirected to `https://auth.anthonyd.co.nz`
 3. Log in with your username and password
 4. Authelia will prompt to enroll a second factor — the enrollment link is
    written to a local file (no email server needed):
@@ -99,8 +99,8 @@ notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
 notifier.smtp = {
   host = "127.0.0.1";
   port = 587;
-  username = "auth@s.anthonyd.co.nz";
-  sender = "Authelia <auth@s.anthonyd.co.nz>";
+  username = "auth@anthonyd.co.nz";
+  sender = "Authelia <auth@anthonyd.co.nz>";
 };
 ```
 
@@ -122,7 +122,7 @@ Each client specifies:
 - `client_secret`: the **digest** of the secret shared with the service, not the
   secret itself.
 - `redirect_uris`: the service's callback URL, e.g.
-  `https://homepage.s.anthonyd.co.nz/api/auth/callback/homepage-oidc`.
+  `https://homepage.anthonyd.co.nz/api/auth/callback/homepage-oidc`.
 - `scopes`, `grant_types`, `response_types`, `response_modes`: whatever the
   service requests.
 - `authorization_policy`: `one_factor` or `two_factor` for the authorization
@@ -162,7 +162,7 @@ needs an explicit rule or requests to it will be rejected:
 ```nix
 services.authelia.instances.main.settings.access_control.rules = [
   {
-    domain = "homepage.s.anthonyd.co.nz";
+    domain = "homepage.anthonyd.co.nz";
     policy = "two_factor";
   }
 ];
@@ -172,8 +172,8 @@ services.authelia.instances.main.settings.access_control.rules = [
 
 | Symptom                            | Check                                                                         |
 | ---------------------------------- | ----------------------------------------------------------------------------- |
-| Redirect loop on protected service | Confirm `auth.s.anthonyd.co.nz` has no `import authelia`                      |
-| 401/403 after login                | Check `access_control` rules; verify cookie domain matches `s.anthonyd.co.nz` |
+| Redirect loop on protected service | Confirm `auth.anthonyd.co.nz` has no `import authelia`                      |
+| 401/403 after login                | Check `access_control` rules; verify cookie domain matches `anthonyd.co.nz` |
 | MFA enrollment link not received   | `cat /var/lib/authelia-main/notifications.txt`                                |
 | Passkey not working                | Ensure you're accessing via HTTPS; WebAuthn requires a secure context         |
 | Service starts but crashes         | `journalctl -u authelia-main --since "5 min ago"`                             |

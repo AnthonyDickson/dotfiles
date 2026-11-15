@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "git.s.anthonyd.co.nz";
+  domain = "git.anthonyd.co.nz";
   port = 3030;
   sshPort = 2222;
   stateDir = "/var/lib/forgejo";

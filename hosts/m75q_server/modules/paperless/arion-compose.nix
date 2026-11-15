@@ -49,9 +49,9 @@
         PAPERLESS_TIKA_ENDPOINT = "http://tika:9998";
 
         PAPERLESS_TIME_ZONE = "Pacific/Auckland";
-        PAPERLESS_URL = "https://paperless.s.anthonyd.co.nz";
-        PAPERLESS_ALLOWED_HOSTS = "paperless.s.anthonyd.co.nz";
-        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.s.anthonyd.co.nz";
+        PAPERLESS_URL = "https://paperless.anthonyd.co.nz";
+        PAPERLESS_ALLOWED_HOSTS = "paperless.anthonyd.co.nz";
+        PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.anthonyd.co.nz";
         # Caddy runs on the host; the container sees the Docker bridge gateway
         PAPERLESS_TRUSTED_PROXIES = "172.16.0.0/12";
 
@@ -83,7 +83,7 @@
       labels = {
         "homepage.group" = "Productivity";
         "homepage.name" = "Paperless-ngx";
-        "homepage.href" = "https://paperless.s.anthonyd.co.nz";
+        "homepage.href" = "https://paperless.anthonyd.co.nz";
         "homepage.description" = "Document management";
         "homepage.icon" = "sh-paperless-ngx";
       };

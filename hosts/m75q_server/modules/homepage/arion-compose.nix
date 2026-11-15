@@ -57,13 +57,13 @@
       depends_on = [ "docker-proxy" ];
 
       environment = {
-        HOMEPAGE_ALLOWED_HOSTS = "homepage.s.anthonyd.co.nz";
+        HOMEPAGE_ALLOWED_HOSTS = "homepage.anthonyd.co.nz";
         PUID = "1000";
         PGID = "131";
 
         HOMEPAGE_AUTH_ENABLED = "true";
-        HOMEPAGE_EXTERNAL_URL = "https://homepage.s.anthonyd.co.nz";
-        HOMEPAGE_OIDC_ISSUER = "https://auth.s.anthonyd.co.nz";
+        HOMEPAGE_EXTERNAL_URL = "https://homepage.anthonyd.co.nz";
+        HOMEPAGE_OIDC_ISSUER = "https://auth.anthonyd.co.nz";
         HOMEPAGE_OIDC_CLIENT_ID = "homepage";
         HOMEPAGE_OIDC_NAME = "Authelia";
         HOMEPAGE_OIDC_SCOPE = "openid email profile";

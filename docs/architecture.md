@@ -50,24 +50,27 @@ these move, change IP, or are decommissioned, this server config breaks.
 ### Cloudflare
 
 The domain **`anthonyd.co.nz`** is registered with Cloudflare and its DNS is
-managed there. Subdomains under `s.anthonyd.co.nz` point at the server, and
+managed there. Subdomains directly under `anthonyd.co.nz` point at the server, and
 subdomains under `nas.anthonyd.co.nz` (e.g. `dsm.nas.anthonyd.co.nz`,
 `sonarr.nas.anthonyd.co.nz`) are services on the NAS (dnsmasq resolves them to
 `192.168.0.10` on the local network):
 
-| Hostname                       | Backend     |
-| ------------------------------ | ----------- |
-| `auth.s.anthonyd.co.nz`        | Authelia    |
-| `budgeteur.s.anthonyd.co.nz`   | Budgeteur   |
-| `git.s.anthonyd.co.nz`         | Forgejo     |
-| `homepage.s.anthonyd.co.nz`    | Homepage    |
-| `jellyfin.s.anthonyd.co.nz`    | Jellyfin    |
-| `paperless.s.anthonyd.co.nz`   | Paperless   |
-| `vaultwarden.s.anthonyd.co.nz` | Vaultwarden |
-| `vikunja.s.anthonyd.co.nz`     | Vikunja     |
+| Hostname                     | Backend     |
+| ---------------------------- | ----------- |
+| `auth.anthonyd.co.nz`        | Authelia    |
+| `budgeteur.anthonyd.co.nz`   | Budgeteur   |
+| `git.anthonyd.co.nz`         | Forgejo     |
+| `homepage.anthonyd.co.nz`    | Homepage    |
+| `jellyfin.anthonyd.co.nz`    | Jellyfin    |
+| `kavita.anthonyd.co.nz`      | Kavita      |
+| `ntfy.anthonyd.co.nz`        | ntfy        |
+| `paperless.anthonyd.co.nz`   | Paperless   |
+| `todos.anthonyd.co.nz`       | Todos       |
+| `vaultwarden.anthonyd.co.nz` | Vaultwarden |
+| `vikunja.anthonyd.co.nz`     | Vikunja     |
 
 Caddy uses Cloudflare's **DNS-01 ACME** plugin to obtain wildcard TLS
-certificates for `*.s.anthonyd.co.nz`. This means the server does not need ports
+certificates for `*.anthonyd.co.nz`. This means the server does not need ports
 80/443 reachable from the internet — domain validation happens via DNS TXT
 records that Caddy creates through the Cloudflare API.
 
@@ -124,7 +127,7 @@ account.
 
 The server joins a Tailscale tailnet for remote SSH and HTTPS access when off
 the local network. Its Tailscale IP is **`100.111.59.85`**, and the public
-Cloudflare records for `*.s.anthonyd.co.nz` point there, so tailnet clients
+Cloudflare records for `*.anthonyd.co.nz` point there, so tailnet clients
 reach services directly. On the local network, dnsmasq answers with the LAN IP
 instead.
 
@@ -185,7 +188,7 @@ ACME challenges go through Cloudflare DNS, not HTTP.
 Server IP:   192.168.0.20
 NAS IP:      192.168.0.10
 Domain:      anthonyd.co.nz
-Subdomains:  s.anthonyd.co.nz (server services)
+Subdomains:  anthonyd.co.nz (server services, e.g. git.anthonyd.co.nz)
              nas.anthonyd.co.nz (NAS services)
 ```
 

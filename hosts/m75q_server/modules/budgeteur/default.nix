@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  domain = "budgeteur.s.anthonyd.co.nz";
+  domain = "budgeteur.anthonyd.co.nz";
   port = 8080;
   db_filename = "budgeteur.sqlite3";
   docker_volume = "/var/lib/budgeteur-fs";
@@ -32,12 +32,12 @@ in
 
         environment = {
           Login__ReturnUrl = "https://${domain}/";
-          Oidc__Authority = "https://auth.s.anthonyd.co.nz";
+          Oidc__Authority = "https://auth.anthonyd.co.nz";
           Oidc__ClientId = client_id;
           Oidc__CallbackPath = "/signin-oidc";
           # Authelia does not support RP-initiated logout; its logout page ends
           # the provider session, then follows rd back to the signed out page.
-          Oidc__LogoutUrl = "https://auth.s.anthonyd.co.nz/logout?rd=https://${domain}/signed-out";
+          Oidc__LogoutUrl = "https://auth.anthonyd.co.nz/logout?rd=https://${domain}/signed-out";
           ConnectionStrings__Default = "Data Source=/data/${db_filename}";
           Logging__FilePath = "/data/logs/app.log";
           DataProtection__KeysPath = "/data/keys";
